@@ -1,9 +1,6 @@
 ---
-layout: archive
+layout: single
 permalink: /pubs/
-toc: true
-toc_label: "Publicationsdsds"
-toc_icon: "cog"
 ---
 
 # Publications 
