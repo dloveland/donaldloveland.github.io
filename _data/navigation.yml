@@ -1,7 +1,7 @@
 # main links
 main:
   - title: "Publications"
-    url: "pubs.html"
+    url: "/_pages/pubs.html"
   - title: "CV"
     url: cv
   - title: 'test'
