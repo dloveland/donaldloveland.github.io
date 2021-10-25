@@ -287,5 +287,17 @@ defaults:
       share: true
       related: true
 
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: _pages
+    values:
+      layout: single
+      author_profile: false
+      read_time: true
+      comments: true
+      share: true
+      related: true
 
 include: ["_pages"]
