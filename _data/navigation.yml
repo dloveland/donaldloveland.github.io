@@ -1,7 +1,7 @@
 # main links
 main:
   - title: "Publications"
-    url: donaldloveland.github.io/_data/pubs.md
+    url: "pubs.md"
   - title: "CV"
     url: cv
   #- title: 'test'
