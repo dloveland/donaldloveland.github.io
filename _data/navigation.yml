@@ -1,11 +1,11 @@
 # main links
 main:
   - title: "Publications"
-    url: /_data/pubs.md
+    url: donaldloveland.github.io/_data/pubs.md
   - title: "CV"
     url: cv
-  - title: 'test'
-    url: test
+  #- title: 'test'
+  #  url: test
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
