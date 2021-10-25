@@ -291,7 +291,7 @@ defaults:
   # _posts
   - scope:
       path: ""
-      type: _pages
+      type: pubs
     values:
       layout: single
       author_profile: false
