@@ -4,6 +4,8 @@ main:
     url: pubs.md
   - title: "CV"
     url: cv
+  - title: "Test"
+    url: test
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
