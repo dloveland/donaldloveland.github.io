@@ -2,7 +2,7 @@
 layout: archive
 permalink: /pubs/
 toc: true
-toc_label: "Publications"
+toc_label: "Publicationsdsds"
 toc_icon: "cog"
 ---
 
