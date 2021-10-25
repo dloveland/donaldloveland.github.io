@@ -3,7 +3,6 @@ layout: archive
 permalink: /pubs/
 ---
 
-# Publications 
 
 Here is a list of my publications, separated by subject area. \* Denotes equal contribution.
 
