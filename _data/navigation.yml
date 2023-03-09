@@ -3,7 +3,7 @@ main:
   - title: "Publications"
     url: /pubs/
   - title: "CV"
-    url: 'assets/images/PhD_Resume.pdf'
+    url: '/assets/images/PhD_Resume.pdf'
   #- title: 'test'
   #  url: test
   # - title: "About"
