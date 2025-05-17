@@ -16,8 +16,6 @@ og_image                 : "/assets/images/preview.png"
 
 words_per_minute         : 200
 
-search: true
-search_full_content: true
 
 author:
   name             : "Donald Loveland"
