@@ -1,5 +1,46 @@
 [
   {
+    "id": "corre",
+    "year": 2026,
+    "title": "Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals",
+    "authors": "Kyungho Kim, Sunwoo Kim, Geon Lee, Shinhwan Kang, Sojeong Kim, Liam Collins, Bhuvesh Kumar, Donald Loveland, Kijung Shin",
+    "venue": "ACM International Conference on Information and Knowledge Management (CIKM), 2026 (Short Paper)",
+    "type": "conference",
+    "topics": ["recommendations"],
+    "citation": "Kyungho Kim, Sunwoo Kim, Geon Lee, Shinhwan Kang, Sojeong Kim, Liam Collins, Bhuvesh Kumar, Donald Loveland, Kijung Shin. \"Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals\", ACM International Conference on Information and Knowledge Management (CIKM), 2026 (Short Paper).",
+    "paper_url": "https://arxiv.org/abs/2608.19665"
+  },
+  {
+    "id": "gala",
+    "year": 2026,
+    "title": "Formalizing and Mitigating Structural Distortion in LLM Attention for Zero-Shot Graph Reasoning",
+    "authors": "Donald Loveland, Puja Trivedi, Ari Weinstein, Edward W Huang, Danai Koutra",
+    "venue": "ACM Conference on Knowledge Discovery and Data Mining (KDD), 2026",
+    "type": "conference",
+    "topics": ["graphs"],
+    "citation": "Donald Loveland, Puja Trivedi, Ari Weinstein, Edward W Huang, Danai Koutra. \"Formalizing and Mitigating Structural Distortion in LLM Attention for Zero-Shot Graph Reasoning\", ACM Conference on Knowledge Discovery and Data Mining (KDD), 2026.",
+    "paper_url": "https://arxiv.org/abs/2606.15633",
+    "search_aliases": [
+      "Formalizing and Mitigating Structural Distortion in LLM Attention for Graph Reasoning",
+      "GaLA"
+    ],
+    "source_urls": [
+      "https://research.snap.com/publications/formalizing-and-mitigating-structural-distortion-in-llm-attention-for-zero-shot-graph-reasoning.html"
+    ]
+  },
+  {
+    "id": "pencil",
+    "year": 2026,
+    "title": "Plain Transformers are Surprisingly Powerful Link Predictors",
+    "authors": "Quang Truong, Yu Song, Donald Loveland, Mingxuan Ju, Tong Zhao, Neil Shah, Jiliang Tang",
+    "venue": "International Conference on Machine Learning (ICML), 2026",
+    "type": "conference",
+    "topics": ["graphs"],
+    "citation": "Quang Truong, Yu Song, Donald Loveland, Mingxuan Ju, Tong Zhao, Neil Shah, Jiliang Tang. \"Plain Transformers are Surprisingly Powerful Link Predictors\", International Conference on Machine Learning (ICML), 2026.",
+    "paper_url": "https://arxiv.org/abs/2602.01553",
+    "search_aliases": ["PENCIL"]
+  },
+  {
     "id": "glance",
     "year": 2026,
     "title": "Glance for Context: Learning When to Leverage LLMs for Node-Aware GNN-LLM Fusion",
@@ -14,7 +55,67 @@
     "art": "fusion",
     "summary": "GLANCE studies when language models can help graph neural networks, using local graph structure to guide where their assistance is useful.",
     "paper_url": "https://openreview.net/forum?id=oODFyykHF5",
-    "code_url": "https://github.com/dloveland/GLANCE-ICLR26"
+    "code_url": "https://github.com/dloveland/GLANCE-ICLR26",
+    "type": "conference"
+  },
+  {
+    "id": "edge-automorphism",
+    "year": 2026,
+    "title": "Edge-Level Automorphism in GNNs: A Quantitative Framework and Effective Designs For Link Prediction",
+    "authors": "Chen Shao, Donald Loveland, Tobias Käfer, Danai Koutra",
+    "venue": "arXiv:2609.34729, 2026",
+    "type": "preprint",
+    "topics": ["graphs"],
+    "citation": "Chen Shao, Donald Loveland, Tobias Käfer, Danai Koutra. \"Edge-Level Automorphism in GNNs: A Quantitative Framework and Effective Designs For Link Prediction\", arXiv:2609.34729, 2026.",
+    "paper_url": "https://arxiv.org/abs/2609.34729",
+    "search_aliases": ["EO-GNN"]
+  },
+  {
+    "id": "semantic-initialization",
+    "year": 2026,
+    "title": "Preserving Item Semantics for Free: Rethinking Token Initialization in LLM-Based Generative Recommendation",
+    "authors": "Donald Loveland, Liam Collins, Bhuvesh Kumar, Danai Koutra, Neil Shah",
+    "venue": "arXiv:2608.07816, 2026",
+    "type": "preprint",
+    "topics": ["recommendations"],
+    "citation": "Donald Loveland, Liam Collins, Bhuvesh Kumar, Danai Koutra, Neil Shah. \"Preserving Item Semantics for Free: Rethinking Token Initialization in LLM-Based Generative Recommendation\", arXiv:2608.07816, 2026.",
+    "paper_url": "https://arxiv.org/abs/2608.07816"
+  },
+  {
+    "id": "snaplgr",
+    "year": 2026,
+    "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+    "authors": "Liam Collins, Jiwen Ren, Donald Loveland, Bhuvesh Kumar, Clark Mingxuan Ju, Xuan Guo, Mo Li, Alvin Hou, Yi Cui, Peng Yang, Jian Wang, Saud Afzal Shafi, Nga Than, Ruiming Lu, Wenfeng Zhuo, Dongheng Li, Lili Zhang, Mingtao Zhang, Jinchao Ye, Jiacong He, Vincent Xue, Chunhui Zhu, Neil Shah",
+    "venue": "arXiv:2607.28895, 2026",
+    "type": "preprint",
+    "topics": ["recommendations"],
+    "citation": "Liam Collins, Jiwen Ren, Donald Loveland, Bhuvesh Kumar, Clark Mingxuan Ju, Xuan Guo, Mo Li, Alvin Hou, Yi Cui, Peng Yang, Jian Wang, Saud Afzal Shafi, Nga Than, Ruiming Lu, Wenfeng Zhuo, Dongheng Li, Lili Zhang, Mingtao Zhang, Jinchao Ye, Jiacong He, Vincent Xue, Chunhui Zhu, Neil Shah. \"LLM-Based Generative Retrieval for Snapchat Content Recommendation\", arXiv:2607.28895, 2026.",
+    "paper_url": "https://arxiv.org/abs/2607.28895",
+    "search_aliases": ["SnapLGR"]
+  },
+  {
+    "id": "llm-memorization",
+    "year": 2026,
+    "title": "On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies",
+    "authors": "Sunwoo Kim, Sunkyung Lee, Clark Mingxuan Ju, Donald Loveland, Bhuvesh Kumar, Kijung Shin, Neil Shah, Liam Collins",
+    "venue": "arXiv:2606.17276, 2026",
+    "type": "preprint",
+    "topics": ["recommendations"],
+    "citation": "Sunwoo Kim, Sunkyung Lee, Clark Mingxuan Ju, Donald Loveland, Bhuvesh Kumar, Kijung Shin, Neil Shah, Liam Collins. \"On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies\", arXiv:2606.17276, 2026.",
+    "paper_url": "https://arxiv.org/abs/2606.17276",
+    "search_aliases": ["IIRG"]
+  },
+  {
+    "id": "pauserec",
+    "year": 2026,
+    "title": "Implicit Reasoning for Large Language Model-based Generative Recommendation",
+    "authors": "Yinhan He, Liam Collins, Bhuvesh Kumar, Jundong Li, Neil Shah, Donald Loveland",
+    "venue": "arXiv:2606.14142, 2026",
+    "type": "preprint",
+    "topics": ["recommendations"],
+    "citation": "Yinhan He, Liam Collins, Bhuvesh Kumar, Jundong Li, Neil Shah, Donald Loveland. \"Implicit Reasoning for Large Language Model-based Generative Recommendation\", arXiv:2606.14142, 2026.",
+    "paper_url": "https://arxiv.org/abs/2606.14142",
+    "search_aliases": ["PauseRec"]
   },
   {
     "id": "weight-decay",
@@ -30,7 +131,8 @@
     "question": "Why do recommenders favor popular items?",
     "art": "popularity",
     "summary": "An investigation of weight decay in collaborative filtering through the lens of item popularity.",
-    "paper_url": "/assets/papers/25_KDD.pdf"
+    "paper_url": "/assets/papers/25_KDD.pdf",
+    "type": "conference"
   },
   {
     "id": "paper-3",
@@ -39,7 +141,9 @@
     "authors": "Donald Loveland, Xinyi Wu, Tong Zhao, Danai Koutra, Neil Shah, Mingxuan Ju",
     "venue": "ACM International World Wide Web Conference (WWW), 2025 (Oral Presentation, ~top 10%)",
     "topics": ["recommendations"],
-    "citation": "Donald Loveland, Xinyi Wu, Tong Zhao, Danai Koutra, Neil Shah, Mingxuan Ju. \"Understanding and Scaling Collaborative Filtering Optimization from the Perspective of Matrix Rank\", ACM International World Wide Web Conference (WWW), 2025 (Oral Presentation, ~top 10%)"
+    "citation": "Donald Loveland, Xinyi Wu, Tong Zhao, Danai Koutra, Neil Shah, Mingxuan Ju. \"Understanding and Scaling Collaborative Filtering Optimization from the Perspective of Matrix Rank\", ACM International World Wide Web Conference (WWW), 2025 (Oral Presentation, ~top 10%)",
+    "type": "conference",
+    "paper_url": "https://arxiv.org/abs/2410.23300"
   },
   {
     "id": "local-fairness",
@@ -55,7 +159,8 @@
     "question": "How does a neighborhood shape fairness?",
     "art": "fairness",
     "summary": "A study of how local graph structure affects prediction fairness, with theoretical analysis and new benchmarks for underrepresented neighborhoods.",
-    "paper_url": "https://arxiv.org/abs/2410.04287"
+    "paper_url": "https://arxiv.org/abs/2410.04287",
+    "type": "conference"
   },
   {
     "id": "paper-5",
@@ -64,7 +169,8 @@
     "authors": "Donald Loveland, James Usevitch, Zachary Serlin, Danai Koutra, Rajmonda Caceres",
     "venue": "International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2025",
     "topics": ["graphs"],
-    "citation": "Donald Loveland, James Usevitch, Zachary Serlin, Danai Koutra, Rajmonda Caceres. \"MAGNET: A Multi-Agent Graph Neural Network for Efficient Bipartite Task Assignment\", International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2025"
+    "citation": "Donald Loveland, James Usevitch, Zachary Serlin, Danai Koutra, Rajmonda Caceres. \"MAGNET: A Multi-Agent Graph Neural Network for Efficient Bipartite Task Assignment\", International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2025",
+    "type": "conference"
   },
   {
     "id": "paper-6",
@@ -73,7 +179,25 @@
     "authors": "Xinyi Wu, Donald Loveland, Runjin Chen, Yozen Liu, Xin Chen, Leonardo Neves, Ali Jadbabaie, Clark Mingxuan Ju, Neil Shah, Tong Zhao",
     "venue": "ACM International World Wide Web Conference (WWW), 2025 (Oral Presentation, ~top 10%)",
     "topics": ["recommendations", "graphs"],
-    "citation": "Xinyi Wu, Donald Loveland, Runjin Chen, Yozen Liu, Xin Chen, Leonardo Neves, Ali Jadbabaie, Clark Mingxuan Ju, Neil Shah, Tong Zhao. \"GraphHash: Graph Clustering Enables Parameter Efficiency in Recommender Systems\", ACM International World Wide Web Conference (WWW), 2025 (Oral Presentation, ~top 10%)"
+    "citation": "Xinyi Wu, Donald Loveland, Runjin Chen, Yozen Liu, Xin Chen, Leonardo Neves, Ali Jadbabaie, Clark Mingxuan Ju, Neil Shah, Tong Zhao. \"GraphHash: Graph Clustering Enables Parameter Efficiency in Recommender Systems\", ACM International World Wide Web Conference (WWW), 2025 (Oral Presentation, ~top 10%)",
+    "type": "conference",
+    "paper_url": "https://arxiv.org/abs/2412.17245"
+  },
+  {
+    "id": "id-text-complementarity",
+    "year": 2025,
+    "title": "Understanding ID-Text Complementarity in Sequential Recommendation",
+    "authors": "Liam Collins, Bhuvesh Kumar, Clark Mingxuan Ju, Tong Zhao, Donald Loveland, Leonardo Neves, Neil Shah",
+    "venue": "arXiv:2512.17820, 2025",
+    "type": "preprint",
+    "topics": ["recommendations"],
+    "citation": "Liam Collins, Bhuvesh Kumar, Clark Mingxuan Ju, Tong Zhao, Donald Loveland, Leonardo Neves, Neil Shah. \"Understanding ID-Text Complementarity in Sequential Recommendation\", arXiv:2512.17820, 2025.",
+    "paper_url": "https://arxiv.org/abs/2512.17820",
+    "search_aliases": [
+      "Exploiting ID-Text Complementarity via Ensembling for Sequential Recommendation",
+      "EnsRec"
+    ],
+    "code_url": "https://github.com/snap-research/EnsRec"
   },
   {
     "id": "paper-7",
@@ -82,7 +206,9 @@
     "authors": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra",
     "venue": "Learning on Graphs (LOG), 2023, (Spotlight Oral Presentation, ~top 5%)",
     "topics": ["graphs"],
-    "citation": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra. \"On Performance Discrepancies Across Local Homophily Levels in Graph Neural Networks\", Learning on Graphs (LOG), 2023, (Spotlight Oral Presentation, ~top 5%)"
+    "citation": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra. \"On Performance Discrepancies Across Local Homophily Levels in Graph Neural Networks\", Learning on Graphs (LOG), 2023, (Spotlight Oral Presentation, ~top 5%)",
+    "type": "conference",
+    "paper_url": "https://arxiv.org/abs/2306.05557"
   },
   {
     "id": "paper-8",
@@ -91,16 +217,9 @@
     "authors": "Donald Loveland, Rajmonda Caceres",
     "venue": "International Conference on Complex Networks and Their Applications, 2023",
     "topics": ["graphs"],
-    "citation": "Donald Loveland, Rajmonda Caceres. \"Network Design through Graph Neural Networks: Identifying Challenges and Improving Performance.\", International Conference on Complex Networks and Their Applications, 2023"
-  },
-  {
-    "id": "paper-9",
-    "year": 2022,
-    "title": "On Graph Neural Network Fairness in the Presence of Heterophilous Neighborhoods",
-    "authors": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra",
-    "venue": "KDD Workshop on Deep Learning on Graphs, 2022",
-    "topics": ["graphs", "trustworthy"],
-    "citation": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra. \"On Graph Neural Network Fairness in the Presence of Heterophilous Neighborhoods\", KDD Workshop on Deep Learning on Graphs, 2022"
+    "citation": "Donald Loveland, Rajmonda Caceres. \"Network Design through Graph Neural Networks: Identifying Challenges and Improving Performance.\", International Conference on Complex Networks and Their Applications, 2023",
+    "type": "conference",
+    "paper_url": "https://arxiv.org/abs/2310.17100"
   },
   {
     "id": "paper-10",
@@ -109,16 +228,41 @@
     "authors": "Jiong Zhu, Junchen Jin, Donald Loveland, Michael T Schaub, and Danai Koutra",
     "venue": "ACM Conference on Knowledge Discovery and Data Mining (KDD), 2022",
     "topics": ["graphs", "trustworthy"],
-    "citation": "Jiong Zhu, Junchen Jin, Donald Loveland, Michael T Schaub, and Danai Koutra. \"How does Heterophily Impact the Robustness of Graph Neural Networks? Theoretical Connections and Practical Implications.\", ACM Conference on Knowledge Discovery and Data Mining (KDD), 2022"
+    "citation": "Jiong Zhu, Junchen Jin, Donald Loveland, Michael T Schaub, and Danai Koutra. \"How does Heterophily Impact the Robustness of Graph Neural Networks? Theoretical Connections and Practical Implications.\", ACM Conference on Knowledge Discovery and Data Mining (KDD), 2022",
+    "type": "conference"
   },
   {
-    "id": "paper-11",
-    "year": 2021,
-    "title": "Reliable Graph Neural Network Explanations Through Adversarial Training",
-    "authors": "Donald Loveland, Shusen Liu, Bhavya Kailkhura, Anna Hiszpanski, Yong Han",
-    "venue": "ICML Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI, 2021",
+    "id": "paper-9",
+    "year": 2022,
+    "title": "On Graph Neural Network Fairness in the Presence of Heterophilous Neighborhoods",
+    "authors": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra",
+    "venue": "KDD Workshop on Deep Learning on Graphs, 2022",
     "topics": ["graphs", "trustworthy"],
-    "citation": "Donald Loveland, Shusen Liu, Bhavya Kailkhura, Anna Hiszpanski, Yong Han. \"Reliable Graph Neural Network Explanations Through Adversarial Training\", ICML Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI, 2021"
+    "citation": "Donald Loveland, Jiong Zhu, Mark Heimann, Ben Fish, Michael T Schaub, Danai Koutra. \"On Graph Neural Network Fairness in the Presence of Heterophilous Neighborhoods\", KDD Workshop on Deep Learning on Graphs, 2022",
+    "type": "workshop",
+    "paper_url": "https://arxiv.org/abs/2207.04376"
+  },
+  {
+    "id": "zeroth-order-sciml",
+    "year": 2022,
+    "title": "Zeroth-Order SciML: Non-intrusive Integration of Scientific Software with Deep Learning",
+    "authors": "Ioannis Tsaknakis, Bhavya Kailkhura, Sijia Liu, Donald Loveland, James Diffenderfer, Anna Maria Hiszpanski, Mingyi Hong",
+    "venue": "arXiv:2206.02785, 2022",
+    "type": "preprint",
+    "topics": ["science"],
+    "citation": "Ioannis Tsaknakis, Bhavya Kailkhura, Sijia Liu, Donald Loveland, James Diffenderfer, Anna Maria Hiszpanski, Mingyi Hong. \"Zeroth-Order SciML: Non-intrusive Integration of Scientific Software with Deep Learning\", arXiv:2206.02785, 2022.",
+    "paper_url": "https://arxiv.org/abs/2206.02785"
+  },
+  {
+    "id": "fairedit",
+    "year": 2022,
+    "title": "FairEdit: Preserving Fairness in Graph Neural Networks through Greedy Graph Editing",
+    "authors": "Donald Loveland, Jiayi Pan, Aaresh Farrokh Bhathena, Yiyang Lu",
+    "venue": "arXiv:2201.03681, 2022",
+    "type": "preprint",
+    "topics": ["graphs", "trustworthy"],
+    "citation": "Donald Loveland, Jiayi Pan, Aaresh Farrokh Bhathena, Yiyang Lu. \"FairEdit: Preserving Fairness in Graph Neural Networks through Greedy Graph Editing\", arXiv:2201.03681, 2022.",
+    "paper_url": "https://arxiv.org/abs/2201.03681"
   },
   {
     "id": "paper-12",
@@ -127,7 +271,19 @@
     "authors": "Phan Nguyen*, Donald Loveland*, Joanne T Kim, Piyush Karande, Anna M Hiszpanski, Yong Han",
     "venue": "Journal of Chemical Information and Modeling, 2021",
     "topics": ["science"],
-    "citation": "Phan Nguyen*, Donald Loveland*, Joanne T Kim, Piyush Karande, Anna M Hiszpanski, Yong Han. \"Predicting Energetics Materials’ Crystalline Density from Chemical Structure by Machine Learning\", Journal of Chemical Information and Modeling, 2021"
+    "citation": "Phan Nguyen*, Donald Loveland*, Joanne T Kim, Piyush Karande, Anna M Hiszpanski, Yong Han. \"Predicting Energetics Materials’ Crystalline Density from Chemical Structure by Machine Learning\", Journal of Chemical Information and Modeling, 2021",
+    "type": "journal"
+  },
+  {
+    "id": "paper-11",
+    "year": 2021,
+    "title": "Reliable Graph Neural Network Explanations Through Adversarial Training",
+    "authors": "Donald Loveland, Shusen Liu, Bhavya Kailkhura, Anna Hiszpanski, Yong Han",
+    "venue": "ICML Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI, 2021",
+    "topics": ["graphs", "trustworthy"],
+    "citation": "Donald Loveland, Shusen Liu, Bhavya Kailkhura, Anna Hiszpanski, Yong Han. \"Reliable Graph Neural Network Explanations Through Adversarial Training\", ICML Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI, 2021",
+    "type": "workshop",
+    "paper_url": "https://arxiv.org/abs/2106.13427"
   },
   {
     "id": "paper-13",
@@ -136,16 +292,8 @@
     "authors": "Donald Loveland, Bhavya Kailkhura, Piyush Karande, Anna M Hiszpanski, Yong Han",
     "venue": "Journal of Chemical Information and Modeling, 2020",
     "topics": ["science"],
-    "citation": "Donald Loveland, Bhavya Kailkhura, Piyush Karande, Anna M Hiszpanski, Yong Han. \"Automated Identification of Molecular Crystals’ Packing Motifs\", Journal of Chemical Information and Modeling, 2020"
-  },
-  {
-    "id": "paper-14",
-    "year": 2020,
-    "title": "Actionable attribution maps for scientific machine learning",
-    "authors": "Shusen Liu, Bhavya Kailkhura, Jize Zhang, Anna M Hiszpanski, Emily Robertson, Donald Loveland, Yong Han",
-    "venue": "ICML Workshop on ML Interpretability for Scientific Discovery, 2020",
-    "topics": ["science", "trustworthy"],
-    "citation": "Shusen Liu, Bhavya Kailkhura, Jize Zhang, Anna M Hiszpanski, Emily Robertson, Donald Loveland, Yong Han. \"Actionable attribution maps for scientific machine learning\", ICML Workshop on ML Interpretability for Scientific Discovery, 2020"
+    "citation": "Donald Loveland, Bhavya Kailkhura, Piyush Karande, Anna M Hiszpanski, Yong Han. \"Automated Identification of Molecular Crystals’ Packing Motifs\", Journal of Chemical Information and Modeling, 2020",
+    "type": "journal"
   },
   {
     "id": "paper-15",
@@ -154,7 +302,24 @@
     "authors": "Brian Gallagher, Matthew Rever, Donald Loveland, T Nathan Mundhenk, Brock Beauchamp, Emily Robertson, Golam G Jaman, Anna M. Hiszpanski, Yong Han",
     "venue": "Materials & Design, 2020",
     "topics": ["science"],
-    "citation": "Brian Gallagher, Matthew Rever, Donald Loveland, T Nathan Mundhenk, Brock Beauchamp, Emily Robertson, Golam G Jaman, Anna M. Hiszpanski, Yong Han. \"Predicting Compressive Strength of Consolidated Molecular Solids using Computer Vision and Deep Learning\", Materials & Design, 2020"
+    "citation": "Brian Gallagher, Matthew Rever, Donald Loveland, T Nathan Mundhenk, Brock Beauchamp, Emily Robertson, Golam G Jaman, Anna M. Hiszpanski, Yong Han. \"Predicting Compressive Strength of Consolidated Molecular Solids using Computer Vision and Deep Learning\", Materials & Design, 2020",
+    "type": "journal"
+  },
+  {
+    "id": "paper-14",
+    "year": 2020,
+    "title": "Actionable attribution maps for scientific machine learning",
+    "authors": "Shusen Liu, Bhavya Kailkhura, Jize Zhang, Anna M Hiszpanski, Emily Robertson, Donald Loveland, Yong Han",
+    "venue": "ICML Workshop on ML Interpretability for Scientific Discovery, 2020",
+    "topics": ["science", "trustworthy"],
+    "citation": "Shusen Liu, Bhavya Kailkhura, Jize Zhang, Anna M Hiszpanski, Emily Robertson, Donald Loveland, Yong Han. \"Actionable attribution maps for scientific machine learning\", ICML Workshop on ML Interpretability for Scientific Discovery, 2020",
+    "type": "workshop",
+    "paper_url": "https://arxiv.org/abs/2006.16533",
+    "related_url": "https://arxiv.org/abs/2007.08631",
+    "related_title": "Explainable Deep Learning for Uncovering Actionable Scientific Insights for Materials Discovery and Design",
+    "search_aliases": [
+      "Explainable Deep Learning for Uncovering Actionable Scientific Insights for Materials Discovery and Design"
+    ]
   },
   {
     "id": "paper-16",
@@ -163,7 +328,8 @@
     "authors": "Shusen Liu, Bhavya Kailkhura, Donald Loveland, Yong Han",
     "venue": "IEEE Global Conference on Signal and Information Processing (GlobalSIP), 2019",
     "topics": ["trustworthy"],
-    "citation": "Shusen Liu, Bhavya Kailkhura, Donald Loveland, Yong Han. \"Generative Counterfactual Introspection for Explainable Deep Learning\", IEEE Global Conference on Signal and Information Processing (GlobalSIP), 2019"
+    "citation": "Shusen Liu, Bhavya Kailkhura, Donald Loveland, Yong Han. \"Generative Counterfactual Introspection for Explainable Deep Learning\", IEEE Global Conference on Signal and Information Processing (GlobalSIP), 2019",
+    "type": "conference"
   },
   {
     "id": "paper-17",
@@ -172,6 +338,7 @@
     "authors": "Vardha N Bennert, Donald Loveland, Edward Donohue, Maren Cosens, Sean Lewis, S Komossa, Tommaso Treu, Matthew A Malkan, Nathan Milgram, Kelsi Flatland, Matthew W Auger, Daeseong Park, Mariana S Lazarova",
     "venue": "Monthly Notices of the Royal Astronomical Society, 2018",
     "topics": ["science"],
-    "citation": "Vardha N Bennert, Donald Loveland, Edward Donohue, Maren Cosens, Sean Lewis, S Komossa, Tommaso Treu, Matthew A Malkan, Nathan Milgram, Kelsi Flatland, Matthew W Auger, Daeseong Park, Mariana S Lazarova, \"Studying the [OIII]λ 5007Å emission-line width in a sample of ∼ 80 local active galaxies: a surrogate for σ⋆?\", Monthly Notices of the Royal Astronomical Society, 2018"
+    "citation": "Vardha N Bennert, Donald Loveland, Edward Donohue, Maren Cosens, Sean Lewis, S Komossa, Tommaso Treu, Matthew A Malkan, Nathan Milgram, Kelsi Flatland, Matthew W Auger, Daeseong Park, Mariana S Lazarova, \"Studying the [OIII]λ 5007Å emission-line width in a sample of ∼ 80 local active galaxies: a surrogate for σ⋆?\", Monthly Notices of the Royal Astronomical Society, 2018",
+    "type": "journal"
   }
 ]

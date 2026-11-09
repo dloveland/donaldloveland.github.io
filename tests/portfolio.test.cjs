@@ -4,6 +4,14 @@ const { chromium } = require("playwright");
 const AxeBuilder = require("@axe-core/playwright").default;
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const publications = require("../_data/publications.json");
+const total = publications.length;
+const recommendationCount = publications.filter((paper) =>
+  paper.topics.includes("recommendations"),
+).length;
+const years = [...new Set(publications.map((paper) => String(paper.year)))]
+  .sort()
+  .reverse();
 
 const base = process.env.SITE_URL || "http://127.0.0.1:4173";
 const screenshotDir = process.env.SCREENSHOT_DIR;
@@ -53,7 +61,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       await page.waitForURL(`${base}/research/`);
       assert.equal(await page.title(), "Research · Donald Loveland");
       assert.equal(await visible(page, "[data-featured-paper]"), 3);
-      assert.equal(await visible(page, "[data-publication]"), 17);
+      assert.equal(await visible(page, "[data-publication]"), total);
       assert.equal(
         await page.locator('#main-nav a[aria-current="page"]').innerText(),
         "Research",
@@ -88,7 +96,10 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       );
       await page.locator("#map-recommendations .text-link").click();
       await page.waitForURL(/research\/\?topic=recommendations#publications/);
-      assert.equal(await visible(page, "[data-publication]"), 3);
+      assert.equal(
+        await visible(page, "[data-publication]"),
+        recommendationCount,
+      );
       await page.locator("#main-nav a", { hasText: "Experience" }).click();
       await page.waitForURL(`${base}/experience/`);
       assert.equal(await page.title(), "Experience · Donald Loveland");
@@ -121,12 +132,15 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       "archive filters, search, URLs, reset, and citation copying",
       async () => {
         await page.goto(`${base}/pubs/`, { waitUntil: "networkidle" });
-        assert.equal(await visible(page, "[data-publication]"), 17);
+        assert.equal(await visible(page, "[data-publication]"), total);
         await screenshot("desktop-publications.png");
         await page
           .locator('[data-publication-topic="recommendations"]')
           .click();
-        assert.equal(await visible(page, "[data-publication]"), 3);
+        assert.equal(
+          await visible(page, "[data-publication]"),
+          recommendationCount,
+        );
         assert.equal(
           new URL(page.url()).searchParams.get("topic"),
           "recommendations",
@@ -145,7 +159,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           .fill("no-matching-research-xyz");
         assert.equal(await page.locator(".empty-state").isVisible(), true);
         await page.locator("[data-reset-search]").click();
-        assert.equal(await visible(page, "[data-publication]"), 17);
+        assert.equal(await visible(page, "[data-publication]"), total);
         assert.equal(new URL(page.url()).search, "");
         await page.locator("#glance summary").click();
         await page.locator("#glance [data-copy-citation]").click();
@@ -173,7 +187,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
     await t.test(
       "deep links reveal papers and reject unknown filter values",
       async () => {
-        await page.goto(`${base}/pubs/?topic=science#glance`, {
+        await page.goto(`${base}/pubs/?topic=science&type=preprint#glance`, {
           waitUntil: "networkidle",
         });
         assert.equal(await page.locator("#glance").isVisible(), true);
@@ -181,10 +195,77 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           await page.locator("#glance details").getAttribute("open"),
           "",
         );
-        await page.goto(`${base}/pubs/?topic=unknown&year=1900`, {
+        await page.goto(`${base}/pubs/?topic=unknown&year=1900&type=unknown`, {
           waitUntil: "networkidle",
         });
-        assert.equal(await visible(page, "[data-publication]"), 17);
+        assert.equal(await visible(page, "[data-publication]"), total);
+      },
+    );
+    await t.test(
+      "year groups, publication types, and earlier titles are searchable",
+      async () => {
+        await page.goto(`${base}/research/#publications`, {
+          waitUntil: "networkidle",
+        });
+        assert.deepEqual(
+          await page.locator(".publication-group-heading h3").allTextContents(),
+          years,
+        );
+        await page.locator("#publication-type").selectOption("preprint");
+        assert.equal(
+          await visible(page, "[data-publication]"),
+          publications.filter((paper) => paper.type === "preprint").length,
+        );
+        assert.equal(new URL(page.url()).searchParams.get("type"), "preprint");
+        await page.locator("#publication-year").selectOption("2022");
+        assert.equal(await visible(page, "[data-publication-group]"), 1);
+        assert.equal(
+          await page
+            .locator("[data-publication-group]:visible [data-group-count]")
+            .innerText(),
+          "2 papers",
+        );
+        await page.locator('[data-publication-topic="science"]').click();
+        assert.equal(await visible(page, "[data-publication]"), 1);
+        assert.equal(
+          await page.locator("[data-publication]:visible").getAttribute("id"),
+          "zeroth-order-sciml",
+        );
+        await page.reload({ waitUntil: "networkidle" });
+        assert.equal(
+          await page.locator("#publication-type").inputValue(),
+          "preprint",
+        );
+        assert.equal(await visible(page, "[data-publication]"), 1);
+        await page.locator("#publication-search").fill("no-matching-paper");
+        assert.equal(await visible(page, "[data-publication-group]"), 0);
+        await page.locator("[data-reset-search]").click();
+        assert.equal(
+          await visible(page, "[data-publication-group]"),
+          years.length,
+        );
+        assert.equal(
+          await page.locator("#publication-type").inputValue(),
+          "all",
+        );
+        await page
+          .locator("#publication-search")
+          .fill("Exploiting ID-Text Complementarity");
+        assert.equal(await visible(page, "[data-publication]"), 1);
+        assert.equal(
+          await page.locator("[data-publication]:visible").getAttribute("id"),
+          "id-text-complementarity",
+        );
+        await page.locator("[data-clear-filters]").click();
+        await page.locator("#publication-type").selectOption("conference");
+        await page.locator("#publication-year").selectOption("2026");
+        assert.deepEqual(
+          await page
+            .locator("[data-publication]:visible")
+            .evaluateAll((nodes) => nodes.map((node) => node.id).sort()),
+          ["corre", "gala", "glance", "pencil"],
+        );
+        await screenshot("desktop-publication-groups.png");
       },
     );
     await t.test("mobile navigation and separate content pages", async () => {
@@ -238,14 +319,14 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         assert.equal(await visible(staticPage, "[data-featured-paper]"), 0);
         await staticPage.locator("#research .teaser-cta").click();
         assert.equal(await visible(staticPage, "[data-featured-paper]"), 3);
-        assert.equal(await visible(staticPage, "[data-publication]"), 17);
+        assert.equal(await visible(staticPage, "[data-publication]"), total);
         assert.equal(await staticPage.locator("#main-nav").isVisible(), true);
         assert.equal(
           await staticPage.locator(".filter-row:visible").count(),
           0,
         );
         await staticPage.goto(`${base}/pubs/`);
-        assert.equal(await visible(staticPage, "[data-publication]"), 17);
+        assert.equal(await visible(staticPage, "[data-publication]"), total);
         await staticPage.locator("#glance summary").click();
         assert.equal(
           await staticPage.locator("#glance details").getAttribute("open"),

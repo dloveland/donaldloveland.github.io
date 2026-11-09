@@ -81,12 +81,14 @@ figure,
 p,
 h1,
 h2,
-h3 {
+h3,
+h4 {
   margin: 0;
 }
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--serif);
   font-weight: 400;
   line-height: 1.1;
@@ -706,10 +708,11 @@ summary::-webkit-details-marker {
 }
 .search-field {
   flex: 1;
-  max-width: 660px;
+  min-width: 0;
 }
-.year-field {
-  width: 180px;
+.year-field,
+.type-field {
+  width: 170px;
 }
 .search-row label {
   display: block;
@@ -751,7 +754,7 @@ summary::-webkit-details-marker {
 }
 .publication {
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 100px minmax(0, 1fr);
   gap: 28px;
   border-top: 1px solid var(--line);
   padding: 30px 0;
@@ -763,10 +766,47 @@ summary::-webkit-details-marker {
     -14px 0 0 #e6eade80,
     14px 0 0 #e6eade80;
 }
-.publication-year {
-  font-size: 13px;
+.archive-intro {
   color: var(--muted);
-  padding-top: 3px;
+  font-size: 14px;
+  max-width: 700px;
+  margin-bottom: 25px;
+}
+.publication-group + .publication-group {
+  margin-top: 35px;
+}
+.publication-group-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 15px;
+}
+.publication-group-heading h2,
+.publication-group-heading h3 {
+  font-size: 37px;
+  color: var(--teal);
+}
+.publication-group-heading > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.publication-group-heading + .publication {
+  border-top: 0;
+}
+.publication-type {
+  font-size: 11px;
+  color: var(--teal);
+  border: 1px solid #a2afa1;
+  border-radius: 3px;
+  padding: 5px 8px;
+  justify-self: start;
+  align-self: start;
+}
+.publication-type-preprint {
+  color: #6c522c;
+  border-color: #bca888;
+  background: #eee7da;
 }
 .publication .eyebrow {
   font-size: 10px;
@@ -1290,7 +1330,7 @@ summary::-webkit-details-marker {
     display: none;
   }
   .publication {
-    grid-template-columns: 52px 1fr;
+    grid-template-columns: 90px minmax(0, 1fr);
     gap: 20px;
   }
   .publication-title {
@@ -1535,14 +1575,20 @@ summary::-webkit-details-marker {
     margin-bottom: 27px;
   }
   .search-row {
+    flex-wrap: wrap;
     gap: 13px;
+  }
+  .search-field {
+    flex-basis: 100%;
   }
   .search-row label {
     font-size: 11px;
   }
-  .year-field {
-    width: 110px;
-    flex-shrink: 0;
+  .year-field,
+  .type-field {
+    width: auto;
+    flex: 1;
+    min-width: 0;
   }
   .search-row input,
   .search-row select {
@@ -1553,9 +1599,8 @@ summary::-webkit-details-marker {
     display: block;
     padding-block: 26px;
   }
-  .publication-year {
-    display: block;
-    font-size: 12px;
+  .publication-type {
+    display: inline-block;
     margin-bottom: 10px;
   }
   .publication-title {

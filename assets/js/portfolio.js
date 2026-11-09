@@ -88,10 +88,13 @@
   if (browser) {
     const search = document.getElementById("publication-search");
     const year = document.getElementById("publication-year");
+    const type = document.getElementById("publication-type");
+    const groups = all("[data-publication-group]", browser);
     const buttons = all("[data-publication-topic]", browser);
     const papers = all("[data-publication]", browser).map((element) => ({
       element,
       year: element.dataset.year,
+      type: element.dataset.type,
       topics: element.dataset.topics.split(" "),
       text: normalize(
         [
@@ -99,6 +102,7 @@
           element.querySelector(".publication-authors").textContent,
           element.querySelector(".publication-venue").textContent,
           element.querySelector(".eyebrow").textContent,
+          element.dataset.searchAliases || "",
         ].join(" "),
       ),
     }));
@@ -112,9 +116,18 @@
         const visible =
           (topic === "all" || paper.topics.includes(topic)) &&
           (year.value === "all" || paper.year === year.value) &&
+          (type.value === "all" || paper.type === type.value) &&
           terms.every((term) => paper.text.includes(term));
         paper.element.hidden = !visible;
         if (visible) count++;
+      });
+      groups.forEach((group) => {
+        const visible = all("[data-publication]", group).filter(
+          (paper) => !paper.hidden,
+        ).length;
+        group.hidden = visible === 0;
+        group.querySelector("[data-group-count]").textContent =
+          `${visible} ${visible === 1 ? "paper" : "papers"}`;
       });
       buttons.forEach((button) =>
         button.setAttribute(
@@ -125,13 +138,18 @@
       document.getElementById("publication-status").textContent =
         `${count} of ${papers.length} publications`;
       empty.hidden = count > 0;
-      clear.hidden = !search.value && topic === "all" && year.value === "all";
+      clear.hidden =
+        !search.value &&
+        topic === "all" &&
+        year.value === "all" &&
+        type.value === "all";
       if (writeUrl) {
         const url = new URL(window.location.href);
         [
           ["q", search.value.trim()],
           ["topic", topic === "all" ? "" : topic],
           ["year", year.value === "all" ? "" : year.value],
+          ["type", type.value === "all" ? "" : type.value],
         ].forEach(([key, value]) => {
           if (value) url.searchParams.set(key, value);
           else url.searchParams.delete(key);
@@ -154,11 +172,17 @@
       )
         ? params.get("year")
         : "all";
+      type.value = all("option", type).some(
+        (option) => option.value === params.get("type"),
+      )
+        ? params.get("type")
+        : "all";
       update(false);
     }
     function reset() {
       search.value = "";
       year.value = "all";
+      type.value = "all";
       topic = "all";
       update();
       search.focus();
@@ -171,6 +195,7 @@
     );
     search.addEventListener("input", () => update());
     year.addEventListener("change", () => update());
+    type.addEventListener("change", () => update());
     clear.addEventListener("click", reset);
     browser
       .querySelector("[data-reset-search]")
@@ -191,9 +216,12 @@
       if (linked.element.hidden) {
         search.value = "";
         year.value = "all";
+        type.value = "all";
         topic = "all";
         const url = new URL(window.location.href);
-        ["q", "topic", "year"].forEach((key) => url.searchParams.delete(key));
+        ["q", "topic", "year", "type"].forEach((key) =>
+          url.searchParams.delete(key),
+        );
         window.history.replaceState(null, "", url);
         update(false);
       }

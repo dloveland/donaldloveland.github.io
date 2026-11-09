@@ -7,4 +7,5 @@
     <a href="https://scholar.google.com/scholar?q={{ paper.title | url_encode }}">Find paper <span aria-hidden="true">↗</span><span class="sr-only">: {{ paper.title }}</span></a>
   {% endif %}
   {% if paper.code_url %}<a href="{{ paper.code_url }}">Code <span aria-hidden="true">↗</span><span class="sr-only">: {{ paper.title }}</span></a>{% endif %}
+  {% if paper.related_url %}<a href="{{ paper.related_url }}">Related preprint <span aria-hidden="true">↗</span><span class="sr-only">: {{ paper.related_title }}</span></a>{% endif %}
 </div>

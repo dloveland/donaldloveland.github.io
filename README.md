@@ -9,8 +9,12 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 - `_data/portfolio.yml`: introduction, contact links, CV location, research topics,
   and experience entries.
 - `_data/publications.json`: all publications, authors, venues, topic tags, and links.
-  Records with `featured_order` appear on the homepage; `question` is the short
+  Records with `featured_order` appear on the research page; `question` is the short
   editorial heading. Omit unknown paper/code links rather than guessing them.
+  Set `type` to `conference`, `journal`, `workshop`, or `preprint`. Keep one record
+  per paper when a preprint is published, retaining its `id` for shared links.
+  Use the conference/publication year for published work and the first release
+  year for preprints. Use `search_aliases` for earlier titles and method names.
 - `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
 - `_pages/research.html`: selected work, interactive research map, and full publication browser.
 - `_pages/experience.html`: the full career timeline.
@@ -21,9 +25,16 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 - `assets/images/25_CV_Yr4.pdf`: the current CV; update `cv_url` when replacing it.
 
 The research illustrations are conceptual SVG diagrams, not empirical charts.
-Publication search combines topic, year, and text filters and stores the current
+Publications are grouped by year, with publication types labeled on each entry.
+Publication search combines topic, year, type, and text filters and stores the current
 view in the URL. Standard links, citations, and experience details work without
 JavaScript. Interactive controls support keyboard input and reduced motion.
+
+The November 2026 bibliography update uses primary arXiv records and Snap Research
+venue information, with DBLP used for discovery. Google Scholar blocked automated
+access, so this is not a complete reconciliation of that profile. The related
+materials-science preprint (arXiv:2007.08631) is linked from the existing Actionable
+Attribution Maps workshop entry rather than counted as a second paper.
 
 ## Local build
 
