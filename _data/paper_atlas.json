@@ -1,7 +1,7 @@
 {
   "default_paper": "semantic-initialization",
   "width": 780,
-  "height": 890,
+  "height": 800,
   "groups": [
     {
       "id": "recommendations",
@@ -25,253 +25,281 @@
       "id": "semantic-initialization",
       "label": "Item semantics",
       "group": "recommendations",
-      "x": 575,
-      "y": 100,
+      "x": 193.39,
+      "y": 104.65,
       "summary": "Preserves the geometry of semantic item IDs when adding them to an LLM vocabulary. Initializing tokens from their semantic centroids improves learning efficiency and recommendation for less frequent items.",
-      "source_url": "https://arxiv.org/abs/2608.07816"
+      "source_url": "https://arxiv.org/abs/2608.07816",
+      "community": "community-1"
     },
     {
       "id": "pauserec",
       "label": "PauseRec",
       "group": "recommendations",
-      "x": 685,
-      "y": 195,
+      "x": 81.0,
+      "y": 352.0,
       "summary": "Studies why explicit reasoning can struggle with semantic item IDs. PauseRec uses implicit reasoning to reduce the training and inference costs of LLM-based generative recommendation.",
-      "source_url": "https://arxiv.org/abs/2606.14142"
+      "source_url": "https://arxiv.org/abs/2606.14142",
+      "community": "community-1"
     },
     {
       "id": "snaplgr",
       "label": "SnapLGR",
       "group": "recommendations",
-      "x": 555,
-      "y": 280,
+      "x": 105.0,
+      "y": 256.0,
       "summary": "Brings LLM-based generative retrieval to short-video recommendation. The system combines graph-informed semantic IDs, vocabulary grounding, and efficient serving.",
-      "source_url": "https://arxiv.org/abs/2607.28895"
+      "source_url": "https://arxiv.org/abs/2607.28895",
+      "community": "community-1"
     },
     {
       "id": "llm-memorization",
       "label": "LLM memorization",
       "group": "recommendations",
-      "x": 690,
-      "y": 380,
+      "x": 65.0,
+      "y": 160.0,
       "summary": "Finds that much of the gain from LLM recommenders comes from memorizing one-step item transitions. IIRG trains richer collaborative and semantic item relationships to improve generalization.",
-      "source_url": "https://arxiv.org/abs/2606.17276"
+      "source_url": "https://arxiv.org/abs/2606.17276",
+      "community": "community-1"
     },
     {
       "id": "id-text-complementarity",
       "label": "ID + text",
       "group": "recommendations",
-      "x": 690,
-      "y": 40,
+      "x": 65.0,
+      "y": 64.0,
       "summary": "Shows that item-ID and text-based recommenders capture complementary signals. Independently training and then combining the two models provides a simple way to preserve those strengths.",
-      "source_url": "https://arxiv.org/abs/2512.17820"
+      "source_url": "https://arxiv.org/abs/2512.17820",
+      "community": "community-1"
     },
     {
       "id": "corre",
       "label": "CoRRe",
       "group": "recommendations",
-      "x": 550,
-      "y": 445,
+      "x": 321.0,
+      "y": 80.0,
       "summary": "Refines LLM-generated item representations with collaborative information after the LLM runs. Co-purchase structure shapes embedding directions, while popularity adjusts their magnitudes.",
-      "source_url": "https://arxiv.org/abs/2608.19665"
+      "source_url": "https://arxiv.org/abs/2608.19665",
+      "community": "community-1"
     },
     {
       "id": "weight-decay",
       "label": "Weight decay",
       "group": "recommendations",
-      "x": 420,
-      "y": 190,
+      "x": 449.0,
+      "y": 64.0,
       "summary": "Explains how weight decay encodes item popularity in embedding magnitudes. PRISM initializes that information directly, simplifying collaborative-filtering training and offering control over popularity bias.",
-      "source_url": "/assets/papers/25_KDD.pdf"
+      "source_url": "/assets/papers/25_KDD.pdf",
+      "community": "community-1"
     },
     {
       "id": "paper-3",
       "label": "Matrix rank",
       "group": "recommendations",
-      "x": 410,
-      "y": 70,
+      "x": 209.0,
+      "y": 352.0,
       "summary": "Connects collaborative-filtering losses to the stable rank of embedding tables. Regularizing rank early in training improves optimization and can reduce reliance on expensive negative sampling.",
-      "source_url": "https://arxiv.org/abs/2410.23300"
+      "source_url": "https://arxiv.org/abs/2410.23300",
+      "community": "community-1"
     },
     {
       "id": "paper-6",
       "label": "GraphHash",
       "group": "recommendations",
-      "x": 410,
-      "y": 360,
+      "x": 233.0,
+      "y": 200.0,
       "summary": "Uses communities in the user–item interaction graph to share embeddings. This graph-informed hashing reduces memory while preserving useful collaborative information.",
-      "source_url": "https://arxiv.org/abs/2412.17245"
+      "source_url": "https://arxiv.org/abs/2412.17245",
+      "community": "community-1"
     },
     {
       "id": "gala",
       "label": "GaLA",
       "group": "graphs",
-      "x": 265,
-      "y": 110,
+      "x": 432.1,
+      "y": 218.61,
       "summary": "Explains how serializing a graph can suppress attention between its neighbors in an LLM. GaLA adjusts attention at inference time to better preserve graph relationships.",
-      "source_url": "https://arxiv.org/abs/2606.15633"
+      "source_url": "https://arxiv.org/abs/2606.15633",
+      "community": "community-2"
     },
     {
       "id": "glance",
       "label": "GLANCE",
       "group": "graphs",
-      "x": 265,
-      "y": 260,
+      "x": 505.0,
+      "y": 312.0,
       "summary": "Learns when a graph model should request LLM assistance. A node-aware router uses local structural signals to target the nodes that benefit from the extra information.",
-      "source_url": "https://arxiv.org/abs/2510.10849"
+      "source_url": "https://arxiv.org/abs/2510.10849",
+      "community": "community-2"
     },
     {
       "id": "pencil",
       "label": "PENCIL",
       "group": "graphs",
-      "x": 110,
-      "y": 70,
+      "x": 577.0,
+      "y": 96.0,
       "summary": "Uses a plain Transformer over sampled local subgraphs for link prediction. Attention captures structural signals without elaborate hand-built encodings or large node-ID tables.",
-      "source_url": "https://arxiv.org/abs/2602.01553"
+      "source_url": "https://arxiv.org/abs/2602.01553",
+      "community": "community-2"
     },
     {
       "id": "edge-automorphism",
       "label": "Edge automorphism",
       "group": "graphs",
-      "x": 100,
-      "y": 205,
+      "x": 561.0,
+      "y": 192.0,
       "summary": "Quantifies when GNNs cannot distinguish structurally equivalent links. EO-GNN uses orbit-aware designs to improve link prediction while retaining equivariance.",
-      "source_url": "https://arxiv.org/abs/2609.34729"
+      "source_url": "https://arxiv.org/abs/2609.34729",
+      "community": "community-2"
     },
     {
       "id": "paper-5",
       "label": "MAGNET",
       "group": "graphs",
-      "x": 95,
-      "y": 350,
+      "x": 337.0,
+      "y": 312.0,
       "summary": "Treats multi-agent task assignment as learning over edges of a bipartite graph. A line-graph transformation, pruning, and feasibility checks combine learned scoring with assignment constraints.",
-      "source_url": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1399.pdf"
+      "source_url": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1399.pdf",
+      "community": "community-3"
     },
     {
       "id": "paper-7",
       "label": "Local performance",
       "group": "graphs",
-      "x": 255,
-      "y": 420,
+      "x": 633.0,
+      "y": 312.0,
       "summary": "Shows that node performance depends on how local homophily differs from the overall graph. Aggregate accuracy can conceal systematic failures on underrepresented neighborhoods.",
-      "source_url": "https://arxiv.org/abs/2306.05557"
+      "source_url": "https://arxiv.org/abs/2306.05557",
+      "community": "community-2"
     },
     {
       "id": "local-fairness",
       "label": "Local fairness",
       "group": "trustworthy",
-      "x": 95,
-      "y": 500,
+      "x": 521.0,
+      "y": 408.0,
       "summary": "Frames underrepresented local homophily as an out-of-distribution fairness problem. Theory and new benchmarks show how neighborhood structure can affect predictions across sensitive groups.",
-      "source_url": "https://arxiv.org/abs/2410.04287"
+      "source_url": "https://arxiv.org/abs/2410.04287",
+      "community": "community-2"
     },
     {
       "id": "paper-9",
       "label": "Neighborhood fairness",
       "group": "trustworthy",
-      "x": 255,
-      "y": 555,
+      "x": 257.0,
+      "y": 448.0,
       "summary": "Connects local neighborhood assortativity to group fairness. GNN designs that handle heterophilous neighborhoods can improve treatment of otherwise disadvantaged groups.",
-      "source_url": "https://arxiv.org/abs/2207.04376"
+      "source_url": "https://arxiv.org/abs/2207.04376",
+      "community": "community-3"
     },
     {
       "id": "fairedit",
       "label": "FairEdit",
       "group": "trustworthy",
-      "x": 95,
-      "y": 640,
+      "x": 385.0,
+      "y": 504.0,
       "summary": "Adds and removes graph edges to improve prediction fairness. Its gradient-guided editing approach works with different GNN models.",
-      "source_url": "https://arxiv.org/abs/2201.03681"
+      "source_url": "https://arxiv.org/abs/2201.03681",
+      "community": "community-3"
     },
     {
       "id": "paper-8",
       "label": "Network design",
       "group": "graphs",
-      "x": 240,
-      "y": 720,
+      "x": 385.0,
+      "y": 408.0,
       "summary": "Shows that structural biases can mislead gradient-based graph editing. ORE repeatedly edits and re-embeds a graph to refresh the information guiding the next change.",
-      "source_url": "https://arxiv.org/abs/2310.17100"
+      "source_url": "https://arxiv.org/abs/2310.17100",
+      "community": "community-3"
     },
     {
       "id": "paper-10",
       "label": "Heterophily + robustness",
       "group": "trustworthy",
-      "x": 405,
-      "y": 510,
+      "x": 649.0,
+      "y": 416.0,
       "summary": "Connects graph homophily to adversarial vulnerability. Separating ego-node and neighbor representations can improve robustness as well as learning on heterophilous graphs.",
-      "source_url": "https://arxiv.org/abs/2106.07767"
+      "source_url": "https://arxiv.org/abs/2106.07767",
+      "community": "community-4"
     },
     {
       "id": "paper-11",
       "label": "Reliable explanations",
       "group": "trustworthy",
-      "x": 425,
-      "y": 645,
+      "x": 554.82,
+      "y": 508.88,
       "summary": "Studies how adversarial training changes the reliability of GNN explanations. It also evaluates whether explanations reflect learned representations and recover meaningful chemistry insights.",
-      "source_url": "https://arxiv.org/abs/2106.13427"
+      "source_url": "https://arxiv.org/abs/2106.13427",
+      "community": "community-4"
     },
     {
       "id": "paper-16",
       "label": "Counterfactuals",
       "group": "trustworthy",
-      "x": 390,
-      "y": 800,
+      "x": 441.0,
+      "y": 704.0,
       "summary": "Uses a generative model to make meaningful changes to images and examine how a classifier responds. These interventions expose what can change a prediction.",
-      "source_url": "https://arxiv.org/abs/1907.03077"
+      "source_url": "https://arxiv.org/abs/1907.03077",
+      "community": "community-4"
     },
     {
       "id": "paper-14",
       "label": "Actionable attribution",
       "group": "science",
-      "x": 560,
-      "y": 755,
+      "x": 497.0,
+      "y": 608.0,
       "summary": "Introduces domain-specific concepts as controllable inputs to model interpretation. Generative modeling helps turn explanations into actionable scientific questions.",
-      "source_url": "https://arxiv.org/abs/2006.16533"
+      "source_url": "https://arxiv.org/abs/2006.16533",
+      "community": "community-4"
     },
     {
       "id": "paper-12",
       "label": "Molecular density",
       "group": "science",
-      "x": 560,
-      "y": 575,
+      "x": 625.0,
+      "y": 608.0,
       "summary": "Predicts crystalline density from molecular chemical structure. A comparison of learned graph representations and fixed features also investigates what the models learn.",
-      "source_url": "https://pubmed.ncbi.nlm.nih.gov/33899482/"
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/33899482/",
+      "community": "community-4"
     },
     {
       "id": "zeroth-order-sciml",
       "label": "Zeroth-order SciML",
       "group": "science",
-      "x": 690,
-      "y": 665,
+      "x": 569.0,
+      "y": 704.0,
       "summary": "Connects scientific software to neural-network training without requiring a differentiable simulator. Gradient-free optimization brings domain knowledge into data-limited materials tasks.",
-      "source_url": "https://arxiv.org/abs/2206.02785"
+      "source_url": "https://arxiv.org/abs/2206.02785",
+      "community": "community-4"
     },
     {
       "id": "paper-15",
       "label": "Material strength",
       "group": "science",
-      "x": 690,
-      "y": 825,
+      "x": 681.0,
+      "y": 512.0,
       "summary": "Predicts the compressive strength of molecular solids from microscope images. It compares engineered visual features and learned features across different data regimes.",
-      "source_url": "https://arxiv.org/abs/1906.02130"
+      "source_url": "https://arxiv.org/abs/1906.02130",
+      "community": "community-4"
     },
     {
       "id": "paper-13",
       "label": "Crystal packing",
       "group": "science",
-      "x": 690,
-      "y": 520,
+      "x": 697.0,
+      "y": 704.0,
       "summary": "Introduces Autopack to identify molecular-crystal packing motifs using representative neighboring molecules. Automated labels enable larger studies of composition and crystal organization.",
-      "source_url": "https://pubmed.ncbi.nlm.nih.gov/33245232/"
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/33245232/",
+      "community": "community-4"
     },
     {
       "id": "paper-17",
       "label": "Active galaxies",
       "group": "science",
-      "x": 100,
-      "y": 825,
+      "x": 95.0,
+      "y": 705.0,
       "summary": "Tests whether an emission-line width can stand in for stellar velocity dispersion in active galaxies. This early astronomy study is shown separately from the connected machine-learning threads.",
-      "source_url": "https://arxiv.org/abs/1808.04821"
+      "source_url": "https://arxiv.org/abs/1808.04821",
+      "community": "community-5"
     }
   ],
   "edges": [
@@ -280,266 +308,409 @@
       "target": "weight-decay",
       "kind": "mechanism",
       "label": "Embedding geometry",
-      "reason": "Both explain collaborative-filtering training through embedding geometry: stable rank in one case, popularity encoded in vector magnitudes in the other."
+      "reason": "Both explain collaborative-filtering training through embedding geometry: stable rank in one case, popularity encoded in vector magnitudes in the other.",
+      "similarity": 0.14497,
+      "weight": 0.78995
     },
     {
       "source": "paper-3",
       "target": "paper-6",
       "kind": "question",
       "label": "Scaling embedding tables",
-      "reason": "Both target the cost of large recommender embeddings. Rank regularization addresses training cost; GraphHash addresses memory through shared embeddings."
+      "reason": "Both target the cost of large recommender embeddings. Rank regularization addresses training cost; GraphHash addresses memory through shared embeddings.",
+      "similarity": 0.01776,
+      "weight": 0.53552
     },
     {
       "source": "weight-decay",
       "target": "corre",
       "kind": "mechanism",
       "label": "Popularity in vector magnitudes",
-      "reason": "The weight-decay study explains popularity in embedding magnitudes; CoRRe explicitly uses item popularity to refine magnitudes after LLM representation generation."
+      "reason": "The weight-decay study explains popularity in embedding magnitudes; CoRRe explicitly uses item popularity to refine magnitudes after LLM representation generation.",
+      "similarity": 0.11804,
+      "weight": 0.73608
     },
     {
       "source": "weight-decay",
       "target": "semantic-initialization",
       "kind": "mechanism",
       "label": "What initialization encodes",
-      "reason": "Both change what recommendation embeddings encode at initialization: PRISM injects popularity information, while semantic initialization preserves item meaning that random initialization loses."
+      "reason": "Both change what recommendation embeddings encode at initialization: PRISM injects popularity information, while semantic initialization preserves item meaning that random initialization loses.",
+      "similarity": 0.0127,
+      "weight": 0.5254
     },
     {
       "source": "id-text-complementarity",
       "target": "semantic-initialization",
       "kind": "question",
       "label": "Preserving item meaning",
-      "reason": "Both preserve useful item meaning alongside behavioral information: through ID–text model combinations in sequential recommendation, and semantic token initialization in generative recommendation."
+      "reason": "Both preserve useful item meaning alongside behavioral information: through ID–text model combinations in sequential recommendation, and semantic token initialization in generative recommendation.",
+      "similarity": 0.03197,
+      "weight": 0.56394
     },
     {
       "source": "id-text-complementarity",
       "target": "corre",
       "kind": "mechanism",
       "label": "Combining semantic and collaborative signals",
-      "reason": "Both preserve useful information from separate signals before combining them. ID–text ensembling joins independently trained models; CoRRe refines LLM representations with collaborative signals."
+      "reason": "Both preserve useful information from separate signals before combining them. ID–text ensembling joins independently trained models; CoRRe refines LLM representations with collaborative signals.",
+      "similarity": 0.04667,
+      "weight": 0.59333
     },
     {
       "source": "id-text-complementarity",
       "target": "llm-memorization",
       "kind": "question",
       "label": "Beyond a single recommendation signal",
-      "reason": "Both find value in combining semantic and behavioral relationships. One studies ID–text complementarity; the other trains LLMs on richer item relationships beyond one-step transitions."
+      "reason": "Both find value in combining semantic and behavioral relationships. One studies ID–text complementarity; the other trains LLMs on richer item relationships beyond one-step transitions.",
+      "similarity": 0.05119,
+      "weight": 0.60238
     },
     {
       "source": "semantic-initialization",
       "target": "pauserec",
       "kind": "mechanism",
       "label": "Semantic IDs meet pretrained LLMs",
-      "reason": "Both examine the mismatch between new item tokens and a pretrained LLM. One changes token initialization; the other changes recommendation reasoning."
+      "reason": "Both examine the mismatch between new item tokens and a pretrained LLM. One changes token initialization; the other changes recommendation reasoning.",
+      "similarity": 0.18109,
+      "weight": 0.86219
     },
     {
       "source": "semantic-initialization",
       "target": "snaplgr",
       "kind": "question",
       "label": "Grounding an item vocabulary",
-      "reason": "Both address an LLM’s new item vocabulary. Semantic initialization preserves token geometry; SnapLGR combines semantic IDs with vocabulary-grounding training for production retrieval."
+      "reason": "Both address an LLM’s new item vocabulary. Semantic initialization preserves token geometry; SnapLGR combines semantic IDs with vocabulary-grounding training for production retrieval.",
+      "similarity": 0.14689,
+      "weight": 0.79378
     },
     {
       "source": "snaplgr",
       "target": "llm-memorization",
       "kind": "mechanism",
       "label": "Richer item relationships",
-      "reason": "Both use item relationships beyond a single interaction. SnapLGR adds co-engagement information to its semantic IDs; IIRG trains collaborative and semantic relations to improve generalization."
+      "reason": "Both use item relationships beyond a single interaction. SnapLGR adds co-engagement information to its semantic IDs; IIRG trains collaborative and semantic relations to improve generalization.",
+      "similarity": 0.05972,
+      "weight": 0.61944
     },
     {
       "source": "snaplgr",
       "target": "paper-6",
       "kind": "mechanism",
       "label": "Graphs inform item representations",
-      "reason": "Both use interaction-graph structure when constructing item representations. GraphHash clusters users and items for shared embeddings; SnapLGR adds co-engagement information to semantic IDs."
+      "reason": "Both use interaction-graph structure when constructing item representations. GraphHash clusters users and items for shared embeddings; SnapLGR adds co-engagement information to semantic IDs.",
+      "similarity": 0.04978,
+      "weight": 0.59955
     },
     {
       "source": "llm-memorization",
       "target": "pauserec",
       "kind": "question",
       "label": "Using what an LLM knows",
-      "reason": "Both ask why an LLM recommender may fail to use its pretrained knowledge effectively. One studies memorization; the other examines explicit versus implicit reasoning."
+      "reason": "Both ask why an LLM recommender may fail to use its pretrained knowledge effectively. One studies memorization; the other examines explicit versus implicit reasoning.",
+      "similarity": 0.11572,
+      "weight": 0.73144
     },
     {
       "source": "corre",
       "target": "paper-6",
       "kind": "mechanism",
       "label": "Collaborative structure before ranking",
-      "reason": "Both extract useful structure from interaction graphs. GraphHash uses graph communities to share embeddings; CoRRe uses co-purchase neighbors to refine item representations."
+      "reason": "Both extract useful structure from interaction graphs. GraphHash uses graph communities to share embeddings; CoRRe uses co-purchase neighbors to refine item representations.",
+      "similarity": 0.06201,
+      "weight": 0.62402
     },
     {
       "source": "gala",
       "target": "glance",
       "kind": "question",
       "label": "LLMs that respect graph structure",
-      "reason": "Both adapt language-model use to graph structure. GLANCE decides which nodes need LLM assistance; GaLA modifies attention to retain graph adjacency during reasoning."
+      "reason": "Both adapt language-model use to graph structure. GLANCE decides which nodes need LLM assistance; GaLA modifies attention to retain graph adjacency during reasoning.",
+      "similarity": 0.04631,
+      "weight": 0.59263
     },
     {
       "source": "gala",
       "target": "pencil",
       "kind": "mechanism",
       "label": "Attention over graph structure",
-      "reason": "Both investigate how Transformers represent graph relationships. PENCIL learns from local subgraphs; GaLA corrects attention distortion when graphs are serialized for an LLM."
+      "reason": "Both investigate how Transformers represent graph relationships. PENCIL learns from local subgraphs; GaLA corrects attention distortion when graphs are serialized for an LLM.",
+      "similarity": 0.04763,
+      "weight": 0.59526
     },
     {
       "source": "pencil",
       "target": "edge-automorphism",
       "kind": "question",
       "label": "Distinguishing candidate links",
-      "reason": "Both study structural expressiveness for link prediction. PENCIL uses local-subgraph attention; the edge-automorphism framework quantifies indistinguishable links and motivates an orbit-aware GNN."
+      "reason": "Both study structural expressiveness for link prediction. PENCIL uses local-subgraph attention; the edge-automorphism framework quantifies indistinguishable links and motivates an orbit-aware GNN.",
+      "similarity": 0.09375,
+      "weight": 0.68751
     },
     {
       "source": "edge-automorphism",
       "target": "paper-5",
       "kind": "mechanism",
       "label": "Learning over edges",
-      "reason": "Both make edge representations central to the learning task. EO-GNN distinguishes structural link roles; MAGNET scores agent–task assignments through a line-graph transformation."
+      "reason": "Both make edge representations central to the learning task. EO-GNN distinguishes structural link roles; MAGNET scores agent–task assignments through a line-graph transformation.",
+      "similarity": 0.0,
+      "weight": 0.5
     },
     {
       "source": "paper-5",
       "target": "paper-8",
       "kind": "question",
       "label": "Learning to change a network",
-      "reason": "Both use learned graph information for decisions over edges. MAGNET selects feasible assignments; ORE edits graph structure while refreshing the gradients used to guide changes."
+      "reason": "Both use learned graph information for decisions over edges. MAGNET selects feasible assignments; ORE edits graph structure while refreshing the gradients used to guide changes.",
+      "similarity": 0.0454,
+      "weight": 0.59079
     },
     {
       "source": "paper-5",
       "target": "paper-6",
       "kind": "bridge",
       "label": "Two uses of bipartite structure",
-      "reason": "Both exploit bipartite graphs, in different applications. MAGNET transforms agent–task graphs for assignment; GraphHash clusters user–item graphs to reduce embedding memory."
+      "reason": "Both exploit bipartite graphs, in different applications. MAGNET transforms agent–task graphs for assignment; GraphHash clusters user–item graphs to reduce embedding memory.",
+      "similarity": 0.02104,
+      "weight": 0.54208
     },
     {
       "source": "local-fairness",
       "target": "paper-7",
       "kind": "mechanism",
       "label": "Local homophily as distribution shift",
-      "reason": "Both examine nodes whose local homophily differs from the graph overall. The performance study diagnoses accuracy gaps; the fairness study analyzes unequal outcomes across sensitive groups."
+      "reason": "Both examine nodes whose local homophily differs from the graph overall. The performance study diagnoses accuracy gaps; the fairness study analyzes unequal outcomes across sensitive groups.",
+      "similarity": 0.13369,
+      "weight": 0.76739
     },
     {
       "source": "local-fairness",
       "target": "paper-9",
       "kind": "question",
       "label": "Fairness depends on the neighborhood",
-      "reason": "Both connect local homophily to unfair predictions. The later study adds an out-of-distribution formulation and benchmarks for underrepresented neighborhood patterns."
+      "reason": "Both connect local homophily to unfair predictions. The later study adds an out-of-distribution formulation and benchmarks for underrepresented neighborhood patterns.",
+      "similarity": 0.09986,
+      "weight": 0.69971
     },
     {
       "source": "local-fairness",
       "target": "glance",
       "kind": "question",
       "label": "Helping overlooked node subgroups",
-      "reason": "Both examine outcomes hidden by graph-wide averages. Local-fairness analysis studies underrepresented neighborhoods; GLANCE routes assistance according to where a GNN needs help."
+      "reason": "Both examine outcomes hidden by graph-wide averages. Local-fairness analysis studies underrepresented neighborhoods; GLANCE routes assistance according to where a GNN needs help.",
+      "similarity": 0.02336,
+      "weight": 0.54672
     },
     {
       "source": "paper-7",
       "target": "glance",
       "kind": "mechanism",
       "label": "Where a graph model struggles",
-      "reason": "The local-performance study identifies accuracy gaps across neighborhood patterns. GLANCE uses local structural signals to decide when an LLM can help a GNN."
+      "reason": "The local-performance study identifies accuracy gaps across neighborhood patterns. GLANCE uses local structural signals to decide when an LLM can help a GNN.",
+      "similarity": 0.04805,
+      "weight": 0.5961
     },
     {
       "source": "paper-7",
       "target": "paper-10",
       "kind": "mechanism",
       "label": "Homophily-sensitive model design",
-      "reason": "Both explain why neighborhood similarity affects GNN behavior. One analyzes local accuracy gaps; the other connects heterophily-aware designs to adversarial robustness."
+      "reason": "Both explain why neighborhood similarity affects GNN behavior. One analyzes local accuracy gaps; the other connects heterophily-aware designs to adversarial robustness.",
+      "similarity": 0.09881,
+      "weight": 0.69762
     },
     {
       "source": "paper-9",
       "target": "fairedit",
       "kind": "question",
       "label": "Diagnosing and improving graph fairness",
-      "reason": "Both address fairness in node prediction. The neighborhood study analyzes structural causes; FairEdit changes graph edges to improve fairness."
+      "reason": "Both address fairness in node prediction. The neighborhood study analyzes structural causes; FairEdit changes graph edges to improve fairness.",
+      "similarity": 0.10284,
+      "weight": 0.70569
     },
     {
       "source": "fairedit",
       "target": "paper-8",
       "kind": "mechanism",
       "label": "Gradient-guided graph editing",
-      "reason": "Both use gradients to choose graph edits. FairEdit optimizes fairness; the network-design study examines structural biases in these gradients and proposes iterative re-embedding."
+      "reason": "Both use gradients to choose graph edits. FairEdit optimizes fairness; the network-design study examines structural biases in these gradients and proposes iterative re-embedding.",
+      "similarity": 0.14202,
+      "weight": 0.78405
     },
     {
       "source": "paper-10",
       "target": "paper-11",
       "kind": "mechanism",
       "label": "Robustness and model understanding",
-      "reason": "Both examine adversarial behavior in GNNs. One studies structural attacks and robust architectures; the other studies how adversarial training affects explanation reliability."
+      "reason": "Both examine adversarial behavior in GNNs. One studies structural attacks and robust architectures; the other studies how adversarial training affects explanation reliability.",
+      "similarity": 0.07097,
+      "weight": 0.64194
     },
     {
       "source": "paper-8",
       "target": "paper-11",
       "kind": "question",
       "label": "Can we trust model-derived importance?",
-      "reason": "Both examine whether information extracted from a GNN is meaningful. One tests gradients used for editing; the other evaluates explanations of learned representations."
+      "reason": "Both examine whether information extracted from a GNN is meaningful. One tests gradients used for editing; the other evaluates explanations of learned representations.",
+      "similarity": 0.04183,
+      "weight": 0.58365
     },
     {
       "source": "paper-11",
       "target": "paper-12",
       "kind": "bridge",
       "label": "Understanding molecular graph models",
-      "reason": "Both investigate what graph models learn about chemistry. The density study compares learned and fixed representations; the explanation study examines reliable domain-relevant insights."
+      "reason": "Both investigate what graph models learn about chemistry. The density study compares learned and fixed representations; the explanation study examines reliable domain-relevant insights.",
+      "similarity": 0.03233,
+      "weight": 0.56466
     },
     {
       "source": "paper-11",
       "target": "paper-14",
       "kind": "question",
       "label": "Explanations that help scientific inquiry",
-      "reason": "Both seek useful scientific understanding from learned models. Reliable GNN explanations focus on training and faithfulness; actionable attribution uses domain concepts to guide interventions."
+      "reason": "Both seek useful scientific understanding from learned models. Reliable GNN explanations focus on training and faithfulness; actionable attribution uses domain concepts to guide interventions.",
+      "similarity": 0.04196,
+      "weight": 0.58392
     },
     {
       "source": "paper-14",
       "target": "paper-16",
       "kind": "mechanism",
       "label": "Generative interventions for explanation",
-      "reason": "Both use generative models to make meaningful input changes and inspect predictions. Actionable attribution brings domain-specific scientific concepts into this intervention-based approach."
+      "reason": "Both use generative models to make meaningful input changes and inspect predictions. Actionable attribution brings domain-specific scientific concepts into this intervention-based approach.",
+      "similarity": 0.02138,
+      "weight": 0.54277
     },
     {
       "source": "paper-14",
       "target": "paper-15",
       "kind": "bridge",
       "label": "Interpreting material microstructure",
-      "reason": "The strength study predicts material properties from microscope images; actionable attribution studies how meaningful changes to scientific inputs can reveal useful model behavior."
+      "reason": "The strength study predicts material properties from microscope images; actionable attribution studies how meaningful changes to scientific inputs can reveal useful model behavior.",
+      "similarity": 0.0,
+      "weight": 0.5
     },
     {
       "source": "paper-14",
       "target": "zeroth-order-sciml",
       "kind": "mechanism",
       "label": "Putting domain knowledge into learning",
-      "reason": "Both connect scientific knowledge to neural models. Actionable attribution uses domain concepts for interpretation; zeroth-order SciML incorporates scientific software into training."
+      "reason": "Both connect scientific knowledge to neural models. Actionable attribution uses domain concepts for interpretation; zeroth-order SciML incorporates scientific software into training.",
+      "similarity": 0.06814,
+      "weight": 0.63629
     },
     {
       "source": "paper-12",
       "target": "paper-13",
       "kind": "question",
       "label": "From molecular structure to crystal properties",
-      "reason": "Both examine molecular materials through structure. The density study predicts a bulk property from chemical structure; Autopack measures how molecules organize in crystals."
+      "reason": "Both examine molecular materials through structure. The density study predicts a bulk property from chemical structure; Autopack measures how molecules organize in crystals.",
+      "similarity": 0.02398,
+      "weight": 0.54796
     },
     {
       "source": "paper-12",
       "target": "paper-15",
       "kind": "question",
       "label": "Learning material properties from representations",
-      "reason": "Both compare ways to represent materials for property prediction. One uses molecular graphs and chemical features; the other uses learned and engineered microscope-image features."
+      "reason": "Both compare ways to represent materials for property prediction. One uses molecular graphs and chemical features; the other uses learned and engineered microscope-image features.",
+      "similarity": 0.09642,
+      "weight": 0.69284
     },
     {
       "source": "paper-12",
       "target": "zeroth-order-sciml",
       "kind": "question",
       "label": "Learning with limited scientific data",
-      "reason": "Both study materials prediction with limited data. The density work evaluates representations; zeroth-order SciML adds scientific knowledge through black-box software."
+      "reason": "Both study materials prediction with limited data. The density work evaluates representations; zeroth-order SciML adds scientific knowledge through black-box software.",
+      "similarity": 0.01649,
+      "weight": 0.53299
     },
     {
       "source": "paper-13",
       "target": "paper-15",
       "kind": "question",
       "label": "Characterizing crystalline materials",
-      "reason": "Both extract information about the organization of molecular solids. Autopack labels molecular packing; the strength study learns useful information from microscopy."
+      "reason": "Both extract information about the organization of molecular solids. Autopack labels molecular packing; the strength study learns useful information from microscopy.",
+      "similarity": 0.0375,
+      "weight": 0.575
     },
     {
       "source": "gala",
       "target": "semantic-initialization",
       "kind": "bridge",
       "label": "Preserving structure at the LLM interface",
-      "reason": "Both examine information lost at the LLM interface: graph adjacency during serialization, and semantic geometry when initializing new item tokens."
+      "reason": "Both examine information lost at the LLM interface: graph adjacency during serialization, and semantic geometry when initializing new item tokens.",
+      "similarity": 0.02326,
+      "weight": 0.54651
     }
-  ]
+  ],
+  "communities": [
+    {
+      "id": "community-1",
+      "label": "Recommendation",
+      "color": "#245d53",
+      "papers": [
+        "corre",
+        "id-text-complementarity",
+        "llm-memorization",
+        "paper-3",
+        "paper-6",
+        "pauserec",
+        "semantic-initialization",
+        "snaplgr",
+        "weight-decay"
+      ]
+    },
+    {
+      "id": "community-2",
+      "label": "Graph structure & prediction",
+      "color": "#406779",
+      "papers": [
+        "edge-automorphism",
+        "gala",
+        "glance",
+        "local-fairness",
+        "paper-7",
+        "pencil"
+      ]
+    },
+    {
+      "id": "community-3",
+      "label": "Graph editing & assignment",
+      "color": "#985a44",
+      "papers": ["fairedit", "paper-5", "paper-8", "paper-9"]
+    },
+    {
+      "id": "community-4",
+      "label": "Explanations & scientific ML",
+      "color": "#766383",
+      "papers": [
+        "paper-10",
+        "paper-11",
+        "paper-12",
+        "paper-13",
+        "paper-14",
+        "paper-15",
+        "paper-16",
+        "zeroth-order-sciml"
+      ]
+    },
+    {
+      "id": "community-5",
+      "label": "Early astronomy",
+      "color": "#69705f",
+      "papers": ["paper-17"]
+    }
+  ],
+  "clustering": {
+    "method": "Louvain",
+    "similarity": "TF-IDF cosine similarity of paper titles and summaries",
+    "weight": "0.5 + 2 × cosine similarity",
+    "resolution": 1,
+    "seed": 41,
+    "modularity": 0.5676,
+    "implementation": "NetworkX 3.7"
+  }
 }

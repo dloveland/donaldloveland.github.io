@@ -54,7 +54,9 @@
       carousel.querySelector("[data-research-status]").textContent =
         `Paper ${current + 1} of ${slides.length}: ${slides[current].querySelector("h3").textContent}`;
       if (moveFocus)
-        slides[current].querySelector("a").focus({ preventScroll: true });
+        slides[current]
+          .querySelector("[data-research-paper-link]")
+          .focus({ preventScroll: true });
     }
     if (slides.length > 1) {
       carousel
@@ -74,6 +76,53 @@
     } else {
       carousel.querySelector(".research-carousel-controls").hidden = true;
     }
+  }
+
+  const figureDialog = document.querySelector(".figure-dialog");
+  if (figureDialog && typeof figureDialog.showModal === "function") {
+    let opener;
+    all("[data-figure-open]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+        event.preventDefault();
+        opener = link;
+        const image = figureDialog.querySelector("[data-figure-image]");
+        image.src = link.href;
+        image.alt = link.querySelector("img").alt;
+        figureDialog.querySelector("#figure-caption").textContent =
+          link.dataset.figureCaption;
+        figureDialog.querySelector("[data-figure-source-link]").href =
+          link.dataset.figureSource;
+        figureDialog.showModal();
+        document.documentElement.classList.add("figure-open");
+        figureDialog.querySelector("[data-figure-close]").focus();
+      });
+    });
+    figureDialog
+      .querySelector("[data-figure-close]")
+      .addEventListener("click", () => figureDialog.close());
+    figureDialog.addEventListener("click", (event) => {
+      const bounds = figureDialog.getBoundingClientRect();
+      if (
+        event.target === figureDialog &&
+        (event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom)
+      )
+        figureDialog.close();
+    });
+    figureDialog.addEventListener("close", () => {
+      document.documentElement.classList.remove("figure-open");
+      opener?.focus({ preventScroll: true });
+    });
   }
 
   const experienceEntries = all(".experience-item");

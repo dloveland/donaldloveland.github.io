@@ -16,8 +16,11 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
   Use the conference/publication year for published work and the first release
   year for preprints. Use `search_aliases` for earlier titles and method names.
   The homepage carousel highlights the three most recent first-author papers using
-  `homepage_order`, ordered from 1. Set their `question`, `art`, `teaser_label`, and
+  `homepage_order`, ordered from 1. Set their `question`, `teaser_label`, and
   `short_venue` fields.
+- `_data/paper_figures.json`: original figure sources, PDF page and figure numbers,
+  crop coordinates (PDF points), captions, alt text, and optimized image paths.
+  The homepage and selected-work cards share `_includes/paper-figure.html`.
 - `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
 - `_pages/research.html`: selected work and the full publication browser.
 - `_data/paper_atlas.json`: paper summaries, primary sources, map positions, and
@@ -30,7 +33,12 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 - `assets/css/portfolio.css` and `assets/js/portfolio.js`: design and interactions.
 - `assets/images/25_CV_Yr4.pdf`: the current CV; update `cv_url` when replacing it.
 
-The research illustrations are conceptual SVG diagrams, not empirical charts.
+Paper cards use figures cropped from the original manuscripts: item semantics
+(Figure 1, page 2), GaLA (Figure 1, page 2), GLANCE (Figure 2, page 6), weight decay
+(Figure 2, page 4), and local fairness (Figure 4, page 8). The item-semantics thumbnail
+shows a detail; its enlarged view contains the full figure. Lossless WebP images
+preserve the original labels, colors, and results. Select a figure to enlarge it
+and follow its source link; without JavaScript the image link opens directly.
 Publications are grouped by year, with publication types labeled on each entry.
 Publication search combines topic, year, type, and text filters and stores the current
 view in the URL. Standard links, citations, and experience details work without
@@ -57,11 +65,32 @@ papers. The atlas uses short, newly written descriptions of the research.
 Keep about two to four useful connections per paper and at most five. A few papers
 can have one or no links when that is the honest reading. Prefer complementary
 approaches to a concrete question over linking every pair in a topic. Maintain the
-`reason` and descriptive `label` together when changing an edge. Coordinates are
-fixed to keep navigation predictable; adjust them if labels overlap after adding
-papers. The mobile view defaults to the selected paper's neighborhood, while every
+`reason` and descriptive `label` together when changing an edge.
+
+The global map renders circular nodes, colored by **Louvain communities**. TF-IDF
+cosine similarity of paper titles and curated summaries weights the existing
+connections (`0.5 + 2 × similarity`); it does not add speculative edges. Louvain
+optimizes weighted modularity with resolution 1 and seed 41. Community names are
+assigned after clustering and do not determine membership. Currently this yields
+five groups, including the isolated astronomy paper. The short-text similarity
+measure is lexical, not a full-text semantic embedding or citation analysis.
+
+A seeded Fruchterman–Reingold spring layout strengthens attraction within the
+detected groups. A collision-avoidance pass reserves room for clickable labels.
+Positions are precomputed, so the browser needs no graph library and the layout
+stays stable while exploring. Regenerate after editing papers or connections:
+
+```sh
+python3 -m venv /tmp/paper-atlas-env
+/tmp/paper-atlas-env/bin/pip install -r scripts/requirements-atlas.txt
+/tmp/paper-atlas-env/bin/python scripts/build_atlas_layout.py
+```
+
+Review the resulting group labels and run the browser checks before publishing.
+The mobile view defaults to the selected paper's neighborhood, while every
 paper stays available through the picker and the full atlas view. Selections can be
-shared with `?atlas=paper-id#atlas`.
+shared with `?atlas=paper-id#atlas`. Expand “Why this connection?” for the source-backed
+reason behind each suggested next paper.
 
 The November 2026 bibliography update uses primary arXiv records and Snap Research
 venue information, with DBLP used for discovery. Google Scholar blocked automated
@@ -103,7 +132,8 @@ npm run test:site
 `SITE_URL` can point the checks at another deployment. Set `SCREENSHOT_DIR` to
 capture desktop and mobile screenshots. The checks exercise search, filters,
 deep links, citation copying, the experience timeline, keyboard navigation, reduced
-motion, mobile layouts, accessibility, and the site without JavaScript.
+motion, mobile layouts, accessibility, the original-figure viewer, nonoverlapping
+graph labels, and the site without JavaScript.
 
 ## Credits
 

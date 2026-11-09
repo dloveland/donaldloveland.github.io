@@ -49,7 +49,7 @@
       mode === "all"
         ? (width * data.height) / data.width
         : mobile.matches
-          ? 420
+          ? 470
           : 500;
     map.style.height = `${height}px`;
     lines.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -160,7 +160,11 @@
       });
       const reason = document.createElement("p");
       reason.textContent = edge.reason;
-      item.append(button, reason);
+      const explanation = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.textContent = "Why this connection?";
+      explanation.append(summary, reason);
+      item.append(button, explanation);
       connections.append(item);
     });
     layout();

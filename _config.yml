@@ -62,6 +62,7 @@ include:
   - .htaccess
   - _pages
 exclude:
+  - scripts
   - "*.sublime-project"
   - "*.sublime-workspace"
   - vendor

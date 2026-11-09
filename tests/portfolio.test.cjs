@@ -6,6 +6,7 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 const publications = require("../_data/publications.json");
 const atlas = require("../_data/paper_atlas.json");
+const figures = require("../_data/paper_figures.json");
 const total = publications.length;
 const recommendationCount = publications.filter((paper) =>
   paper.topics.includes("recommendations"),
@@ -73,7 +74,9 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           for (let index = 0; index < 3; index++) {
             assert.equal(await visible(page, ".research-preview"), 1);
             assert.equal(
-              await active.locator("a").getAttribute("href"),
+              await active
+                .locator("[data-research-paper-link]")
+                .getAttribute("href"),
               `/research/#${expected[index].id}`,
             );
             assert.equal(
@@ -120,11 +123,11 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
             await carousel.locator("[data-research-count]").innerText(),
             "1 / 3",
           );
-          await active.locator("a").focus();
+          await active.locator("[data-research-paper-link]").focus();
           await page.keyboard.press("ArrowRight");
           assert.equal(
             await active
-              .locator("a")
+              .locator("[data-research-paper-link]")
               .evaluate((link) => link === document.activeElement),
             true,
           );
@@ -133,7 +136,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
             /Paper 2 of 3/,
           );
           if (width === 1440) {
-            await active.locator("a").click();
+            await active.locator("[data-research-paper-link]").click();
             await page.waitForURL(`${base}/research/#${expected[1].id}`);
             assert.equal(
               await page
@@ -143,6 +146,81 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
             );
           }
         }
+        await page.setViewportSize({ width: 1440, height: 1000 });
+      },
+    );
+    await t.test(
+      "original paper figures enlarge with sources and restore keyboard focus",
+      async () => {
+        const seen = new Set();
+        for (const width of [1440, 390]) {
+          await page.setViewportSize({ width, height: 1000 });
+          for (const route of ["/", "/research/"]) {
+            await page.goto(base + route, { waitUntil: "networkidle" });
+            const dialog = page.locator(".figure-dialog");
+            for (let index = 0; index < 3; index++) {
+              const link =
+                route === "/"
+                  ? page.locator(
+                      '[data-research-slide][aria-hidden="false"] [data-figure-open]',
+                    )
+                  : page
+                      .locator("[data-featured-paper] [data-figure-open]")
+                      .nth(index);
+              const href = await link.getAttribute("href");
+              const [id, figure] = Object.entries(figures).find(
+                ([, figure]) => figure.image === href,
+              );
+              seen.add(id);
+              await link.scrollIntoViewIfNeeded();
+              await link.locator("img").evaluate((img) => img.decode());
+              await link.focus();
+              await page.keyboard.press("Enter");
+              assert.equal(await dialog.evaluate((d) => d.open), true);
+              await dialog.locator("img").evaluate((img) => img.decode());
+              assert.equal(
+                await dialog.locator("img").getAttribute("src"),
+                base + figure.image,
+              );
+              assert.equal(
+                await dialog
+                  .locator("[data-figure-source-link]")
+                  .getAttribute("href"),
+                figure.source,
+              );
+              assert.equal(
+                await dialog.locator("#figure-caption").innerText(),
+                figure.caption,
+              );
+              assert.equal(
+                await page.evaluate(
+                  () => document.documentElement.scrollWidth <= innerWidth,
+                ),
+                true,
+              );
+              if (route === "/" && index === 0 && width === 1440) {
+                const result = await new AxeBuilder({ page })
+                  .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+                  .analyze();
+                assert.deepEqual(
+                  result.violations.map((v) => v.id),
+                  [],
+                );
+              }
+              if (index % 2)
+                await dialog.locator("[data-figure-close]").click();
+              else await page.keyboard.press("Escape");
+              assert.equal(await dialog.evaluate((d) => d.open), false);
+              assert.equal(
+                await link.evaluate((el) => el === document.activeElement),
+                true,
+              );
+              if (route === "/")
+                await page.locator("[data-research-next]").click();
+            }
+          }
+        }
+        assert.equal(seen.size, Object.keys(figures).length);
         await page.setViewportSize({ width: 1440, height: 1000 });
       },
     );
@@ -384,6 +462,69 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           await page.locator("#atlas").screenshot({
             path: path.join(screenshotDir, "desktop-paper-atlas.png"),
           });
+      },
+    );
+    await t.test(
+      "computed communities cover every paper and full-graph labels stay separate",
+      async () => {
+        assert.equal(atlas.clustering.method, "Louvain");
+        assert.ok(atlas.clustering.modularity > 0);
+        const assigned = atlas.communities.flatMap((c) => c.papers);
+        assert.equal(new Set(assigned).size, total);
+        assert.equal(assigned.length, total);
+        for (const node of atlas.nodes)
+          assert.ok(
+            atlas.communities
+              .find((c) => c.id === node.community)
+              ?.papers.includes(node.id),
+          );
+        assert.ok(
+          atlas.edges.every(
+            (edge) =>
+              edge.similarity >= 0 && edge.similarity <= 1 && edge.weight > 0,
+          ),
+        );
+        for (const width of [1440, 1200, 1024, 768, 390, 320]) {
+          await page.setViewportSize({ width, height: 1000 });
+          await page.goto(`${base}/research/`);
+          await page.evaluate(() => document.fonts.ready);
+          await page.locator('[data-atlas-view="all"]').click();
+          const issues = await page.locator(".atlas-map").evaluate((map) => {
+            const bounds = map.getBoundingClientRect();
+            const nodes = [...map.querySelectorAll("[data-atlas-node]")].map(
+              (n) => ({
+                id: n.dataset.atlasNode,
+                box: n.getBoundingClientRect(),
+              }),
+            );
+            return nodes.flatMap((n, i) => {
+              const r = n.box;
+              const outside =
+                r.left < bounds.left ||
+                r.right > bounds.right ||
+                r.top < bounds.top ||
+                r.bottom > bounds.bottom;
+              const collisions = nodes
+                .slice(i + 1)
+                .filter(
+                  (m) =>
+                    r.left < m.box.right &&
+                    r.right > m.box.left &&
+                    r.top < m.box.bottom &&
+                    r.bottom > m.box.top,
+                )
+                .map((m) => `${n.id} overlaps ${m.id}`);
+              return outside
+                ? [...collisions, `${n.id} outside canvas`]
+                : collisions;
+            });
+          });
+          assert.deepEqual(issues, [], `Graph at ${width}px`);
+        }
+        const details = page.locator(".atlas-connections details").first();
+        assert.equal(await details.evaluate((d) => d.open), false);
+        await details.locator("summary").click();
+        assert.equal(await details.locator("p").isVisible(), true);
       },
     );
     await t.test(
@@ -681,7 +822,9 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         );
         const firstPaper = staticPage.locator(".research-preview:visible");
         assert.match(
-          await firstPaper.getAttribute("href"),
+          await firstPaper
+            .locator("[data-research-paper-link]")
+            .getAttribute("href"),
           /\/research\/#semantic-initialization$/,
         );
         await staticPage.locator("#research .teaser-cta").click();

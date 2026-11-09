@@ -26,7 +26,7 @@ permalink: /research/
     {% assign featured = site.data.publications | where_exp: 'paper', 'paper.featured_order != nil' | sort: 'featured_order' %}
     {% for paper in featured %}
     <article class="featured-paper" data-featured-paper data-topics="{{ paper.topics | join: ' ' }}">
-      {% include research-art.html art=paper.art %}
+      {% include paper-figure.html paper=paper %}
       <div class="paper-copy"><p class="eyebrow">{{ paper.label }} · {{ paper.short_venue }} {{ paper.year }}</p><h3><a href="{{ '/research/' | relative_url }}#{{ paper.id }}">{{ paper.question }} <span class="paper-arrow" aria-hidden="true">↗</span></a></h3><p class="paper-title">{{ paper.title }}</p>{% include paper-links.html paper=paper %}</div>
     </article>
     {% endfor %}

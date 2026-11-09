@@ -7,18 +7,18 @@
       <div class="atlas-picker"><label for="atlas-paper">Jump to a paper</label><select id="atlas-paper">{% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}<option value="{{ node.id }}" {% if node.id == atlas.default_paper %}selected{% endif %}>{{ node.label | escape }} · {{ paper.year }}</option>{% endfor %}</select></div>
       <div class="atlas-views" role="group" aria-label="Atlas view"><button type="button" data-atlas-view="all" aria-pressed="true">All papers</button><button type="button" data-atlas-view="connected" aria-pressed="false">Connected papers</button></div>
     </div>
-    <ul class="atlas-legend" aria-label="Research areas">{% for group in atlas.groups %}<li data-atlas-group="{{ group.id }}"><span aria-hidden="true"></span>{{ group.label }}</li>{% endfor %}</ul>
+    <ul class="atlas-legend" aria-label="Detected paper communities">{% for community in atlas.communities %}<li style="--atlas-color: {{ community.color }}"><span aria-hidden="true"></span>{{ community.label }}</li>{% endfor %}</ul>
     <div class="atlas-layout">
       <div class="atlas-map-column">
         <div class="atlas-map-scroll" role="region" aria-label="Paper connections map" tabindex="0">
           <div class="atlas-map" role="group" aria-label="Select a paper">
             <svg class="atlas-lines" viewBox="0 0 {{ atlas.width }} {{ atlas.height }}" preserveAspectRatio="none" aria-hidden="true"></svg>
-            {% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}<button type="button" class="atlas-node" data-atlas-node="{{ node.id }}" data-atlas-group="{{ node.group }}" aria-label="{{ paper.title | escape }}, {{ paper.year }}" aria-pressed="false" aria-controls="atlas-detail" title="{{ paper.title | escape }}"><span class="atlas-node-label">{{ node.label | escape }}</span><span class="atlas-node-year">{{ paper.year }}</span></button>{% endfor %}
+            {% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}{% assign community = atlas.communities | where: 'id', node.community | first %}<button type="button" class="atlas-node" data-atlas-node="{{ node.id }}" data-atlas-community="{{ node.community }}" style="--atlas-color: {{ community.color }}" aria-label="{{ paper.title | escape }}, {{ paper.year }}. {{ community.label | escape }}." aria-pressed="false" aria-controls="atlas-detail" title="{{ paper.title | escape }}"><span class="atlas-node-circle" aria-hidden="true"></span><span class="atlas-node-label">{{ node.label | escape }}</span><span class="atlas-node-year">{{ paper.year }}</span></button>{% endfor %}
           </div>
         </div>
         <p class="atlas-map-caption" data-atlas-caption></p>
         <a class="atlas-details-link text-link" href="#atlas-detail">Read selected paper <span aria-hidden="true">↓</span></a>
-        <p class="atlas-method">Connections trace shared questions, methods, and bridges between research areas.</p>
+        <p class="atlas-method">Colors show communities found by Louvain clustering, using title-and-summary similarity to weight curated connections. A force-directed layout brings related papers together. Lines trace shared questions and methods, not citations.</p>
       </div>
       <div id="atlas-detail" class="atlas-detail" role="region" aria-labelledby="atlas-paper-title">
         <p class="eyebrow" data-atlas-meta></p>

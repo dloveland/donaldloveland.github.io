@@ -38,6 +38,14 @@
       </nav>
     </header>
     <main id="main" tabindex="-1">{{ content }}</main>
+    {% if page.home or page.nav == 'research' %}
+    <dialog class="figure-dialog" aria-label="Paper figure" aria-describedby="figure-caption">
+      <div class="figure-dialog-toolbar"><span>From the paper</span><button type="button" data-figure-close aria-label="Close figure">Close <span aria-hidden="true">×</span></button></div>
+      <img data-figure-image alt="">
+      <p id="figure-caption"></p>
+      <a class="text-link" data-figure-source-link>View figure in paper ↗</a>
+    </dialog>
+    {% endif %}
     <footer class="site-footer wrap">
       <a class="footer-name" href="{{ '/' | relative_url }}">Donald Loveland</a>
       <div class="footer-links">

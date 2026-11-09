@@ -1,0 +1,63 @@
+{
+  "semantic-initialization": {
+    "page": 2,
+    "figure": "1",
+    "full": [52, 84, 295, 349],
+    "thumb": [52, 166, 295, 349],
+    "caption": "Figure 1: random versus centroid initialization and the resulting item-embedding geometry.",
+    "alt": "Original figure comparing randomly initialized item embeddings with centroid-initialized embeddings that preserve semantic clusters.",
+    "source": "https://arxiv.org/pdf/2608.07816#page=2",
+    "thumbnail": "/assets/images/papers/semantic-initialization-640.webp",
+    "width": 641,
+    "height": 483,
+    "image": "/assets/images/papers/semantic-initialization-1600.webp"
+  },
+  "gala": {
+    "page": 2,
+    "figure": "1",
+    "full": [53, 84, 295, 196],
+    "caption": "Figure 1: graph neighbors become separated in sequence space, weakening attention.",
+    "alt": "Original GaLA diagram showing graph space, sequence space, and how positional gaps alter attention.",
+    "source": "https://arxiv.org/pdf/2606.15633#page=2",
+    "thumbnail": "/assets/images/papers/gala-640.webp",
+    "width": 641,
+    "height": 297,
+    "image": "/assets/images/papers/gala-1600.webp"
+  },
+  "glance": {
+    "page": 6,
+    "figure": "2",
+    "full": [107, 79, 502, 233],
+    "caption": "Figure 2: the GLANCE routing, LLM embedding, and prediction-refinement pipeline.",
+    "alt": "Original GLANCE overview showing node-aware routing, LLM assistance, and prediction refinement.",
+    "source": "https://arxiv.org/pdf/2510.10849#page=6",
+    "thumbnail": "/assets/images/papers/glance-640.webp",
+    "width": 641,
+    "height": 250,
+    "image": "/assets/images/papers/glance-1600.webp"
+  },
+  "weight-decay": {
+    "page": 4,
+    "figure": "2",
+    "full": [52, 82, 548, 325],
+    "caption": "Figure 2: embedding magnitude tracks item popularity when weight decay is used.",
+    "alt": "Original comparison of item popularity and embedding magnitude, with and without weight decay for BPR and DirectAU.",
+    "source": "/assets/papers/25_KDD.pdf#page=4",
+    "thumbnail": "/assets/images/papers/weight-decay-640.webp",
+    "width": 641,
+    "height": 315,
+    "image": "/assets/images/papers/weight-decay-1600.webp"
+  },
+  "local-fairness": {
+    "page": 8,
+    "figure": "4",
+    "full": [76, 300, 286, 418],
+    "caption": "Figure 4: changes in statistical-parity gaps for standard and fairness-adjusted GNNs.",
+    "alt": "Original histogram comparing changes in statistical parity for unadjusted GNNs and fairness-adjusted GNNs on real and semi-synthetic datasets.",
+    "source": "https://arxiv.org/pdf/2410.04287#page=8",
+    "thumbnail": "/assets/images/papers/local-fairness-640.webp",
+    "width": 641,
+    "height": 360,
+    "image": "/assets/images/papers/local-fairness-1600.webp"
+  }
+}
