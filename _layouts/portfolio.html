@@ -20,6 +20,7 @@
     <link rel="preload" href="{{ '/assets/fonts/dm-sans-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}?v={{ site.time | date: '%s' }}">
     <script src="{{ '/assets/js/portfolio.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+    {% if page.nav == 'research' %}<script src="{{ '/assets/js/paper-atlas.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>{% endif %}
   </head>
   <body class="{% if page.home %}home-page{% else %}interior-page{% endif %}">
     <a class="skip-link" href="#main">Skip to content</a>

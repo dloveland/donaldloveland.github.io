@@ -182,7 +182,8 @@
     "venue": "International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2025",
     "topics": ["graphs"],
     "citation": "Donald Loveland, James Usevitch, Zachary Serlin, Danai Koutra, Rajmonda Caceres. \"MAGNET: A Multi-Agent Graph Neural Network for Efficient Bipartite Task Assignment\", International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2025",
-    "type": "conference"
+    "type": "conference",
+    "paper_url": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1399.pdf"
   },
   {
     "id": "paper-6",
@@ -241,7 +242,8 @@
     "venue": "ACM Conference on Knowledge Discovery and Data Mining (KDD), 2022",
     "topics": ["graphs", "trustworthy"],
     "citation": "Jiong Zhu, Junchen Jin, Donald Loveland, Michael T Schaub, and Danai Koutra. \"How does Heterophily Impact the Robustness of Graph Neural Networks? Theoretical Connections and Practical Implications.\", ACM Conference on Knowledge Discovery and Data Mining (KDD), 2022",
-    "type": "conference"
+    "type": "conference",
+    "paper_url": "https://arxiv.org/abs/2106.07767"
   },
   {
     "id": "paper-9",
@@ -284,7 +286,8 @@
     "venue": "Journal of Chemical Information and Modeling, 2021",
     "topics": ["science"],
     "citation": "Phan Nguyen*, Donald Loveland*, Joanne T Kim, Piyush Karande, Anna M Hiszpanski, Yong Han. \"Predicting Energetics Materials’ Crystalline Density from Chemical Structure by Machine Learning\", Journal of Chemical Information and Modeling, 2021",
-    "type": "journal"
+    "type": "journal",
+    "paper_url": "https://pubmed.ncbi.nlm.nih.gov/33899482/"
   },
   {
     "id": "paper-11",
@@ -305,7 +308,8 @@
     "venue": "Journal of Chemical Information and Modeling, 2020",
     "topics": ["science"],
     "citation": "Donald Loveland, Bhavya Kailkhura, Piyush Karande, Anna M Hiszpanski, Yong Han. \"Automated Identification of Molecular Crystals’ Packing Motifs\", Journal of Chemical Information and Modeling, 2020",
-    "type": "journal"
+    "type": "journal",
+    "paper_url": "https://pubmed.ncbi.nlm.nih.gov/33245232/"
   },
   {
     "id": "paper-15",
@@ -315,7 +319,8 @@
     "venue": "Materials & Design, 2020",
     "topics": ["science"],
     "citation": "Brian Gallagher, Matthew Rever, Donald Loveland, T Nathan Mundhenk, Brock Beauchamp, Emily Robertson, Golam G Jaman, Anna M. Hiszpanski, Yong Han. \"Predicting Compressive Strength of Consolidated Molecular Solids using Computer Vision and Deep Learning\", Materials & Design, 2020",
-    "type": "journal"
+    "type": "journal",
+    "paper_url": "https://arxiv.org/abs/1906.02130"
   },
   {
     "id": "paper-14",
@@ -341,7 +346,8 @@
     "venue": "IEEE Global Conference on Signal and Information Processing (GlobalSIP), 2019",
     "topics": ["trustworthy"],
     "citation": "Shusen Liu, Bhavya Kailkhura, Donald Loveland, Yong Han. \"Generative Counterfactual Introspection for Explainable Deep Learning\", IEEE Global Conference on Signal and Information Processing (GlobalSIP), 2019",
-    "type": "conference"
+    "type": "conference",
+    "paper_url": "https://arxiv.org/abs/1907.03077"
   },
   {
     "id": "paper-17",
@@ -351,6 +357,7 @@
     "venue": "Monthly Notices of the Royal Astronomical Society, 2018",
     "topics": ["science"],
     "citation": "Vardha N Bennert, Donald Loveland, Edward Donohue, Maren Cosens, Sean Lewis, S Komossa, Tommaso Treu, Matthew A Malkan, Nathan Milgram, Kelsi Flatland, Matthew W Auger, Daeseong Park, Mariana S Lazarova, \"Studying the [OIII]λ 5007Å emission-line width in a sample of ∼ 80 local active galaxies: a surrogate for σ⋆?\", Monthly Notices of the Royal Astronomical Society, 2018",
-    "type": "journal"
+    "type": "journal",
+    "paper_url": "https://arxiv.org/abs/1808.04821"
   }
 ]

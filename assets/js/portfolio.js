@@ -154,9 +154,33 @@
     }));
     const clear = browser.querySelector("[data-clear-filters]");
     const empty = browser.querySelector(".empty-state");
+    const toggleYears = browser.querySelector("[data-toggle-years]");
+    function updateYearControl() {
+      const shown = groups.filter((group) => !group.hidden);
+      toggleYears.hidden = shown.length === 0;
+      toggleYears.textContent = shown.every((group) => group.open)
+        ? "Collapse all years −"
+        : "Expand all years ＋";
+    }
+    groups.forEach((group) =>
+      group.addEventListener("toggle", updateYearControl),
+    );
+    toggleYears.addEventListener("click", () => {
+      const shown = groups.filter((group) => !group.hidden);
+      const open = shown.some((group) => !group.open);
+      shown.forEach((group) => {
+        group.open = open;
+      });
+      updateYearControl();
+    });
     let topic = "all";
     function update(writeUrl = true) {
       const terms = normalize(search.value).split(" ").filter(Boolean);
+      const filtered =
+        terms.length > 0 ||
+        topic !== "all" ||
+        year.value !== "all" ||
+        type.value !== "all";
       let count = 0;
       papers.forEach((paper) => {
         const visible =
@@ -172,9 +196,11 @@
           (paper) => !paper.hidden,
         ).length;
         group.hidden = visible === 0;
+        group.open = filtered && visible > 0;
         group.querySelector("[data-group-count]").textContent =
           `${visible} ${visible === 1 ? "paper" : "papers"}`;
       });
+      updateYearControl();
       buttons.forEach((button) =>
         button.setAttribute(
           "aria-pressed",
@@ -271,12 +297,30 @@
         window.history.replaceState(null, "", url);
         update(false);
       }
+      linked.element.closest("[data-publication-group]").open = true;
       linked.element.querySelector("details").open = true;
+      updateYearControl();
       requestAnimationFrame(() =>
         linked.element.scrollIntoView({ block: "start", behavior: "instant" }),
       );
     }
     window.addEventListener("hashchange", revealLinkedPaper);
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (link && link.hash === window.location.hash) revealLinkedPaper();
+    });
+    let printOpenYears = [];
+    window.addEventListener("beforeprint", () => {
+      printOpenYears = groups.map((group) => group.open);
+      groups.forEach((group) => {
+        group.open = true;
+      });
+    });
+    window.addEventListener("afterprint", () => {
+      groups.forEach((group, index) => {
+        group.open = printOpenYears[index];
+      });
+    });
     revealLinkedPaper();
   }
 

@@ -1,0 +1,38 @@
+{% assign atlas = site.data.paper_atlas %}
+<section id="atlas" class="atlas-section wrap section" aria-labelledby="atlas-title">
+  <div class="section-heading"><div><p class="eyebrow">02 / Explore the work</p><h2 id="atlas-title">Paper atlas.</h2></div><p class="atlas-count">{{ atlas.nodes.size }} papers · {{ atlas.edges.size }} connections</p></div>
+  <p class="atlas-intro">Follow a question from one paper to another. Select a paper to explore its contribution and the ideas it shares with its neighbors.</p>
+  <div class="paper-atlas js-only" data-paper-atlas>
+    <div class="atlas-toolbar">
+      <div class="atlas-picker"><label for="atlas-paper">Jump to a paper</label><select id="atlas-paper">{% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}<option value="{{ node.id }}" {% if node.id == atlas.default_paper %}selected{% endif %}>{{ node.label | escape }} · {{ paper.year }}</option>{% endfor %}</select></div>
+      <div class="atlas-views" role="group" aria-label="Atlas view"><button type="button" data-atlas-view="all" aria-pressed="true">All papers</button><button type="button" data-atlas-view="connected" aria-pressed="false">Connected papers</button></div>
+    </div>
+    <ul class="atlas-legend" aria-label="Research areas">{% for group in atlas.groups %}<li data-atlas-group="{{ group.id }}"><span aria-hidden="true"></span>{{ group.label }}</li>{% endfor %}</ul>
+    <div class="atlas-layout">
+      <div class="atlas-map-column">
+        <div class="atlas-map-scroll" role="region" aria-label="Paper connections map" tabindex="0">
+          <div class="atlas-map" role="group" aria-label="Select a paper">
+            <svg class="atlas-lines" viewBox="0 0 {{ atlas.width }} {{ atlas.height }}" preserveAspectRatio="none" aria-hidden="true"></svg>
+            {% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}<button type="button" class="atlas-node" data-atlas-node="{{ node.id }}" data-atlas-group="{{ node.group }}" aria-label="{{ paper.title | escape }}, {{ paper.year }}" aria-pressed="false" aria-controls="atlas-detail" title="{{ paper.title | escape }}"><span class="atlas-node-label">{{ node.label | escape }}</span><span class="atlas-node-year">{{ paper.year }}</span></button>{% endfor %}
+          </div>
+        </div>
+        <p class="atlas-map-caption" data-atlas-caption></p>
+        <a class="atlas-details-link text-link" href="#atlas-detail">Read selected paper <span aria-hidden="true">↓</span></a>
+        <p class="atlas-method">Connections trace shared questions, methods, and bridges between research areas.</p>
+      </div>
+      <div id="atlas-detail" class="atlas-detail" role="region" aria-labelledby="atlas-paper-title">
+        <p class="eyebrow" data-atlas-meta></p>
+        <h3 id="atlas-paper-title"></h3>
+        <p class="atlas-venue" data-atlas-venue></p>
+        <p class="atlas-summary" data-atlas-summary></p>
+        <div class="paper-links"><a data-atlas-source>Read paper ↗</a><a data-atlas-publication>Full entry ↓</a></div>
+        <h4 class="atlas-connections-heading">Continue exploring <span data-atlas-degree></span></h4>
+        <ul class="atlas-connections" data-atlas-connections></ul>
+        <p class="atlas-isolated" data-atlas-isolated hidden>This early astronomy work sits outside the connected machine-learning threads. Choose another paper above to continue exploring.</p>
+      </div>
+    </div>
+    <p class="sr-only" role="status" aria-live="polite" data-atlas-status></p>
+  </div>
+  <noscript><p class="atlas-intro">Explore every paper in the <a href="#publications">publications by year</a> below.</p></noscript>
+  <script type="application/json" id="paper-atlas-data">{{ atlas | jsonify | replace: '</', '<\/' }}</script>
+</section>

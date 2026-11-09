@@ -20,6 +20,9 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
   `short_venue` fields.
 - `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
 - `_pages/research.html`: selected work and the full publication browser.
+- `_data/paper_atlas.json`: paper summaries, primary sources, map positions, and
+  curated connections. `_includes/paper-atlas.html` and `assets/js/paper-atlas.js`
+  render the explorer on the Research page.
 - `_pages/experience.html`: the full career timeline.
 - `_includes/publication-browser.html`: shared publication search and citation interface.
 - `_pages/pubs.html`: the existing `/pubs/` archive remains available for shared links.
@@ -32,6 +35,33 @@ Publications are grouped by year, with publication types labeled on each entry.
 Publication search combines topic, year, type, and text filters and stores the current
 view in the URL. Standard links, citations, and experience details work without
 JavaScript. Interactive controls support keyboard input and reduced motion.
+Publication years start collapsed. Filters open matching years; direct paper links
+open the containing year and citation. Readers can also expand all years.
+
+## Curating the paper atlas
+
+The atlas includes all 28 publications, joined by 38 undirected reading connections.
+Connections were curated from primary abstracts and papers, with an explicit reason
+for each pair. They represent shared questions, shared mechanisms, or a bridge
+between research areas; they do not assert citations or direct intellectual lineage.
+Author overlap, publication year, and a broad topic tag are insufficient reasons
+to add a connection. The original astronomy study remains independently selectable
+because its subject does not support a specific connection to these ML threads.
+
+Each node's `source_url` points to the abstract or paper supporting its summary.
+Each edge is supported by its two endpoint sources. Sources include arXiv,
+the author's weight-decay manuscript, AAMAS proceedings, and the original
+publisher-deposited abstracts in PubMed for the crystalline-density and Autopack
+papers. The atlas uses short, newly written descriptions of the research.
+
+Keep about two to four useful connections per paper and at most five. A few papers
+can have one or no links when that is the honest reading. Prefer complementary
+approaches to a concrete question over linking every pair in a topic. Maintain the
+`reason` and descriptive `label` together when changing an edge. Coordinates are
+fixed to keep navigation predictable; adjust them if labels overlap after adding
+papers. The mobile view defaults to the selected paper's neighborhood, while every
+paper stays available through the picker and the full atlas view. Selections can be
+shared with `?atlas=paper-id#atlas`.
 
 The November 2026 bibliography update uses primary arXiv records and Snap Research
 venue information, with DBLP used for discovery. Google Scholar blocked automated

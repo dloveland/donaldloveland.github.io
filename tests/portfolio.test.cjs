@@ -5,6 +5,7 @@ const AxeBuilder = require("@axe-core/playwright").default;
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const publications = require("../_data/publications.json");
+const atlas = require("../_data/paper_atlas.json");
 const total = publications.length;
 const recommendationCount = publications.filter((paper) =>
   paper.topics.includes("recommendations"),
@@ -167,7 +168,8 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       await page.waitForURL(`${base}/research/`);
       assert.equal(await page.title(), "Research · Donald Loveland");
       assert.equal(await visible(page, "[data-featured-paper]"), 3);
-      assert.equal(await visible(page, "[data-publication]"), total);
+      assert.equal(await visible(page, "[data-publication]"), 0);
+      assert.equal(await page.locator("[data-publication]").count(), total);
       assert.equal(
         await page.locator('#main-nav a[aria-current="page"]').innerText(),
         "Research",
@@ -259,6 +261,209 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         await page.setViewportSize({ width: 1440, height: 1000 });
       },
     );
+    await t.test(
+      "year groups start closed and open for navigation or search",
+      async () => {
+        for (const route of ["/research/", "/pubs/"]) {
+          await page.goto(base + route);
+          const groups = page.locator("[data-publication-group]");
+          assert.equal(await groups.count(), years.length);
+          assert.equal(
+            await page.locator("[data-publication-group][open]").count(),
+            0,
+          );
+          const first = groups.first();
+          await first.locator(":scope > summary").focus();
+          await page.keyboard.press("Enter");
+          assert.ok((await visible(page, "[data-publication]")) > 0);
+          await page.keyboard.press("Space");
+          assert.equal(await visible(page, "[data-publication]"), 0);
+          await page.locator("[data-toggle-years]").click();
+          assert.equal(await visible(page, "[data-publication]"), total);
+          await page.locator("[data-toggle-years]").click();
+          assert.equal(await visible(page, "[data-publication]"), 0);
+          await page.locator("#publication-search").fill("GLANCE");
+          assert.equal(await page.locator("#glance").isVisible(), true);
+          assert.equal(
+            await page.locator("[data-publication-group][open]").count(),
+            1,
+          );
+          await page.locator("[data-clear-filters]").click();
+          assert.equal(await visible(page, "[data-publication]"), 0);
+        }
+      },
+    );
+    await t.test(
+      "atlas covers the bibliography with specific, bounded connections",
+      async () => {
+        const ids = new Set(publications.map((paper) => paper.id));
+        assert.equal(new Set(atlas.nodes.map((node) => node.id)).size, total);
+        assert.ok(
+          atlas.nodes.every(
+            (node) => ids.has(node.id) && node.summary && node.source_url,
+          ),
+        );
+        const pairs = new Set(),
+          degrees = new Map(atlas.nodes.map((node) => [node.id, 0]));
+        for (const edge of atlas.edges) {
+          assert.ok(ids.has(edge.source) && ids.has(edge.target));
+          assert.notEqual(edge.source, edge.target);
+          const key = [edge.source, edge.target].sort().join("|");
+          assert.equal(pairs.has(key), false, "Duplicate atlas connection");
+          pairs.add(key);
+          assert.ok(edge.reason.length > 80 && edge.label.length > 8);
+          degrees.set(edge.source, degrees.get(edge.source) + 1);
+          degrees.set(edge.target, degrees.get(edge.target) + 1);
+        }
+        assert.ok([...degrees.values()].every((degree) => degree <= 5));
+        assert.ok(
+          atlas.edges.length / total > 1 && atlas.edges.length / total < 2,
+        );
+        await page.goto(`${base}/research/`);
+        assert.equal(await visible(page, "[data-atlas-node]"), total);
+        assert.equal(
+          await page.locator(".atlas-edge").count(),
+          atlas.edges.length,
+        );
+        await page.locator('[data-atlas-node="glance"]').click();
+        await page.waitForURL(/atlas=glance#atlas$/);
+        assert.match(
+          await page.locator("#atlas-paper-title").innerText(),
+          /Glance for Context/,
+        );
+        assert.equal(
+          await page.locator("[data-atlas-related]").count(),
+          degrees.get("glance"),
+        );
+        await page.locator('[data-atlas-related="local-fairness"]').click();
+        assert.match(
+          await page.locator("#atlas-paper-title").innerText(),
+          /Local Homophily on GNN Fairness/,
+        );
+        await page.goBack();
+        assert.equal(await page.locator("#atlas-paper").inputValue(), "glance");
+        await page.goForward();
+        assert.equal(
+          await page.locator("#atlas-paper").inputValue(),
+          "local-fairness",
+        );
+        await page.reload();
+        assert.equal(
+          await page.locator("#atlas-paper").inputValue(),
+          "local-fairness",
+        );
+        await page.locator('[data-atlas-view="connected"]').click();
+        assert.equal(
+          await visible(page, "[data-atlas-node]"),
+          degrees.get("local-fairness") + 1,
+        );
+        await page.locator('[data-atlas-node="local-fairness"]').focus();
+        await page.keyboard.press("ArrowUp");
+        const focused = await page.evaluate(
+          () => document.activeElement.dataset.atlasNode,
+        );
+        assert.ok(focused && focused !== "local-fairness");
+        await page.keyboard.press("Enter");
+        assert.equal(await page.locator("#atlas-paper").inputValue(), focused);
+        await page.locator("[data-atlas-publication]").click();
+        await page.waitForFunction(
+          (id) => document.getElementById(id).querySelector("details").open,
+          focused,
+        );
+        assert.equal(await page.locator(`#${focused}`).isVisible(), true);
+        assert.equal(
+          await page.locator(`#${focused} details`).getAttribute("open"),
+          "",
+        );
+        await page.goto(`${base}/research/?atlas=does-not-exist#atlas`);
+        assert.equal(
+          await page.locator("#atlas-paper").inputValue(),
+          atlas.default_paper,
+        );
+        if (screenshotDir)
+          await page.locator("#atlas").screenshot({
+            path: path.join(screenshotDir, "desktop-paper-atlas.png"),
+          });
+      },
+    );
+    await t.test(
+      "atlas neighborhoods stay legible and navigable on phones",
+      async () => {
+        for (const width of [320, 390]) {
+          await page.setViewportSize({ width, height: 1000 });
+          await page.goto(`${base}/research/`);
+          await page.evaluate(() => document.fonts.ready);
+          assert.equal(
+            await page
+              .locator('[data-atlas-view="connected"]')
+              .getAttribute("aria-pressed"),
+            "true",
+          );
+          for (const node of atlas.nodes) {
+            await page.locator("#atlas-paper").selectOption(node.id);
+            const related = atlas.edges.filter(
+              (edge) => edge.source === node.id || edge.target === node.id,
+            );
+            assert.equal(
+              await visible(page, "[data-atlas-node]"),
+              related.length + 1,
+            );
+            const geometry = await page
+              .locator(".atlas-map")
+              .evaluate((map) => {
+                const bounds = map.getBoundingClientRect();
+                const rects = [...map.querySelectorAll("[data-atlas-node]")]
+                  .filter((node) => !node.hidden)
+                  .map((node) => node.getBoundingClientRect());
+                return {
+                  outside: rects.some(
+                    (r) =>
+                      r.left < bounds.left ||
+                      r.right > bounds.right ||
+                      r.top < bounds.top ||
+                      r.bottom > bounds.bottom,
+                  ),
+                  overlap: rects.some((r, i) =>
+                    rects
+                      .slice(i + 1)
+                      .some(
+                        (s) =>
+                          r.left < s.right &&
+                          r.right > s.left &&
+                          r.top < s.bottom &&
+                          r.bottom > s.top,
+                      ),
+                  ),
+                  overflow: document.documentElement.scrollWidth > innerWidth,
+                };
+              });
+            assert.deepEqual(
+              geometry,
+              { outside: false, overlap: false, overflow: false },
+              `${node.id} at ${width}`,
+            );
+          }
+          assert.equal(
+            await page.locator("[data-atlas-isolated]").isVisible(),
+            true,
+          );
+          await page.locator("#atlas-paper").selectOption(atlas.default_paper);
+          if (screenshotDir && width === 390)
+            await page.locator("#atlas").screenshot({
+              path: path.join(screenshotDir, "mobile-paper-atlas.png"),
+            });
+          await page.locator('[data-atlas-view="all"]').click();
+          assert.equal(await visible(page, "[data-atlas-node]"), total);
+          assert.equal(
+            await page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+            true,
+          );
+        }
+        await page.setViewportSize({ width: 1440, height: 1000 });
+      },
+    );
     await t.test("all main pages are accessible", async () => {
       for (const route of ["/", "/research/", "/experience/"]) {
         await page.goto(base + route, { waitUntil: "networkidle" });
@@ -279,6 +484,8 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       "archive filters, search, URLs, reset, and citation copying",
       async () => {
         await page.goto(`${base}/pubs/`, { waitUntil: "networkidle" });
+        assert.equal(await visible(page, "[data-publication]"), 0);
+        await page.locator("[data-toggle-years]").click();
         assert.equal(await visible(page, "[data-publication]"), total);
         await screenshot("desktop-publications.png");
         await page
@@ -306,6 +513,8 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           .fill("no-matching-research-xyz");
         assert.equal(await page.locator(".empty-state").isVisible(), true);
         await page.locator("[data-reset-search]").click();
+        assert.equal(await visible(page, "[data-publication]"), 0);
+        await page.locator("[data-toggle-years]").click();
         assert.equal(await visible(page, "[data-publication]"), total);
         assert.equal(new URL(page.url()).search, "");
         await page.locator("#glance summary").click();
@@ -345,7 +554,8 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         await page.goto(`${base}/pubs/?topic=unknown&year=1900&type=unknown`, {
           waitUntil: "networkidle",
         });
-        assert.equal(await visible(page, "[data-publication]"), total);
+        assert.equal(await visible(page, "[data-publication]"), 0);
+        assert.equal(await page.locator("[data-publication]").count(), total);
       },
     );
     await t.test(
@@ -476,6 +686,12 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         );
         await staticPage.locator("#research .teaser-cta").click();
         assert.equal(await visible(staticPage, "[data-featured-paper]"), 3);
+        assert.equal(await visible(staticPage, "[data-publication]"), 0);
+        for (const group of await staticPage
+          .locator("[data-publication-group]")
+          .all()) {
+          await group.locator(":scope > summary").click();
+        }
         assert.equal(await visible(staticPage, "[data-publication]"), total);
         assert.equal(await staticPage.locator("#main-nav").isVisible(), true);
         assert.equal(
@@ -483,6 +699,12 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           0,
         );
         await staticPage.goto(`${base}/pubs/`);
+        assert.equal(await visible(staticPage, "[data-publication]"), 0);
+        for (const group of await staticPage
+          .locator("[data-publication-group]")
+          .all()) {
+          await group.locator(":scope > summary").click();
+        }
         assert.equal(await visible(staticPage, "[data-publication]"), total);
         await staticPage.locator("#glance summary").click();
         assert.equal(

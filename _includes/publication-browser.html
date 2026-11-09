@@ -1,7 +1,7 @@
 {% assign years = site.data.publications | map: 'year' | uniq | sort | reverse %}
 {% assign year_heading = include.year_heading | default: 'h2' %}
 {% assign paper_heading = include.heading | default: 'h3' %}
-<p class="archive-intro">Browse by year, topic, or publication type. Conference and journal versions are listed once; preprints are labeled separately.</p>
+<p class="archive-intro">Open a year to browse its papers, or search by topic, title, and publication type. Conference and journal versions are listed once; preprints are labeled separately.</p>
 <div class="publication-tools js-only">
   <div class="search-row">
     <div class="search-field"><label for="publication-search">Search publications</label><input id="publication-search" type="search" placeholder="Title, author, or venue…" autocomplete="off"></div>
@@ -11,11 +11,12 @@
   <div class="filter-row" role="group" aria-label="Filter publications by topic"><button type="button" data-publication-topic="all" aria-pressed="true">All work</button>{% for topic in site.data.portfolio.topics %}<button type="button" data-publication-topic="{{ topic.id }}" aria-pressed="false">{{ topic.label }}</button>{% endfor %}</div>
   <div class="results-meta"><p id="publication-status" role="status" aria-live="polite">{{ site.data.publications.size }} publications</p><button type="button" class="text-button" data-clear-filters hidden>Clear filters ↺</button></div>
 </div>
+<div class="year-controls js-only"><button type="button" class="text-button" data-toggle-years>Expand all years <span aria-hidden="true">＋</span></button></div>
 <div class="publication-list">
   {% for year in years %}
   {% assign year_papers = site.data.publications | where: 'year', year %}
-  <section class="publication-group" data-publication-group aria-labelledby="year-{{ year }}">
-    <div class="publication-group-heading"><{{ year_heading }} id="year-{{ year }}">{{ year }}</{{ year_heading }}><span data-group-count>{{ year_papers.size }} {% if year_papers.size == 1 %}paper{% else %}papers{% endif %}</span></div>
+  <details class="publication-group" data-publication-group aria-labelledby="year-{{ year }}">
+    <summary class="publication-group-heading"><{{ year_heading }} id="year-{{ year }}">{{ year }}</{{ year_heading }}><span data-group-count>{{ year_papers.size }} {% if year_papers.size == 1 %}paper{% else %}papers{% endif %}</span><span class="year-toggle" aria-hidden="true"></span></summary>
     {% for paper in year_papers %}
     <article id="{{ paper.id }}" class="publication" data-publication data-year="{{ paper.year }}" data-type="{{ paper.type }}" data-topics="{{ paper.topics | join: ' ' }}" data-search-aliases="{{ paper.search_aliases | join: ' ' | escape }}">
       <span class="publication-type publication-type-{{ paper.type }}">{{ paper.type | capitalize }}</span>
@@ -29,7 +30,7 @@
       </div>
     </article>
     {% endfor %}
-  </section>
+  </details>
   {% endfor %}
 </div>
 <div class="empty-state" hidden><{{ year_heading }}>No papers found.</{{ year_heading }}><p>Try a different phrase, topic, year, or publication type.</p><button type="button" class="button" data-reset-search>Show all publications</button></div>
