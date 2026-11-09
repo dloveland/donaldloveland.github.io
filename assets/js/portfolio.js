@@ -130,21 +130,6 @@
     }),
   );
 
-  const topicButtons = all("[data-map-topic]");
-  const topicPanels = all("[data-map-panel]");
-  topicButtons.forEach((button) =>
-    button.addEventListener("click", () => {
-      const topic = button.dataset.mapTopic;
-      topicButtons.forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
-      topicPanels.forEach((panel) => {
-        panel.hidden = panel.dataset.mapPanel !== topic;
-      });
-      document.querySelector(".network-graph").dataset.activeTopic = topic;
-    }),
-  );
-
   const browser = document.querySelector("[data-publication-browser]");
   if (browser) {
     const search = document.getElementById("publication-search");

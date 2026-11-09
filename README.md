@@ -19,7 +19,7 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
   `homepage_order`, ordered from 1. Set their `question`, `art`, `teaser_label`, and
   `short_venue` fields.
 - `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
-- `_pages/research.html`: selected work, interactive research map, and full publication browser.
+- `_pages/research.html`: selected work and the full publication browser.
 - `_pages/experience.html`: the full career timeline.
 - `_includes/publication-browser.html`: shared publication search and citation interface.
 - `_pages/pubs.html`: the existing `/pubs/` archive remains available for shared links.
@@ -72,7 +72,7 @@ npm run test:site
 
 `SITE_URL` can point the checks at another deployment. Set `SCREENSHOT_DIR` to
 capture desktop and mobile screenshots. The checks exercise search, filters,
-deep links, citation copying, the research map, keyboard navigation, reduced
+deep links, citation copying, the experience timeline, keyboard navigation, reduced
 motion, mobile layouts, accessibility, and the site without JavaScript.
 
 ## Credits

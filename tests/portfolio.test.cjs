@@ -184,42 +184,35 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       await page.locator('[data-feature-filter="all"]').click();
       assert.equal(await visible(page, "[data-featured-paper]"), 3);
     });
-    await t.test("research map and experience work with keyboard", async () => {
-      const topic = page.locator('[data-map-topic="recommendations"]');
-      await topic.focus();
-      await page.keyboard.press("Enter");
-      assert.equal(await topic.getAttribute("aria-pressed"), "true");
-      assert.equal(
-        await page.locator("#map-recommendations").isVisible(),
-        true,
-      );
-      assert.equal(await page.locator("#map-graphs").isVisible(), false);
-      assert.match(
-        await page
-          .locator("#map-recommendations .text-link")
-          .getAttribute("href"),
-        /topic=recommendations/,
-      );
-      await page.locator("#map-recommendations .text-link").click();
-      await page.waitForURL(/research\/\?topic=recommendations#publications/);
-      assert.equal(
-        await visible(page, "[data-publication]"),
-        recommendationCount,
-      );
-      await page.locator("#main-nav a", { hasText: "Experience" }).click();
-      await page.waitForURL(`${base}/experience/`);
-      assert.equal(await page.title(), "Experience · Donald Loveland");
-      assert.equal(await page.locator(".experience-item").count(), 6);
-      await screenshot("desktop-experience.png");
-      const experience = page.locator(".experience-item").nth(1);
-      await experience.locator("summary").focus();
-      await page.keyboard.press("Enter");
-      await page.waitForURL(/#university-of-michigan-doctoral-research$/);
-      assert.equal(await experience.getAttribute("open"), "");
-      await page.keyboard.press("Enter");
-      await page.waitForURL(/#timeline$/);
-      assert.equal(await experience.getAttribute("open"), null);
-    });
+    await t.test(
+      "publication filters and experience work with keyboard",
+      async () => {
+        const topic = page.locator(
+          '[data-publication-topic="recommendations"]',
+        );
+        await topic.focus();
+        await page.keyboard.press("Enter");
+        assert.equal(await topic.getAttribute("aria-pressed"), "true");
+        await page.waitForURL(/research\/\?topic=recommendations#publications/);
+        assert.equal(
+          await visible(page, "[data-publication]"),
+          recommendationCount,
+        );
+        await page.locator("#main-nav a", { hasText: "Experience" }).click();
+        await page.waitForURL(`${base}/experience/`);
+        assert.equal(await page.title(), "Experience · Donald Loveland");
+        assert.equal(await page.locator(".experience-item").count(), 6);
+        await screenshot("desktop-experience.png");
+        const experience = page.locator(".experience-item").nth(1);
+        await experience.locator("summary").focus();
+        await page.keyboard.press("Enter");
+        await page.waitForURL(/#university-of-michigan-doctoral-research$/);
+        assert.equal(await experience.getAttribute("open"), "");
+        await page.keyboard.press("Enter");
+        await page.waitForURL(/#timeline$/);
+        assert.equal(await experience.getAttribute("open"), null);
+      },
+    );
     await t.test(
       "experience milestones support direct links and browser history",
       async () => {
@@ -435,8 +428,8 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         await menu.click();
         await page.locator("#main-nav a", { hasText: "Research" }).click();
         await page.waitForURL(`${base}/research/`);
-        await page.locator('[data-map-topic="trustworthy"]').click();
-        assert.equal(await page.locator("#map-trustworthy").isVisible(), true);
+        await page.locator('[data-feature-filter="trustworthy"]').click();
+        assert.equal(await visible(page, "[data-featured-paper]"), 1);
         for (const route of ["/", "/research/", "/experience/", "/pubs/"]) {
           await page.goto(base + route, { waitUntil: "networkidle" });
           assert.equal(
