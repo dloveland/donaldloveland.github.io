@@ -232,7 +232,7 @@ h2 {
 }
 .hero .eyebrow {
   margin-bottom: 26px;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.2em;
 }
 
@@ -1036,13 +1036,19 @@ summary::-webkit-details-marker {
 .experience-preview li:last-child {
   padding-bottom: 14px;
 }
+.experience-continuation {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 23px;
+  margin: 8px 0 0 -3px;
+}
 .timeline-continuation {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   width: 7px;
-  margin: 8px 0 18px -3px;
 }
 .timeline-continuation span {
   width: 3px;
@@ -1305,7 +1311,7 @@ summary::-webkit-details-marker {
   }
 
   .hero .eyebrow {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.13em;
     margin-bottom: 20px;
   }
@@ -1447,7 +1453,7 @@ summary::-webkit-details-marker {
     gap: 24px;
   }
   .hero .eyebrow {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.15em;
   }
 
