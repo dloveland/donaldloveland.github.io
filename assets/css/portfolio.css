@@ -252,7 +252,7 @@ h2 {
 .hero-intro {
   font-size: var(--hero-bio-size);
   line-height: 1.7;
-  max-width: 550px;
+  max-width: 560px;
   margin-top: 28px;
 }
 .hero-actions {
