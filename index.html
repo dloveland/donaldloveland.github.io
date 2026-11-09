@@ -3,11 +3,11 @@ layout: portfolio
 home: true
 ---
 {% assign person = site.data.portfolio %}
-<section class="hero wrap" aria-labelledby="hero-name">
+<section class="hero wrap" aria-labelledby="hero-title">
   <div class="hero-copy">
+    <h1 id="hero-title" class="sr-only">About me</h1>
     <p class="eyebrow">{{ person.role }} <span aria-hidden="true">·</span> <a href="{{ person.organization_url }}">{{ person.organization }}</a></p>
-    <h1 id="hero-name">{{ person.name }}</h1>
-    <p class="hero-intro">{{ person.intro }}</p>
+    <div class="hero-intro">{{ person.bio | markdownify }}</div>
     <div class="hero-actions"><a class="button" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-link" href="mailto:{{ person.email }}">Get in touch <span aria-hidden="true">→</span></a></div>
     <div class="social-links"><a href="{{ person.scholar_url }}">Google Scholar <span aria-hidden="true">↗</span></a><a href="{{ person.github_url }}">GitHub <span aria-hidden="true">↗</span></a><a href="{{ person.cv_url | relative_url }}">CV <span aria-hidden="true">↓</span></a></div>
   </div>

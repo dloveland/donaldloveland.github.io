@@ -3,6 +3,16 @@ role: Research Scientist
 organization: Snap Research
 organization_url: https://research.snap.com
 intro: I study graph learning and recommendation systems, with a focus on understanding how models learn—and how to make them more useful.
+bio: >-
+  I am a Research Scientist on the User Modeling and Personalization team at
+  [Snap Research](https://research.snap.com). Simultaneously, I am completing my
+  Ph.D. in Computer Science and Engineering at the
+  [University of Michigan, Ann Arbor](https://cse.engin.umich.edu), where I am
+  advised by [Danai Koutra](https://gemslab.github.io). My doctoral work has been
+  supported by an
+  [NSF Graduate Research Fellowship](https://cse.engin.umich.edu/people/honors-and-awards/awarded-graduate-fellowships/)
+  and a
+  [Rackham Merit Fellowship](https://rackham.umich.edu/funding/funding-types/rackham-merit-fellowship-program/).
 email: dlovelan@umich.edu
 scholar_url: https://scholar.google.com/citations?user=BvbMe3YAAAAJ&hl=en
 github_url: https://github.com/dloveland
