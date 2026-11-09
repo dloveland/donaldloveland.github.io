@@ -31,11 +31,13 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
     });
   };
   try {
-    await t.test("homepage and featured filters", async () => {
+    await t.test("homepage teasers lead to the research page", async () => {
       await page.goto(base, { waitUntil: "networkidle" });
       await page.evaluate(() => document.fonts.ready);
       assert.equal(await page.title(), "Donald Loveland");
-      assert.equal(await visible(page, "[data-featured-paper]"), 3);
+      assert.equal(await visible(page, "[data-featured-paper]"), 0);
+      assert.equal(await page.locator(".page-teaser").count(), 2);
+      assert.equal(await page.locator(".experience-item").count(), 0);
       assert.equal(
         await page
           .locator(".hero-portrait img")
@@ -47,6 +49,16 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         true,
       );
       await screenshot("desktop-home.png");
+      await page.locator("#research .teaser-cta").click();
+      await page.waitForURL(`${base}/research/`);
+      assert.equal(await page.title(), "Research · Donald Loveland");
+      assert.equal(await visible(page, "[data-featured-paper]"), 3);
+      assert.equal(await visible(page, "[data-publication]"), 17);
+      assert.equal(
+        await page.locator('#main-nav a[aria-current="page"]').innerText(),
+        "Research",
+      );
+      await screenshot("desktop-research.png");
       await page.locator('[data-feature-filter="recommendations"]').click();
       assert.equal(await visible(page, "[data-featured-paper]"), 1);
       assert.match(
@@ -74,6 +86,14 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           .getAttribute("href"),
         /topic=recommendations/,
       );
+      await page.locator("#map-recommendations .text-link").click();
+      await page.waitForURL(/research\/\?topic=recommendations#publications/);
+      assert.equal(await visible(page, "[data-publication]"), 3);
+      await page.locator("#main-nav a", { hasText: "Experience" }).click();
+      await page.waitForURL(`${base}/experience/`);
+      assert.equal(await page.title(), "Experience · Donald Loveland");
+      assert.equal(await page.locator(".experience-item").count(), 6);
+      await screenshot("desktop-experience.png");
       const experience = page.locator(".experience-item").nth(1);
       await experience.locator("summary").focus();
       await page.keyboard.press("Enter");
@@ -81,17 +101,21 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       await page.keyboard.press("Enter");
       assert.equal(await experience.getAttribute("open"), null);
     });
-    await t.test("homepage accessibility", async () => {
-      const results = await new AxeBuilder({ page })
-        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-        .analyze();
-      assert.deepEqual(
-        results.violations.map((v) => ({
-          id: v.id,
-          elements: v.nodes.map((n) => n.target),
-        })),
-        [],
-      );
+    await t.test("all main pages are accessible", async () => {
+      for (const route of ["/", "/research/", "/experience/"]) {
+        await page.goto(base + route, { waitUntil: "networkidle" });
+        const results = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+          .analyze();
+        assert.deepEqual(
+          results.violations.map((v) => ({
+            id: v.id,
+            elements: v.nodes.map((n) => n.target),
+          })),
+          [],
+          route,
+        );
+      }
     });
     await t.test(
       "archive filters, search, URLs, reset, and citation copying",
@@ -163,47 +187,33 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         assert.equal(await visible(page, "[data-publication]"), 17);
       },
     );
-    await t.test("mobile layout, menu, map, and archive", async () => {
+    await t.test("mobile navigation and separate content pages", async () => {
       for (const width of [320, 390, 768]) {
         await page.setViewportSize({ width, height: 844 });
         await page.goto(base, { waitUntil: "networkidle" });
-        assert.equal(
-          await page.evaluate(
-            () => document.documentElement.scrollWidth <= window.innerWidth,
-          ),
-          true,
-          `No horizontal overflow at ${width}px`,
-        );
+        if (width === 390) await screenshot("mobile-home.png");
         const menu = page.getByRole("button", { name: /Menu/ });
         await menu.click();
         assert.equal(await page.locator("#main-nav").isVisible(), true);
         await page.keyboard.press("Escape");
         assert.equal(await menu.getAttribute("aria-expanded"), "false");
+        await menu.click();
+        await page.locator("#main-nav a", { hasText: "Research" }).click();
+        await page.waitForURL(`${base}/research/`);
         await page.locator('[data-map-topic="trustworthy"]').click();
         assert.equal(await page.locator("#map-trustworthy").isVisible(), true);
-        if (width === 390) {
-          await page.locator('[data-map-topic="graphs"]').click();
-          await screenshot("mobile-home.png");
-          const results = await new AxeBuilder({ page })
-            .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-            .analyze();
-          assert.deepEqual(
-            results.violations.map((v) => ({
-              id: v.id,
-              elements: v.nodes.map((n) => n.target),
-            })),
-            [],
+        for (const route of ["/", "/research/", "/experience/", "/pubs/"]) {
+          await page.goto(base + route, { waitUntil: "networkidle" });
+          assert.equal(
+            await page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+            true,
+            `${route} at ${width}`,
           );
+          if (width === 390 && route !== "/")
+            await screenshot("mobile-" + route.replaceAll("/", "") + ".png");
         }
-        await page.goto(`${base}/pubs/`, { waitUntil: "networkidle" });
-        assert.equal(
-          await page.evaluate(
-            () => document.documentElement.scrollWidth <= window.innerWidth,
-          ),
-          true,
-          `Archive overflow at ${width}px`,
-        );
-        if (width === 390) await screenshot("mobile-publications.png");
       }
     });
     await t.test("reduced motion is respected", async () => {
@@ -225,11 +235,14 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         });
         const staticPage = await noJs.newPage();
         await staticPage.goto(base);
+        assert.equal(await visible(staticPage, "[data-featured-paper]"), 0);
+        await staticPage.locator("#research .teaser-cta").click();
         assert.equal(await visible(staticPage, "[data-featured-paper]"), 3);
+        assert.equal(await visible(staticPage, "[data-publication]"), 17);
         assert.equal(await staticPage.locator("#main-nav").isVisible(), true);
         assert.equal(
-          await staticPage.locator(".filter-row").isVisible(),
-          false,
+          await staticPage.locator(".filter-row:visible").count(),
+          0,
         );
         await staticPage.goto(`${base}/pubs/`);
         assert.equal(await visible(staticPage, "[data-publication]"), 17);

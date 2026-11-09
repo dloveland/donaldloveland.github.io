@@ -1,0 +1,14 @@
+  <div class="publication-tools js-only">
+    <div class="search-row"><div class="search-field"><label for="publication-search">Search publications</label><input id="publication-search" type="search" placeholder="Title, author, or venue…" autocomplete="off"></div><div class="year-field"><label for="publication-year">Year</label><select id="publication-year"><option value="all">All years</option>{% assign years = site.data.publications | map: 'year' | uniq %}{% for year in years %}<option value="{{ year }}">{{ year }}</option>{% endfor %}</select></div></div>
+    <div class="filter-row" role="group" aria-label="Filter publications by topic"><button type="button" data-publication-topic="all" aria-pressed="true">All work</button>{% for topic in site.data.portfolio.topics %}<button type="button" data-publication-topic="{{ topic.id }}" aria-pressed="false">{{ topic.label }}</button>{% endfor %}</div>
+    <div class="results-meta"><p id="publication-status" role="status" aria-live="polite">{{ site.data.publications.size }} publications</p><button type="button" class="text-button" data-clear-filters hidden>Clear filters ↺</button></div>
+  </div>
+  <div class="publication-list">
+    {% for paper in site.data.publications %}
+    <article id="{{ paper.id }}" class="publication" data-publication data-year="{{ paper.year }}" data-topics="{{ paper.topics | join: ' ' }}">
+      <span class="publication-year">{{ paper.year }}</span><div class="publication-content"><p class="eyebrow">{% for topic_id in paper.topics %}{% assign topic = site.data.portfolio.topics | where: 'id', topic_id | first %}{{ topic.label }}{% unless forloop.last %} · {% endunless %}{% endfor %}</p><{{ include.heading | default: "h2" }} class="publication-title">{{ paper.title }}</{{ include.heading | default: "h2" }}><p class="publication-authors">{{ paper.authors | escape | replace: 'Donald Loveland', '<strong>Donald Loveland</strong>' }}</p><p class="publication-venue">{{ paper.venue }}</p>{% include paper-links.html paper=paper %}<details class="publication-details"><summary>{% if paper.summary %}Overview & citation{% else %}Citation{% endif %}<span aria-hidden="true"> +</span></summary><div>{% if paper.summary %}<p class="paper-summary">{{ paper.summary }}</p>{% endif %}<p class="citation" id="citation-{{ paper.id }}">{{ paper.citation }}</p><button type="button" class="copy-citation js-only" data-copy-citation="citation-{{ paper.id }}">Copy citation</button><span class="copy-status" role="status"></span></div></details></div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="empty-state" hidden><h2>No papers found.</h2><p>Try a different phrase, topic, or year.</p><button type="button" class="button" data-reset-search>Show all publications</button></div>
+  <p class="publication-note">* Denotes equal contribution. Research diagrams are conceptual illustrations.</p>

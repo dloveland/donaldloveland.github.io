@@ -37,6 +37,19 @@
   });
   window.matchMedia("(min-width: 901px)").addEventListener("change", closeMenu);
 
+  function revealExperience() {
+    let id;
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch {
+      return;
+    }
+    const entry = document.getElementById(id);
+    if (entry?.matches(".experience-item")) entry.open = true;
+  }
+  window.addEventListener("hashchange", revealExperience);
+  revealExperience();
+
   const featureButtons = all("[data-feature-filter]");
   const featuredPapers = all("[data-featured-paper]");
   featureButtons.forEach((button) =>
@@ -82,7 +95,7 @@
       topics: element.dataset.topics.split(" "),
       text: normalize(
         [
-          element.querySelector("h2").textContent,
+          element.querySelector(".publication-title").textContent,
           element.querySelector(".publication-authors").textContent,
           element.querySelector(".publication-venue").textContent,
           element.querySelector(".eyebrow").textContent,
@@ -124,7 +137,7 @@
           else url.searchParams.delete(key);
         });
         // A filtered view shouldn't retain a fragment pointing at a now-hidden paper.
-        url.hash = "";
+        url.hash = browser.dataset.archiveAnchor || "";
         window.history.replaceState(null, "", url);
       }
     }

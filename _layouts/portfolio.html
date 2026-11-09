@@ -30,8 +30,8 @@
       </a>
       <button class="menu-toggle js-only" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">＋</span></button>
       <nav id="main-nav" class="main-nav" aria-label="Main navigation">
-        <a href="{{ '/' | relative_url }}#research" data-section="research">Research</a>
-        <a href="{{ '/' | relative_url }}#experience" data-section="experience">Experience</a>
+        <a href="{{ '/research/' | relative_url }}"{% if page.nav == 'research' %} aria-current="page"{% endif %}>Research</a>
+        <a href="{{ '/experience/' | relative_url }}"{% if page.nav == 'experience' %} aria-current="page"{% endif %}>Experience</a>
         <a href="{{ '/' | relative_url }}#about" data-section="about">About</a>
         <a class="nav-cv" href="{{ person.cv_url | relative_url }}" aria-label="Read my CV (PDF)">CV <span aria-hidden="true">↗</span></a>
       </nav>

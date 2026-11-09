@@ -11,8 +11,11 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 - `_data/publications.json`: all publications, authors, venues, topic tags, and links.
   Records with `featured_order` appear on the homepage; `question` is the short
   editorial heading. Omit unknown paper/code links rather than guessing them.
-- `index.html`: homepage structure and mentoring section.
-- `_pages/pubs.html`: searchable publication archive at `/pubs/`.
+- `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
+- `_pages/research.html`: selected work, interactive research map, and full publication browser.
+- `_pages/experience.html`: the full career timeline.
+- `_includes/publication-browser.html`: shared publication search and citation interface.
+- `_pages/pubs.html`: the existing `/pubs/` archive remains available for shared links.
 - `_layouts/portfolio.html`: navigation, metadata, and footer.
 - `assets/css/portfolio.css` and `assets/js/portfolio.js`: design and interactions.
 - `assets/images/25_CV_Yr4.pdf`: the current CV; update `cv_url` when replacing it.
