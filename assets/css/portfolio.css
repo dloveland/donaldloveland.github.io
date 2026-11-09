@@ -617,8 +617,8 @@ summary::-webkit-details-marker {
 }
 .about-section {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 70px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: 48px;
   border-top: 1px solid var(--line);
   padding-top: 66px;
   padding-bottom: 80px;
@@ -905,7 +905,7 @@ summary::-webkit-details-marker {
   margin-top: 16px;
 }
 .teaser-copy > p:not(.eyebrow) {
-  max-width: 440px;
+  max-width: none;
   margin-top: 20px;
   font-size: 15px;
   line-height: 1.8;
@@ -1008,6 +1008,7 @@ summary::-webkit-details-marker {
 }
 .experience-teaser {
   border-bottom: 0;
+  gap: 48px;
 }
 .experience-preview {
   padding-inline: 30px;
@@ -1029,6 +1030,23 @@ summary::-webkit-details-marker {
   height: 7px;
   left: -4px;
   top: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.experience-preview li:last-child {
+  padding-bottom: 14px;
+}
+.timeline-continuation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 7px;
+  margin: 8px 0 18px -3px;
+}
+.timeline-continuation span {
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background: var(--teal);
 }
@@ -1384,8 +1402,8 @@ summary::-webkit-details-marker {
     font-size: 13px;
   }
   .about-section {
-    grid-template-columns: 1fr 1.2fr;
-    gap: 34px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: 28px;
   }
   .about-section h2 {
     font-size: 38px;
