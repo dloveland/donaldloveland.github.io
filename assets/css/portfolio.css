@@ -1079,9 +1079,8 @@ summary::-webkit-details-marker {
   padding-block: 36px 30px;
   border-bottom: 1px solid var(--line);
 }
-.detail-heading h1 {
-  font-size: clamp(55px, 7vw, 84px);
-  margin-top: 12px;
+.detail-heading .back-link {
+  margin-bottom: 0;
 }
 .detail-intro {
   font-size: 17px;
@@ -1556,9 +1555,6 @@ summary::-webkit-details-marker {
   }
   .detail-heading {
     padding-block: 29px 30px;
-  }
-  .detail-heading h1 {
-    font-size: 58px;
   }
   .detail-intro {
     font-size: 15px;
