@@ -564,6 +564,26 @@ summary::-webkit-details-marker {
   font-size: 12px;
   margin-top: 12px;
 }
+.experience-context {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.experience-highlights {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+.experience-highlights li + li {
+  margin-top: 8px;
+}
+.experience-papers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+.experience-item--no-logo .experience-role {
+  margin-left: 0;
+}
 .about-section {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);

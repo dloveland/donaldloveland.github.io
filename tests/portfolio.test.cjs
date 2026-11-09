@@ -269,7 +269,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         await page.locator("#main-nav a", { hasText: "Experience" }).click();
         await page.waitForURL(`${base}/experience/`);
         assert.equal(await page.title(), "Experience · Donald Loveland");
-        assert.equal(await page.locator(".experience-item").count(), 6);
+        assert.equal(await page.locator(".experience-item").count(), 7);
         await screenshot("desktop-experience.png");
         const experience = page.locator(".experience-item").nth(1);
         await experience.locator("summary").focus();

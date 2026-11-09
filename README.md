@@ -7,7 +7,9 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 ## Updating content
 
 - `_data/portfolio.yml`: introduction, contact links, CV location, research topics,
-  and experience entries. Each experience entry can set `logo` to a local image.
+  and experience entries. Keep each experience `id` stable when changing its
+  dates so existing links continue to work. Entries support a local `logo`,
+  context, highlights, and related `papers` linking to publication IDs.
 - `_data/publications.json`: all publications, authors, venues, topic tags, and links.
   Omit unknown paper/code links rather than guessing them.
   Set `type` to `conference`, `journal`, `workshop`, or `preprint`. Keep one record
@@ -31,6 +33,8 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 - `_layouts/portfolio.html`: navigation, metadata, and footer.
 - `assets/css/portfolio.css` and `assets/js/portfolio.js`: design and interactions.
 - `assets/images/25_CV_Yr4.pdf`: the current CV; update `cv_url` when replacing it.
+  Root-level `CV.png` and `CV.pdf` are reference-only files excluded from Git
+  and the site build. They must not replace the downloadable CV.
 
 Paper cards use figures cropped from the original manuscripts: item semantics
 (Figure 1, page 2), GaLA (Figure 1, page 2), GLANCE (Figure 2, page 6), weight decay

@@ -2,13 +2,14 @@ name: Donald Loveland
 role: Research Scientist
 organization: Snap Research
 organization_url: https://research.snap.com
-intro: I study graph learning and recommendation systems, with a focus on understanding how models learn—and how to make them more useful.
+intro: I study LLM adaptation, personalization, and training efficiency, with a focus on understanding how models learn and using those insights to improve them.
 bio: >-
   I am a Research Scientist on the User Modeling and Personalization team at
-  [Snap Research](https://research.snap.com). Simultaneously, I am completing my
-  Ph.D. in Computer Science and Engineering at the
-  [University of Michigan, Ann Arbor](https://cse.engin.umich.edu), where I am
-  advised by [Danai Koutra](https://gemslab.github.io). My doctoral work has been
+  [Snap Research](https://research.snap.com), where I work on LLM adaptation and
+  efficient training for generative recommendation. I earned my Ph.D. in Computer
+  Science and Engineering at the
+  [University of Michigan, Ann Arbor](https://cse.engin.umich.edu) in April 2026,
+  advised by [Danai Koutra](https://gemslab.github.io). My doctoral research was
   supported by an
   [NSF Graduate Research Fellowship](https://cse.engin.umich.edu/people/honors-and-awards/awarded-graduate-fellowships/)
   and a
@@ -21,7 +22,7 @@ cv_url: /assets/images/25_CV_Yr4.pdf
 topics:
   - id: recommendations
     label: Recommendations
-    description: Understanding the structure, optimization, and popularity biases of personalized recommendation systems.
+    description: Adapting LLMs for generative recommendation, with a focus on training efficiency, item representations, and popularity bias.
   - id: graphs
     label: Graph learning
     description: Understanding how local graph structure shapes what a model can learn.
@@ -32,38 +33,80 @@ topics:
     label: Scientific applications
     description: Applying machine learning to scientific questions, from molecular structure to materials properties.
 experience:
-  - period: Present
+  - id: snap-research-present
+    period: Sep. 2025–present
     organization: Snap Research
     logo: /assets/images/organizations/snap.svg
     role: Research Scientist
-    description: User modeling and personalization, with a focus on generative and graph-based recommendation systems.
+    context: User Modeling and Personalization · Bellevue, Washington
+    description: Research on LLM-based generative recommendation, focusing on training efficiency, popularity bias, and scalable reasoning.
+    highlights:
+      - Analyze how models encode semantic and behavioral signals, identifying sources of memorization and popularity bias to improve token initialization, semantic ID construction, and training tasks.
+      - Developed core methodology for SnapLGR, enabling the adaptation of Qwen3 models for production recommendation across Snapchat content and ads retrieval.
+      - Advise intern projects on generative recommendation, conversational recommendation, and graph foundation models.
+    papers:
+      - id: snaplgr
+        label: SnapLGR
+      - id: semantic-initialization
+        label: Item token initialization
+      - id: llm-memorization
+        label: Memorization in recommendation
     url: https://research.snap.com
-  - period: Doctoral research
+  - id: university-of-michigan-doctoral-research
+    period: Aug. 2021–Apr. 2026
     organization: University of Michigan
     logo: /assets/images/organizations/michigan.svg
-    role: Computer Science & Engineering
-    description: Graph representation learning with Danai Koutra. Supported by an NSF Graduate Research Fellowship and a Rackham Merit Fellowship.
+    role: Ph.D. · Computer Science & Engineering
+    context: GEMS Lab · Ann Arbor, Michigan
+    description: Completed my Ph.D. in Computer Science and Engineering in April 2026, advised by Danai Koutra. My research on graph representation learning was supported by an NSF Graduate Research Fellowship and a Rackham Merit Fellowship.
     url: https://gemslab.github.io
-  - period: Summer 2025
+  - id: amazon-summer-2025
+    period: May–Sep. 2025
     organization: Amazon
     logo: /assets/images/organizations/amazon.svg
-    role: Research internship
-    description: Investigating large language models for graph reasoning.
-  - period: Summer 2024
+    role: Applied Research Intern
+    context: Seattle, Washington · Advised by Ari Weinstein and Eddie Huang
+    description: Studied how LLMs process graph-structured data, identifying attention decay and bandwidth bottlenecks that limit graph reasoning. Developed a lightweight inference-time method to align attention with graph topology and improve performance with minimal computational overhead. This work was accepted to KDD 2026.
+    papers:
+      - id: gala
+        label: GaLA
+  - id: snap-research-summer-2024
+    period: May–Sep. 2024
     organization: Snap Research
     logo: /assets/images/organizations/snap.svg
-    role: Research internship
-    description: Efficient collaborative filtering and popularity bias in recommendation systems.
+    role: Research Intern
+    context: Bellevue, Washington · Advised by Clark Ju, Tong Zhao, and Neil Shah
+    description: Studied training dynamics in collaborative filtering, uncovering how embedding geometry and regularization encode popularity. Developed efficient training strategies using singular value regularization and popularity-aware initialization. This work led to papers at WWW 2025 (oral presentation) and KDD 2025.
+    papers:
+      - id: paper-3
+        label: Matrix rank and optimization
+      - id: weight-decay
+        label: Weight decay and popularity
     url: https://research.snap.com
-  - period: Summers 2022 & 2023
+  - id: mit-lincoln-laboratory-summers-2022-2023
+    period: May–Sep. 2022 & 2023
     organization: MIT Lincoln Laboratory
     logo: /assets/images/organizations/mit-lincoln.svg
-    role: Research internships
-    description: Combinatorial optimization over networks and applied machine learning for graph-structured data.
+    role: Research Intern
+    context: Remote · Advised by James Usevitch and Rajmonda Caceres
+    description: Developed graph learning methods for combinatorial optimization, including GNN architectures for weighted bipartite task assignment and gradient-based methods for graph editing and substructure manipulation. This work led to papers at AAMAS 2025 and Complex Networks 2023.
+    papers:
+      - id: paper-5
+        label: MAGNET
+      - id: paper-8
+        label: Network design with GNNs
     url: https://www.ll.mit.edu
-  - period: Before my Ph.D.
+  - id: lawrence-livermore-national-laboratory-before-my-ph-d
+    period: Feb. 2019–Aug. 2021
     organization: Lawrence Livermore National Laboratory
     logo: /assets/images/organizations/llnl.svg
     role: Staff Scientist
-    description: Graph learning for molecular modeling, inverse design, and interpretable machine learning for scientific discovery.
+    context: Livermore, California
+    description: Researched deep learning for materials science, with a focus on interpretability and molecule generation for property optimization. This work connected graph learning and scientific machine learning with materials discovery.
     url: https://www.llnl.gov
+  - id: cal-poly-undergraduate
+    period: Aug. 2014–Jun. 2018
+    organization: Cal Poly, San Luis Obispo
+    role: B.S. · Physics
+    context: California Polytechnic State University · San Luis Obispo, California
+    description: Earned a B.S. in Physics in June 2018, with minors in Computer Science, Mathematics, Astronomy, and Ethnic Studies.

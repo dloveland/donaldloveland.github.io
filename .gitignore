@@ -27,3 +27,7 @@ codekit-config.json
 .sass-cache
 _asset_bundler_cache
 _site
+
+# Local CV reference screenshots; keep the downloadable CV under assets/images.
+/CV.png
+/CV.pdf

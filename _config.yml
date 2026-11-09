@@ -4,9 +4,9 @@ minimal_mistakes_skin    : "mint"  # Was "air", now using a friendlier color pal
 locale                   : "en-US"
 title                    : "Donald Loveland"
 title_separator          : "-"
-subtitle                 : "Graph Learning, Recommender Systems, and Personalization"
+subtitle                 : "LLM Adaptation, Personalization, and Graph Learning"
 name                     : "Donald Loveland"
-description              : "Donald Loveland researches graph learning, recommendation systems, and trustworthy machine learning at Snap Research."
+description              : "Donald Loveland researches LLM adaptation, generative recommendation, training efficiency, and graph learning at Snap Research."
 url                      : "https://www.donaldloveland.com"
 baseurl                  : ""
 repository               : "dloveland/donaldloveland.github.io"
@@ -21,8 +21,8 @@ words_per_minute         : 200
 author:
   name             : "Donald Loveland"
   avatar           : "/assets/images/donald-loveland-2026.jpg"
-  bio              : "Research Scientist at Snap Research. Graph learning, recommendation systems, and trustworthy machine learning."
-  location         : "Ann Arbor, Michigan"
+  bio              : "Research Scientist at Snap Research. LLM adaptation, personalization, training efficiency, and graph learning."
+  location         : "Bellevue, Washington"
   email            : "dlovelan@umich.edu"
   links:
     - label: "Email"
@@ -62,6 +62,8 @@ include:
   - .htaccess
   - _pages
 exclude:
+  - CV.png
+  - CV.pdf
   - assets/images/organizations/SOURCES.md
   - scripts
   - "*.sublime-project"

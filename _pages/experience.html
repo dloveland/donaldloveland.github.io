@@ -15,14 +15,20 @@ permalink: /experience/
 <section id="timeline" class="experience-section wrap section" aria-label="Career timeline">
   <div class="experience-list">
     {% for entry in person.experience %}
-    <details id="{{ entry.organization | append: '-' | append: entry.period | slugify }}" class="experience-item" name="experience-timeline" {% if forloop.first %}open{% endif %}>
+    <details id="{{ entry.id }}" class="experience-item{% unless entry.logo %} experience-item--no-logo{% endunless %}" name="experience-timeline" {% if forloop.first %}open{% endif %}>
       <summary>
         <span class="experience-marker" aria-hidden="true"></span>
         <span class="experience-period">{{ entry.period }}</span>
         <span class="experience-title"><span class="experience-org">{% include organization-logo.html entry=entry %}<span>{{ entry.organization }}</span></span><span class="experience-role">{{ entry.role }}</span></span>
         <span class="expand-icon" aria-hidden="true">+</span>
       </summary>
-      <div class="experience-body"><p>{{ entry.description }}</p>{% if entry.url %}<a class="text-link" href="{{ entry.url }}">{{ entry.organization }} <span aria-hidden="true">↗</span></a>{% endif %}</div>
+      <div class="experience-body">
+        {% if entry.context %}<p class="experience-context">{{ entry.context }}</p>{% endif %}
+        <p>{{ entry.description }}</p>
+        {% if entry.highlights %}<ul class="experience-highlights">{% for highlight in entry.highlights %}<li>{{ highlight }}</li>{% endfor %}</ul>{% endif %}
+        {% if entry.papers %}<div class="experience-papers" aria-label="Related papers">{% for paper in entry.papers %}<a class="text-link" href="{{ '/research/' | relative_url }}#{{ paper.id }}">{{ paper.label }} <span aria-hidden="true">↗</span></a>{% endfor %}</div>{% endif %}
+        {% if entry.url %}<a class="text-link" href="{{ entry.url }}">{{ entry.organization }} <span aria-hidden="true">↗</span></a>{% endif %}
+      </div>
     </details>
     {% endfor %}
   </div>
