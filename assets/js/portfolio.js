@@ -37,6 +37,45 @@
   });
   window.matchMedia("(min-width: 901px)").addEventListener("change", closeMenu);
 
+  const carousel = document.querySelector("[data-research-carousel]");
+  if (carousel) {
+    const slides = all("[data-research-slide]", carousel);
+    let current = 0;
+    function showPaper(offset) {
+      const moveFocus = slides[current].contains(document.activeElement);
+      current = (current + offset + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const active = index === current;
+        slide.setAttribute("aria-hidden", String(!active));
+        slide.inert = !active;
+      });
+      carousel.querySelector("[data-research-count]").textContent =
+        `${current + 1} / ${slides.length}`;
+      carousel.querySelector("[data-research-status]").textContent =
+        `Paper ${current + 1} of ${slides.length}: ${slides[current].querySelector("h3").textContent}`;
+      if (moveFocus)
+        slides[current].querySelector("a").focus({ preventScroll: true });
+    }
+    if (slides.length > 1) {
+      carousel
+        .querySelector("[data-research-previous]")
+        .addEventListener("click", () => showPaper(-1));
+      carousel
+        .querySelector("[data-research-next]")
+        .addEventListener("click", () => showPaper(1));
+      carousel.addEventListener("keydown", (event) => {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
+          return;
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          showPaper(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      });
+    } else {
+      carousel.querySelector(".research-carousel-controls").hidden = true;
+    }
+  }
+
   function revealExperience() {
     let id;
     try {

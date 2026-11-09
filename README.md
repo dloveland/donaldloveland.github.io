@@ -15,6 +15,9 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
   per paper when a preprint is published, retaining its `id` for shared links.
   Use the conference/publication year for published work and the first release
   year for preprints. Use `search_aliases` for earlier titles and method names.
+  The homepage carousel highlights the three most recent first-author papers using
+  `homepage_order`, ordered from 1. Set their `question`, `art`, `teaser_label`, and
+  `short_venue` fields.
 - `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
 - `_pages/research.html`: selected work, interactive research map, and full publication browser.
 - `_pages/experience.html`: the full career timeline.

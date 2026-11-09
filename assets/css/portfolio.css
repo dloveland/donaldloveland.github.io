@@ -915,8 +915,66 @@ summary::-webkit-details-marker {
   margin-top: 24px;
   color: var(--teal);
 }
+.research-carousel {
+  min-width: 0;
+  background: var(--sage);
+}
+.research-slides {
+  display: grid;
+}
+.research-slide {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+/* Keep each slide's dimensions so browsing never moves the content below. */
+.research-slide[aria-hidden="true"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+.research-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-inline: 30px;
+  border-top: 1px solid #b7c5b0;
+  padding-block: 14px 18px;
+}
+.js .research-carousel-controls {
+  display: flex !important;
+}
+.research-carousel-controls[hidden] {
+  display: none !important;
+}
+.research-slide-count {
+  font-size: 12px;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+.research-carousel-arrows {
+  display: flex;
+  gap: 10px;
+}
+.research-carousel-arrows button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #78957c;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--teal);
+  font-size: 22px;
+  line-height: 1;
+}
+.research-carousel-arrows button:hover {
+  background: var(--teal);
+  color: var(--paper);
+}
 .research-preview {
   display: grid;
+  height: 100%;
   grid-template-columns: 145px minmax(0, 1fr);
   align-items: center;
   gap: 24px;
@@ -1074,6 +1132,9 @@ summary::-webkit-details-marker {
   .research-preview h3 {
     font-size: 26px;
   }
+  .research-carousel-controls {
+    margin-inline: 24px;
+  }
   .experience-preview {
     padding-inline: 24px;
   }
@@ -1094,6 +1155,9 @@ summary::-webkit-details-marker {
   .research-preview {
     grid-template-columns: 110px minmax(0, 1fr);
     padding: 22px;
+  }
+  .research-carousel-controls {
+    margin-inline: 22px;
   }
   .experience-preview {
     padding-inline: 12px;
@@ -1126,6 +1190,9 @@ summary::-webkit-details-marker {
   }
   .research-preview h3 {
     font-size: 24px;
+  }
+  .research-carousel-controls {
+    margin-inline: 18px;
   }
 }
 @media (min-width: 901px) {

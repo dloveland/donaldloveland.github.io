@@ -19,15 +19,28 @@ home: true
 <section id="research" class="page-teaser wrap section" aria-labelledby="research-title">
   <div class="teaser-copy">
     <p class="eyebrow">01 / Research</p>
-    <h2 id="research-title">A few questions<br>I work on.</h2>
-    <p>How do connections shape what a model learns? I explore graph learning, recommendation systems, and the behavior of machine learning models.</p>
+    <h2 id="research-title">Some of my<br> recent work</h2>
+    <p>I work on large language models for recommendation, from item representations to personalization. I also study how graph structure shapes what models learn and how they reason about connections.</p>
     <a class="text-link teaser-cta" href="{{ '/research/' | relative_url }}">Explore research <span aria-hidden="true">→</span></a>
   </div>
-  {% assign teaser_paper = site.data.publications | where: 'id', 'glance' | first %}
-  <a class="research-preview" href="{{ '/research/' | relative_url }}#{{ teaser_paper.id }}">
-    {% include research-art.html art=teaser_paper.art %}
-    <div><p class="eyebrow">A question to start with</p><h3>{{ teaser_paper.question }}</h3><p class="preview-note">{{ teaser_paper.short_venue }} {{ teaser_paper.year }} <span aria-hidden="true">↗</span></p></div>
-  </a>
+  {% assign teaser_papers = site.data.publications | where_exp: 'paper', 'paper.homepage_order != nil' | sort: 'homepage_order' %}
+  <div class="research-carousel" data-research-carousel role="region" aria-roledescription="carousel" aria-label="Recent research papers">
+    <div class="research-slides" id="research-slides">
+      {% for teaser_paper in teaser_papers limit:3 %}
+      <div class="research-slide" data-research-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"{% unless forloop.first %} inert{% endunless %}>
+        <a class="research-preview" href="{{ '/research/' | relative_url }}#{{ teaser_paper.id }}" title="{{ teaser_paper.title | escape }}">
+          {% include research-art.html art=teaser_paper.art %}
+          <div><p class="eyebrow">Recent paper · {{ teaser_paper.teaser_label }}</p><h3>{{ teaser_paper.question }}</h3><p class="preview-note">{{ teaser_paper.short_venue }} {{ teaser_paper.year }} <span aria-hidden="true">↗</span></p></div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="research-carousel-controls js-only">
+      <p class="research-slide-count" data-research-count aria-hidden="true">1 / {{ teaser_papers.size | at_most: 3 }}</p>
+      <div class="research-carousel-arrows"><button type="button" data-research-previous aria-label="Previous paper" aria-controls="research-slides"><span aria-hidden="true">←</span></button><button type="button" data-research-next aria-label="Next paper" aria-controls="research-slides"><span aria-hidden="true">→</span></button></div>
+    </div>
+    <p class="sr-only" data-research-status role="status" aria-atomic="true"></p>
+  </div>
 </section>
 <section id="experience" class="page-teaser experience-teaser wrap section" aria-labelledby="experience-title">
   <div class="teaser-copy">

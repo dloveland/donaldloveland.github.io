@@ -39,6 +39,112 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
     });
   };
   try {
+    await t.test(
+      "homepage papers cycle with buttons and keyboard without layout shifts",
+      async () => {
+        const expected = publications
+          .filter((paper) => paper.homepage_order)
+          .sort((a, b) => a.homepage_order - b.homepage_order)
+          .slice(0, 3);
+        assert.equal(expected.length, 3);
+        assert.deepEqual(
+          expected.map((paper) => paper.id),
+          ["semantic-initialization", "gala", "glance"],
+        );
+        assert.ok(
+          expected.every((paper) =>
+            paper.authors.startsWith("Donald Loveland,"),
+          ),
+        );
+        for (const width of [1440, 1024, 768, 390, 320]) {
+          await page.setViewportSize({ width, height: 1000 });
+          await page.goto(base, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          const carousel = page.locator("[data-research-carousel]");
+          const active = carousel.locator(
+            '[data-research-slide][aria-hidden="false"]',
+          );
+          const next = carousel.getByRole("button", { name: "Next paper" });
+          const previous = carousel.getByRole("button", {
+            name: "Previous paper",
+          });
+          const height = (await carousel.boundingBox()).height;
+          for (let index = 0; index < 3; index++) {
+            assert.equal(await visible(page, ".research-preview"), 1);
+            assert.equal(
+              await active.locator("a").getAttribute("href"),
+              `/research/#${expected[index].id}`,
+            );
+            assert.equal(
+              await carousel.locator("[data-research-count]").innerText(),
+              `${index + 1} / 3`,
+            );
+            assert.equal(
+              await carousel.locator('[aria-hidden="true"][inert]').count(),
+              2,
+            );
+            assert.ok(
+              Math.abs((await carousel.boundingBox()).height - height) < 1,
+              `Stable height at ${width}`,
+            );
+            assert.equal(
+              await page.evaluate(
+                () => document.documentElement.scrollWidth <= innerWidth,
+              ),
+              true,
+            );
+            if (
+              screenshotDir &&
+              index === 0 &&
+              (width === 1440 || width === 390)
+            ) {
+              await fs.mkdir(screenshotDir, { recursive: true });
+              await carousel.screenshot({
+                path: path.join(screenshotDir, `carousel-${width}.png`),
+              });
+            }
+            await next.click();
+          }
+          assert.equal(
+            await carousel.locator("[data-research-count]").innerText(),
+            "1 / 3",
+          );
+          await previous.click();
+          assert.equal(
+            await carousel.locator("[data-research-count]").innerText(),
+            "3 / 3",
+          );
+          await page.keyboard.press("ArrowRight");
+          assert.equal(
+            await carousel.locator("[data-research-count]").innerText(),
+            "1 / 3",
+          );
+          await active.locator("a").focus();
+          await page.keyboard.press("ArrowRight");
+          assert.equal(
+            await active
+              .locator("a")
+              .evaluate((link) => link === document.activeElement),
+            true,
+          );
+          assert.match(
+            await carousel.locator("[data-research-status]").innerText(),
+            /Paper 2 of 3/,
+          );
+          if (width === 1440) {
+            await active.locator("a").click();
+            await page.waitForURL(`${base}/research/#${expected[1].id}`);
+            assert.equal(
+              await page
+                .locator(`#${expected[1].id} details`)
+                .getAttribute("open"),
+              "",
+            );
+          }
+        }
+        await page.setViewportSize({ width: 1440, height: 1000 });
+      },
+    );
     await t.test("homepage teasers lead to the research page", async () => {
       await page.goto(base, { waitUntil: "networkidle" });
       await page.evaluate(() => document.fonts.ready);
@@ -317,6 +423,16 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         const staticPage = await noJs.newPage();
         await staticPage.goto(base);
         assert.equal(await visible(staticPage, "[data-featured-paper]"), 0);
+        assert.equal(await visible(staticPage, ".research-preview"), 1);
+        assert.equal(
+          await staticPage.getByRole("button", { name: "Next paper" }).count(),
+          0,
+        );
+        const firstPaper = staticPage.locator(".research-preview:visible");
+        assert.match(
+          await firstPaper.getAttribute("href"),
+          /\/research\/#semantic-initialization$/,
+        );
         await staticPage.locator("#research .teaser-cta").click();
         assert.equal(await visible(staticPage, "[data-featured-paper]"), 3);
         assert.equal(await visible(staticPage, "[data-publication]"), total);

@@ -26,7 +26,12 @@
     ],
     "source_urls": [
       "https://research.snap.com/publications/formalizing-and-mitigating-structural-distortion-in-llm-attention-for-zero-shot-graph-reasoning.html"
-    ]
+    ],
+    "homepage_order": 2,
+    "question": "How can LLMs preserve graph structure?",
+    "art": "links",
+    "teaser_label": "GaLA",
+    "short_venue": "KDD"
   },
   {
     "id": "pencil",
@@ -56,7 +61,9 @@
     "summary": "GLANCE studies when language models can help graph neural networks, using local graph structure to guide where their assistance is useful.",
     "paper_url": "https://openreview.net/forum?id=oODFyykHF5",
     "code_url": "https://github.com/dloveland/GLANCE-ICLR26",
-    "type": "conference"
+    "type": "conference",
+    "homepage_order": 3,
+    "teaser_label": "GLANCE"
   },
   {
     "id": "edge-automorphism",
@@ -79,7 +86,12 @@
     "type": "preprint",
     "topics": ["recommendations"],
     "citation": "Donald Loveland, Liam Collins, Bhuvesh Kumar, Danai Koutra, Neil Shah. \"Preserving Item Semantics for Free: Rethinking Token Initialization in LLM-Based Generative Recommendation\", arXiv:2608.07816, 2026.",
-    "paper_url": "https://arxiv.org/abs/2608.07816"
+    "paper_url": "https://arxiv.org/abs/2608.07816",
+    "homepage_order": 1,
+    "question": "What should a new item token know?",
+    "art": "semantics",
+    "teaser_label": "Item semantics",
+    "short_venue": "Preprint"
   },
   {
     "id": "snaplgr",
