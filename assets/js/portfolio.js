@@ -160,25 +160,6 @@
     revealExperience();
   }
 
-  const featureButtons = all("[data-feature-filter]");
-  const featuredPapers = all("[data-featured-paper]");
-  featureButtons.forEach((button) =>
-    button.addEventListener("click", () => {
-      const topic = button.dataset.featureFilter;
-      featureButtons.forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
-      let count = 0;
-      featuredPapers.forEach((paper) => {
-        paper.hidden =
-          topic !== "all" && !paper.dataset.topics.split(" ").includes(topic);
-        if (!paper.hidden) count++;
-      });
-      document.getElementById("featured-status").textContent =
-        `${count} featured ${count === 1 ? "paper" : "papers"} shown.`;
-    }),
-  );
-
   const browser = document.querySelector("[data-publication-browser]");
   if (browser) {
     const search = document.getElementById("publication-search");

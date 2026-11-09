@@ -155,76 +155,67 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         const seen = new Set();
         for (const width of [1440, 390]) {
           await page.setViewportSize({ width, height: 1000 });
-          for (const route of ["/", "/research/"]) {
-            await page.goto(base + route, { waitUntil: "networkidle" });
-            const dialog = page.locator(".figure-dialog");
-            for (let index = 0; index < 3; index++) {
-              const link =
-                route === "/"
-                  ? page.locator(
-                      '[data-research-slide][aria-hidden="false"] [data-figure-open]',
-                    )
-                  : page
-                      .locator("[data-featured-paper] [data-figure-open]")
-                      .nth(index);
-              const href = await link.getAttribute("href");
-              const [id, figure] = Object.entries(figures).find(
-                ([, figure]) => figure.image === href,
+          await page.goto(base, { waitUntil: "networkidle" });
+          const dialog = page.locator(".figure-dialog");
+          for (let index = 0; index < 3; index++) {
+            const link = page.locator(
+              '[data-research-slide][aria-hidden="false"] [data-figure-open]',
+            );
+            const href = await link.getAttribute("href");
+            const [id, figure] = Object.entries(figures).find(
+              ([, figure]) => figure.image === href,
+            );
+            seen.add(id);
+            await link.scrollIntoViewIfNeeded();
+            await link.locator("img").evaluate((img) => img.decode());
+            await link.focus();
+            await page.keyboard.press("Enter");
+            assert.equal(await dialog.evaluate((d) => d.open), true);
+            await dialog.locator("img").evaluate((img) => img.decode());
+            assert.equal(
+              await dialog.locator("img").getAttribute("src"),
+              base + figure.image,
+            );
+            assert.equal(
+              await dialog
+                .locator("[data-figure-source-link]")
+                .getAttribute("href"),
+              figure.source,
+            );
+            assert.equal(
+              await dialog.locator("#figure-caption").innerText(),
+              figure.caption,
+            );
+            assert.equal(
+              await page.evaluate(
+                () => document.documentElement.scrollWidth <= innerWidth,
+              ),
+              true,
+            );
+            if (index === 0 && width === 1440) {
+              const result = await new AxeBuilder({ page })
+                .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+                .analyze();
+              assert.deepEqual(
+                result.violations.map((v) => v.id),
+                [],
               );
-              seen.add(id);
-              await link.scrollIntoViewIfNeeded();
-              await link.locator("img").evaluate((img) => img.decode());
-              await link.focus();
-              await page.keyboard.press("Enter");
-              assert.equal(await dialog.evaluate((d) => d.open), true);
-              await dialog.locator("img").evaluate((img) => img.decode());
-              assert.equal(
-                await dialog.locator("img").getAttribute("src"),
-                base + figure.image,
-              );
-              assert.equal(
-                await dialog
-                  .locator("[data-figure-source-link]")
-                  .getAttribute("href"),
-                figure.source,
-              );
-              assert.equal(
-                await dialog.locator("#figure-caption").innerText(),
-                figure.caption,
-              );
-              assert.equal(
-                await page.evaluate(
-                  () => document.documentElement.scrollWidth <= innerWidth,
-                ),
-                true,
-              );
-              if (route === "/" && index === 0 && width === 1440) {
-                const result = await new AxeBuilder({ page })
-                  .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-                  .analyze();
-                assert.deepEqual(
-                  result.violations.map((v) => v.id),
-                  [],
-                );
-              }
-              if (index % 2)
-                await dialog.locator("[data-figure-close]").click();
-              else await page.keyboard.press("Escape");
-              assert.equal(await dialog.evaluate((d) => d.open), false);
-              assert.equal(
-                await link.evaluate((el) => el === document.activeElement),
-                true,
-              );
-              if (route === "/")
-                await page.locator("[data-research-next]").click();
             }
+            if (index % 2) await dialog.locator("[data-figure-close]").click();
+            else await page.keyboard.press("Escape");
+            assert.equal(await dialog.evaluate((d) => d.open), false);
+            assert.equal(
+              await link.evaluate((el) => el === document.activeElement),
+              true,
+            );
+            await page.locator("[data-research-next]").click();
           }
         }
         assert.deepEqual(
           seen,
           new Set(
             publications
-              .filter((paper) => paper.featured_order || paper.homepage_order)
+              .filter((paper) => paper.homepage_order)
               .map((paper) => paper.id),
           ),
         );
@@ -252,7 +243,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       await page.locator("#research .teaser-cta").click();
       await page.waitForURL(`${base}/research/`);
       assert.equal(await page.title(), "Research · Donald Loveland");
-      assert.equal(await visible(page, "[data-featured-paper]"), 3);
+      assert.equal(await visible(page, "[data-paper-atlas]"), 1);
       assert.equal(await visible(page, "[data-publication]"), 0);
       assert.equal(await page.locator("[data-publication]").count(), total);
       assert.equal(
@@ -260,16 +251,6 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         "Research",
       );
       await screenshot("desktop-research.png");
-      await page.locator('[data-feature-filter="recommendations"]').click();
-      assert.equal(await visible(page, "[data-featured-paper]"), 1);
-      assert.match(
-        await page.locator("[data-featured-paper]:visible h3").innerText(),
-        /new item token/,
-      );
-      await page.locator('[data-feature-filter="graphs"]').click();
-      assert.equal(await visible(page, "[data-featured-paper]"), 2);
-      await page.locator('[data-feature-filter="all"]').click();
-      assert.equal(await visible(page, "[data-featured-paper]"), 3);
     });
     await t.test(
       "publication filters and experience work with keyboard",
@@ -786,8 +767,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         await menu.click();
         await page.locator("#main-nav a", { hasText: "Research" }).click();
         await page.waitForURL(`${base}/research/`);
-        await page.locator('[data-feature-filter="graphs"]').click();
-        assert.equal(await visible(page, "[data-featured-paper]"), 2);
+        assert.equal(await visible(page, "[data-paper-atlas]"), 1);
         for (const route of ["/", "/research/", "/experience/", "/pubs/"]) {
           await page.goto(base + route, { waitUntil: "networkidle" });
           assert.equal(
@@ -835,7 +815,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           /\/research\/#semantic-initialization$/,
         );
         await staticPage.locator("#research .teaser-cta").click();
-        assert.equal(await visible(staticPage, "[data-featured-paper]"), 3);
+        assert.equal(await visible(staticPage, "#atlas noscript a"), 1);
         assert.equal(await visible(staticPage, "[data-publication]"), 0);
         for (const group of await staticPage
           .locator("[data-publication-group]")

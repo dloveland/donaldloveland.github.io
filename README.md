@@ -9,8 +9,7 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 - `_data/portfolio.yml`: introduction, contact links, CV location, research topics,
   and experience entries. Each experience entry can set `logo` to a local image.
 - `_data/publications.json`: all publications, authors, venues, topic tags, and links.
-  Records with `featured_order` appear on the research page; `question` is the short
-  editorial heading. Omit unknown paper/code links rather than guessing them.
+  Omit unknown paper/code links rather than guessing them.
   Set `type` to `conference`, `journal`, `workshop`, or `preprint`. Keep one record
   per paper when a preprint is published, retaining its `id` for shared links.
   Use the conference/publication year for published work and the first release
@@ -20,9 +19,9 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
   `short_venue` fields.
 - `_data/paper_figures.json`: original figure sources, PDF page and figure numbers,
   crop coordinates (PDF points), captions, alt text, and optimized image paths.
-  The homepage and selected-work cards share `_includes/paper-figure.html`.
+  The homepage cards use `_includes/paper-figure.html`.
 - `index.html`: homepage introduction, Research and Experience teasers, and mentoring section.
-- `_pages/research.html`: selected work and the full publication browser.
+- `_pages/research.html`: the paper atlas followed by the full publication browser.
 - `_data/paper_atlas.json`: paper summaries, primary sources, map positions, and
   curated connections. `_includes/paper-atlas.html` and `assets/js/paper-atlas.js`
   render the explorer on the Research page.

@@ -32,7 +32,6 @@
     "art": "links",
     "teaser_label": "GaLA",
     "short_venue": "KDD",
-    "featured_order": 2,
     "label": "Graph learning"
   },
   {
@@ -57,7 +56,6 @@
     "citation": "Donald Loveland, Yao-An Yang, Danai Koutra. \"Glance for Context: Learning When to Leverage LLMs for Node-Aware GNN-LLM Fusion\", International Conference on Learning Representations (ICLR), 2026",
     "short_venue": "ICLR",
     "label": "Graph learning",
-    "featured_order": 3,
     "question": "When should a graph model ask an LLM?",
     "art": "fusion",
     "summary": "GLANCE studies when language models can help graph neural networks, using local graph structure to guide where their assistance is useful.",
@@ -94,7 +92,6 @@
     "art": "semantics",
     "teaser_label": "Item semantics",
     "short_venue": "Preprint",
-    "featured_order": 1,
     "label": "Recommendation systems"
   },
   {
