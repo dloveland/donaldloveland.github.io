@@ -14,20 +14,19 @@ permalink: /research/
   <nav class="section-nav" aria-label="Research page sections"><a href="#selected-work">Selected work ↓</a><a href="#atlas">Paper atlas ↓</a><a href="#publications">All publications ↓</a></nav>
 </header>
 <section id="selected-work" class="research-section wrap section" aria-labelledby="research-title">
+  {% assign featured = site.data.publications | where_exp: 'paper', 'paper.featured_order != nil' | sort: 'featured_order' %}
   <div class="section-heading"><div><p class="eyebrow">01 / Selected work</p><h2 id="research-title">A few questions I work on.</h2></div><a class="text-link" href="#publications">All publications <span aria-hidden="true">↗</span></a></div>
   <div class="filter-row js-only" role="group" aria-label="Filter selected research">
     <button type="button" data-feature-filter="all" aria-pressed="true">All work</button>
-    <button type="button" data-feature-filter="recommendations" aria-pressed="false">Recommendations</button>
-    <button type="button" data-feature-filter="graphs" aria-pressed="false">Graph learning</button>
-    <button type="button" data-feature-filter="trustworthy" aria-pressed="false">Trustworthy ML</button>
+    {% for topic in person.topics %}{% assign topic_papers = featured | where_exp: 'paper', 'paper.topics contains topic.id' %}{% if topic_papers.size > 0 %}<button type="button" data-feature-filter="{{ topic.id }}" aria-pressed="false">{{ topic.label }}</button>{% endif %}{% endfor %}
   </div>
   <p id="featured-status" class="sr-only" role="status" aria-live="polite"></p>
   <div class="featured-list">
-    {% assign featured = site.data.publications | where_exp: 'paper', 'paper.featured_order != nil' | sort: 'featured_order' %}
     {% for paper in featured %}
+    {% capture authorship %}{% include paper-authorship.html paper=paper %}{% endcapture %}{% assign authorship = authorship | strip %}
     <article class="featured-paper" data-featured-paper data-topics="{{ paper.topics | join: ' ' }}">
       {% include paper-figure.html paper=paper %}
-      <div class="paper-copy"><p class="eyebrow">{{ paper.label }} · {{ paper.short_venue }} {{ paper.year }}</p><h3><a href="{{ '/research/' | relative_url }}#{{ paper.id }}">{{ paper.question }} <span class="paper-arrow" aria-hidden="true">↗</span></a></h3><p class="paper-title">{{ paper.title }}</p>{% include paper-links.html paper=paper %}</div>
+      <div class="paper-copy"><div class="paper-meta"><p class="eyebrow">{{ paper.label }} · {{ paper.short_venue }} {{ paper.year }}</p>{% include authorship-badge.html label=authorship %}</div><h3><a href="{{ '/research/' | relative_url }}#{{ paper.id }}">{{ paper.question }} <span class="paper-arrow" aria-hidden="true">↗</span></a></h3><p class="paper-title">{{ paper.title }}</p>{% include paper-links.html paper=paper %}</div>
     </article>
     {% endfor %}
   </div>

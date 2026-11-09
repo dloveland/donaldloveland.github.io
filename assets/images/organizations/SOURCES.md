@@ -13,5 +13,6 @@ belong to their respective organizations; no endorsement is implied.
 | `llnl.svg` | [LLNL logo on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lawrence_Livermore_National_Laboratory_logo.svg), [original SVG](https://upload.wikimedia.org/wikipedia/commons/f/fd/Lawrence_Livermore_National_Laboratory_logo.svg) | Extracted the blue symbol; removed the wordmark and white background rectangle. Commons marks the source as public domain. |
 
 SVG viewports fit the artwork with equal proportional padding. CSS provides the
-same 28 × 28px box for every icon and preserves each logo's aspect ratio. No logo
+same box for every icon within each timeline: 28 × 28px on the homepage and
+24 × 24px on the experience page. Each logo's aspect ratio is preserved. No logo
 has a background panel, border, or crop mask. Retrieved November 9, 2026.

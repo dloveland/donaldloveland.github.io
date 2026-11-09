@@ -18,10 +18,11 @@
   <details class="publication-group" data-publication-group aria-labelledby="year-{{ year }}">
     <summary class="publication-group-heading"><{{ year_heading }} id="year-{{ year }}">{{ year }}</{{ year_heading }}><span data-group-count>{{ year_papers.size }} {% if year_papers.size == 1 %}paper{% else %}papers{% endif %}</span><span class="year-toggle" aria-hidden="true"></span></summary>
     {% for paper in year_papers %}
-    <article id="{{ paper.id }}" class="publication" data-publication data-year="{{ paper.year }}" data-type="{{ paper.type }}" data-topics="{{ paper.topics | join: ' ' }}" data-search-aliases="{{ paper.search_aliases | join: ' ' | escape }}">
+    {% capture authorship %}{% include paper-authorship.html paper=paper %}{% endcapture %}{% assign authorship = authorship | strip %}
+    <article id="{{ paper.id }}" class="publication" data-publication data-authorship="{{ authorship }}" data-year="{{ paper.year }}" data-type="{{ paper.type }}" data-topics="{{ paper.topics | join: ' ' }}" data-search-aliases="{{ paper.search_aliases | join: ' ' | escape }}">
       <span class="publication-type publication-type-{{ paper.type }}">{{ paper.type | capitalize }}</span>
       <div class="publication-content">
-        <p class="eyebrow">{% for topic_id in paper.topics %}{% assign topic = site.data.portfolio.topics | where: 'id', topic_id | first %}{{ topic.label }}{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
+        <div class="paper-meta"><p class="eyebrow">{% for topic_id in paper.topics %}{% assign topic = site.data.portfolio.topics | where: 'id', topic_id | first %}{{ topic.label }}{% unless forloop.last %} · {% endunless %}{% endfor %}</p>{% include authorship-badge.html label=authorship %}</div>
         <{{ paper_heading }} class="publication-title">{{ paper.title | escape }}</{{ paper_heading }}>
         <p class="publication-authors">{{ paper.authors | escape | replace: 'Donald Loveland', '<strong>Donald Loveland</strong>' }}</p>
         <p class="publication-venue">{{ paper.venue | escape }}</p>

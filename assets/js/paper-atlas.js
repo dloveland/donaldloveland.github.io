@@ -127,6 +127,10 @@
     picker.value = selected;
     root.querySelector("[data-atlas-meta]").textContent =
       `${data.communities.find((community) => community.id === node.community).label} · ${entry.dataset.year}`;
+    const authorship = entry.dataset.authorship;
+    root.querySelector("[data-atlas-authorship]").hidden = !authorship;
+    root.querySelector("[data-atlas-authorship-label]").textContent =
+      authorship;
     root.querySelector("#atlas-paper-title").textContent = title(selected);
     root.querySelector("[data-atlas-venue]").textContent =
       entry.querySelector(".publication-venue").textContent;

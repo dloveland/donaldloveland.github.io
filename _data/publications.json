@@ -31,7 +31,9 @@
     "question": "How can LLMs preserve graph structure?",
     "art": "links",
     "teaser_label": "GaLA",
-    "short_venue": "KDD"
+    "short_venue": "KDD",
+    "featured_order": 2,
+    "label": "Graph learning"
   },
   {
     "id": "pencil",
@@ -55,7 +57,7 @@
     "citation": "Donald Loveland, Yao-An Yang, Danai Koutra. \"Glance for Context: Learning When to Leverage LLMs for Node-Aware GNN-LLM Fusion\", International Conference on Learning Representations (ICLR), 2026",
     "short_venue": "ICLR",
     "label": "Graph learning",
-    "featured_order": 2,
+    "featured_order": 3,
     "question": "When should a graph model ask an LLM?",
     "art": "fusion",
     "summary": "GLANCE studies when language models can help graph neural networks, using local graph structure to guide where their assistance is useful.",
@@ -91,7 +93,9 @@
     "question": "What should a new item token know?",
     "art": "semantics",
     "teaser_label": "Item semantics",
-    "short_venue": "Preprint"
+    "short_venue": "Preprint",
+    "featured_order": 1,
+    "label": "Recommendation systems"
   },
   {
     "id": "snaplgr",
@@ -139,7 +143,6 @@
     "citation": "Donald Loveland, Mingxuan Ju, Tong Zhao, Neil Shah, Danai Koutra. \"On the Role of Weight Decay in Collaborative Filtering: A Popularity Perspective\", ACM Conference on Knowledge Discovery and Data Mining (KDD), 2025",
     "short_venue": "KDD",
     "label": "Recommendation systems",
-    "featured_order": 1,
     "question": "Why do recommenders favor popular items?",
     "art": "popularity",
     "summary": "An investigation of weight decay in collaborative filtering through the lens of item popularity.",
@@ -167,7 +170,6 @@
     "citation": "Donald Loveland, Danai Koutra. \"Unveiling the Impact of Local Homophily on GNN Fairness: In-Depth Analysis and New Benchmarks\", SIAM International Conference on Data Mining (SDM), 2025",
     "short_venue": "SDM",
     "label": "Graph learning",
-    "featured_order": 3,
     "question": "How does a neighborhood shape fairness?",
     "art": "fairness",
     "summary": "A study of how local graph structure affects prediction fairness, with theoretical analysis and new benchmarks for underrepresented neighborhoods.",

@@ -1,0 +1,8 @@
+{%- assign first_author = include.paper.authors | split: ',' | first | strip -%}
+{%- assign first_author_name = first_author | remove: '*' -%}
+{%- assign marked_name = site.data.portfolio.name | append: '*' -%}
+{%- if first_author contains '*' and include.paper.authors contains marked_name -%}
+Co-first author
+{%- elsif first_author_name == site.data.portfolio.name -%}
+First author
+{%- endif -%}

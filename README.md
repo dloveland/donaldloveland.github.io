@@ -45,6 +45,11 @@ view in the URL. Standard links, citations, and experience details work without
 JavaScript. Interactive controls support keyboard input and reduced motion.
 Publication years start collapsed. Filters open matching years; direct paper links
 open the containing year and citation. Readers can also expand all years.
+First-author work has a small badge on paper entries and a star on atlas nodes.
+`_includes/paper-authorship.html` derives the label from the author list; an explicit
+equal-contribution marker shared with the first-listed author produces “Co-first
+author.” The atlas detail panel distinguishes these two labels. Other coauthored
+papers are unmarked.
 
 ## Curating the paper atlas
 
@@ -143,7 +148,7 @@ graph labels, and the site without JavaScript.
 ## Credits
 
 Organization logos are local transparent SVGs, displayed in matching 28px squares
-beside names in the homepage teaser and experience timeline. Original proportions
+on the homepage and 24px squares beside the smaller experience-page names. Original proportions
 are preserved. They are decorative for screen readers because the adjacent text
 already names the organization. See [logo sources and adaptations](assets/images/organizations/SOURCES.md)
 and the bundled Bootstrap Icons license for asset provenance.

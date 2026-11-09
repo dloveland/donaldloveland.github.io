@@ -448,6 +448,34 @@ html.figure-open {
   letter-spacing: 0.15em;
   margin-bottom: 9px;
 }
+.paper-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.paper-copy .paper-meta {
+  margin-bottom: 9px;
+}
+.paper-copy .paper-meta .eyebrow {
+  margin-bottom: 0;
+}
+.authorship-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border: 1px solid #b2c2ae;
+  border-radius: var(--radius-small);
+  background: var(--sage);
+  color: var(--teal-dark);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
 .paper-copy h3 {
   font-size: clamp(24px, 2.5vw, 31px);
   line-height: 1.15;
@@ -559,6 +587,12 @@ summary::-webkit-details-marker {
   background: transparent;
   margin-top: 2px;
 }
+.experience-org .organization-logo {
+  width: 24px;
+  height: 24px;
+  flex-basis: 24px;
+  margin-top: 0;
+}
 .experience-org > span,
 .experience-preview-name {
   min-width: 0;
@@ -619,15 +653,10 @@ summary::-webkit-details-marker {
 .site-footer {
   border-top: 1px solid var(--line);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 20px;
   padding-block: 25px 32px;
-}
-.footer-name {
-  font: 23px/1.2 var(--serif);
-  letter-spacing: -0.035em;
-  text-decoration: none;
 }
 .site-footer p {
   font-size: 11px;
@@ -1219,6 +1248,13 @@ summary::-webkit-details-marker {
   border-radius: 50%;
   background: var(--atlas-color);
 }
+.atlas-author-legend span {
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+}
 .atlas-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.9fr) minmax(300px, 1fr);
@@ -1295,6 +1331,22 @@ summary::-webkit-details-marker {
   margin-bottom: 3px;
   box-shadow: 0 0 0 1px var(--atlas-color);
 }
+.atlas-authorship-marker {
+  position: absolute;
+  left: calc(50% + 7px);
+  top: -5px;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--atlas-color);
+  border-radius: 50%;
+  background: #eeefe8;
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 1;
+  pointer-events: none;
+}
 .atlas-node-label {
   font-size: 11px;
   font-weight: 600;
@@ -1341,15 +1393,10 @@ summary::-webkit-details-marker {
 .atlas-map[data-view="connected"] .atlas-node-label {
   font-size: 12px;
 }
-.atlas-map-caption {
-  font-size: 12px;
-  color: var(--teal);
-  margin-top: 14px;
-}
 .atlas-method {
   font-size: 11px;
   color: var(--muted);
-  margin-top: 7px;
+  margin-top: 14px;
 }
 .atlas-detail {
   border-top: 3px solid var(--teal);
@@ -1634,7 +1681,7 @@ summary::-webkit-details-marker {
     display: block;
     text-align: left;
     margin-top: 5px;
-    margin-left: 38px;
+    margin-left: 34px;
   }
 }
 @media (max-width: 900px) {
@@ -1904,9 +1951,6 @@ summary::-webkit-details-marker {
     flex-wrap: wrap;
     padding-block: 23px 30px;
     gap: 18px;
-  }
-  .footer-name {
-    font-size: 23px;
   }
   .footer-links {
     font-size: 12px;

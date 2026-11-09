@@ -7,21 +7,21 @@
       <div class="atlas-picker"><label for="atlas-paper">Jump to a paper</label><select id="atlas-paper">{% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}<option value="{{ node.id }}" {% if node.id == atlas.default_paper %}selected{% endif %}>{{ node.label | escape }} · {{ paper.year }}</option>{% endfor %}</select></div>
       <div class="atlas-views" role="group" aria-label="Atlas view"><button type="button" data-atlas-view="all" aria-pressed="true">All papers</button><button type="button" data-atlas-view="connected" aria-pressed="false">Connected papers</button></div>
     </div>
-    <ul class="atlas-legend" aria-label="Paper communities">{% for community in atlas.communities %}<li style="--atlas-color: {{ community.color }}"><span aria-hidden="true"></span>{{ community.label }}</li>{% endfor %}</ul>
+    <ul class="atlas-legend" aria-label="Paper communities and authorship">{% for community in atlas.communities %}<li style="--atlas-color: {{ community.color }}"><span aria-hidden="true"></span>{{ community.label }}</li>{% endfor %}<li class="atlas-author-legend"><span aria-hidden="true">★</span>First or co-first author</li></ul>
     <div class="atlas-layout">
       <div class="atlas-map-column">
         <div class="atlas-map-scroll" role="region" aria-label="Paper connections map" tabindex="0">
           <div class="atlas-map" role="group" aria-label="Select a paper">
             <svg class="atlas-lines" viewBox="0 0 {{ atlas.width }} {{ atlas.height }}" preserveAspectRatio="none" aria-hidden="true"></svg>
-            {% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}{% assign community = atlas.communities | where: 'id', node.community | first %}<button type="button" class="atlas-node" data-atlas-node="{{ node.id }}" data-atlas-community="{{ node.community }}" style="--atlas-color: {{ community.color }}" aria-label="{{ paper.title | escape }}, {{ paper.year }}. {{ community.label | escape }}." aria-pressed="false" aria-controls="atlas-detail" title="{{ paper.title | escape }}"><span class="atlas-node-circle" aria-hidden="true"></span><span class="atlas-node-label">{{ node.label | escape }}</span><span class="atlas-node-year">{{ paper.year }}</span></button>{% endfor %}
+            {% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}{% assign community = atlas.communities | where: 'id', node.community | first %}{% capture authorship %}{% include paper-authorship.html paper=paper %}{% endcapture %}{% assign authorship = authorship | strip %}<button type="button" class="atlas-node" data-atlas-node="{{ node.id }}" data-atlas-community="{{ node.community }}" style="--atlas-color: {{ community.color }}" aria-label="{{ paper.title | escape }}, {{ paper.year }}. {{ community.label | escape }}.{% if authorship != '' %} {{ authorship }}.{% endif %}" aria-pressed="false" aria-controls="atlas-detail" title="{{ paper.title | escape }}{% if authorship != '' %} — {{ authorship }}{% endif %}"><span class="atlas-node-circle" aria-hidden="true"></span>{% if authorship != '' %}<span class="atlas-authorship-marker" aria-hidden="true">★</span>{% endif %}<span class="atlas-node-label">{{ node.label | escape }}</span><span class="atlas-node-year">{{ paper.year }}</span></button>{% endfor %}
           </div>
         </div>
-        <p class="atlas-map-caption" data-atlas-caption></p>
+        <p class="sr-only" data-atlas-caption></p>
+        <p class="atlas-method">Based on Louvain clustering of paper connections, weighted by title and summary similarity.</p>
         <a class="atlas-details-link text-link" href="#atlas-detail">Read selected paper <span aria-hidden="true">↓</span></a>
-        <p class="atlas-method">Colors show communities based on Louvain clustering and title-and-summary similarity, with Interpretability and Scientific ML separated for exploration. A force-directed layout brings related papers together. Lines trace shared questions and methods, not citations.</p>
       </div>
       <div id="atlas-detail" class="atlas-detail" role="region" aria-labelledby="atlas-paper-title">
-        <p class="eyebrow" data-atlas-meta></p>
+        <div class="paper-meta"><p class="eyebrow" data-atlas-meta></p><span class="authorship-badge" data-atlas-authorship hidden><span aria-hidden="true">★</span><span data-atlas-authorship-label></span></span></div>
         <h3 id="atlas-paper-title"></h3>
         <p class="atlas-venue" data-atlas-venue></p>
         <p class="atlas-summary" data-atlas-summary></p>

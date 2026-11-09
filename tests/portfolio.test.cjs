@@ -220,7 +220,14 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
             }
           }
         }
-        assert.equal(seen.size, Object.keys(figures).length);
+        assert.deepEqual(
+          seen,
+          new Set(
+            publications
+              .filter((paper) => paper.featured_order || paper.homepage_order)
+              .map((paper) => paper.id),
+          ),
+        );
         await page.setViewportSize({ width: 1440, height: 1000 });
       },
     );
@@ -257,10 +264,10 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       assert.equal(await visible(page, "[data-featured-paper]"), 1);
       assert.match(
         await page.locator("[data-featured-paper]:visible h3").innerText(),
-        /popular/,
+        /new item token/,
       );
-      await page.locator('[data-feature-filter="trustworthy"]').click();
-      assert.equal(await visible(page, "[data-featured-paper]"), 1);
+      await page.locator('[data-feature-filter="graphs"]').click();
+      assert.equal(await visible(page, "[data-featured-paper]"), 2);
       await page.locator('[data-feature-filter="all"]').click();
       assert.equal(await visible(page, "[data-featured-paper]"), 3);
     });
@@ -779,8 +786,8 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         await menu.click();
         await page.locator("#main-nav a", { hasText: "Research" }).click();
         await page.waitForURL(`${base}/research/`);
-        await page.locator('[data-feature-filter="trustworthy"]').click();
-        assert.equal(await visible(page, "[data-featured-paper]"), 1);
+        await page.locator('[data-feature-filter="graphs"]').click();
+        assert.equal(await visible(page, "[data-featured-paper]"), 2);
         for (const route of ["/", "/research/", "/experience/", "/pubs/"]) {
           await page.goto(base + route, { waitUntil: "networkidle" });
           assert.equal(
