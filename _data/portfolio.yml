@@ -34,30 +34,36 @@ topics:
 experience:
   - period: Present
     organization: Snap Research
+    logo: /assets/images/organizations/snap.svg
     role: Research Scientist
     description: User modeling and personalization, with a focus on generative and graph-based recommendation systems.
     url: https://research.snap.com
   - period: Doctoral research
     organization: University of Michigan
+    logo: /assets/images/organizations/michigan.svg
     role: Computer Science & Engineering
     description: Graph representation learning with Danai Koutra. Supported by an NSF Graduate Research Fellowship and a Rackham Merit Fellowship.
     url: https://gemslab.github.io
   - period: Summer 2025
     organization: Amazon
+    logo: /assets/images/organizations/amazon.svg
     role: Research internship
     description: Investigating large language models for graph reasoning.
   - period: Summer 2024
     organization: Snap Research
+    logo: /assets/images/organizations/snap.svg
     role: Research internship
     description: Efficient collaborative filtering and popularity bias in recommendation systems.
     url: https://research.snap.com
   - period: Summers 2022 & 2023
     organization: MIT Lincoln Laboratory
+    logo: /assets/images/organizations/mit-lincoln.svg
     role: Research internships
     description: Combinatorial optimization over networks and applied machine learning for graph-structured data.
     url: https://www.ll.mit.edu
   - period: Before my Ph.D.
     organization: Lawrence Livermore National Laboratory
+    logo: /assets/images/organizations/llnl.svg
     role: Staff Scientist
     description: Graph learning for molecular modeling, inverse design, and interpretable machine learning for scientific discovery.
     url: https://www.llnl.gov

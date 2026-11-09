@@ -49,8 +49,8 @@ home: true
     <a class="text-link teaser-cta" href="{{ '/experience/' | relative_url }}">Explore experience <span aria-hidden="true">→</span></a>
   </div>
   <div class="experience-preview">
-    <ol>{% for entry in person.experience limit:3 %}<li><p class="eyebrow">{{ entry.period }}</p><a href="{{ '/experience/' | relative_url }}#{{ entry.organization | append: '-' | append: entry.period | slugify }}">{{ entry.organization }} <span aria-hidden="true">↗</span></a><p class="preview-role">{{ entry.role }}</p></li>{% endfor %}</ol>
-    <div class="experience-continuation"><div class="timeline-continuation" aria-hidden="true"><span></span><span></span><span></span></div><a class="preview-history" href="{{ '/experience/' | relative_url }}">Earlier work at Snap, MIT Lincoln Laboratory & LLNL <span aria-hidden="true">→</span></a></div>
+    <ol>{% for entry in person.experience limit:3 %}<li><p class="eyebrow">{{ entry.period }}</p><a href="{{ '/experience/' | relative_url }}#{{ entry.organization | append: '-' | append: entry.period | slugify }}">{% include organization-logo.html entry=entry %}<span class="experience-preview-name">{{ entry.organization }}&nbsp;<span class="experience-preview-arrow" aria-hidden="true">↗</span></span></a><p class="preview-role">{{ entry.role }}</p></li>{% endfor %}</ol>
+    <div class="experience-continuation"><div class="timeline-continuation" aria-hidden="true"><span></span><span></span><span></span></div><a class="preview-history" href="{{ '/experience/' | relative_url }}">Earlier work at Snap, MIT Lincoln Laboratory & LLNL&nbsp;<span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 <section id="about" class="about-section wrap section" aria-labelledby="about-title">

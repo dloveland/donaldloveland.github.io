@@ -7,7 +7,7 @@ JavaScript layer. It retains the existing GitHub Pages branch deployment.
 ## Updating content
 
 - `_data/portfolio.yml`: introduction, contact links, CV location, research topics,
-  and experience entries.
+  and experience entries. Each experience entry can set `logo` to a local image.
 - `_data/publications.json`: all publications, authors, venues, topic tags, and links.
   Records with `featured_order` appear on the research page; `question` is the short
   editorial heading. Omit unknown paper/code links rather than guessing them.
@@ -141,6 +141,12 @@ motion, mobile layouts, accessibility, the original-figure viewer, nonoverlappin
 graph labels, and the site without JavaScript.
 
 ## Credits
+
+Organization logos are local transparent SVGs, displayed in matching 28px squares
+beside names in the homepage teaser and experience timeline. Original proportions
+are preserved. They are decorative for screen readers because the adjacent text
+already names the organization. See [logo sources and adaptations](assets/images/organizations/SOURCES.md)
+and the bundled Bootstrap Icons license for asset provenance.
 
 Newsreader and DM Sans are bundled under the SIL Open Font License; copies of
 the licenses are in `assets/fonts/`. The repository retains the Minimal Mistakes

@@ -21,7 +21,7 @@ permalink: /experience/
       <summary>
         <span class="experience-marker" aria-hidden="true"></span>
         <span class="experience-period">{{ entry.period }}</span>
-        <span class="experience-title"><span class="experience-org">{{ entry.organization }}</span><span class="experience-role">{{ entry.role }}</span></span>
+        <span class="experience-title"><span class="experience-org">{% include organization-logo.html entry=entry %}<span>{{ entry.organization }}</span></span><span class="experience-role">{{ entry.role }}</span></span>
         <span class="expand-icon" aria-hidden="true">+</span>
       </summary>
       <div class="experience-body"><p>{{ entry.description }}</p>{% if entry.url %}<a class="text-link" href="{{ entry.url }}">{{ entry.organization }} <span aria-hidden="true">↗</span></a>{% endif %}</div>
