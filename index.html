@@ -30,7 +30,7 @@ home: true
       <div class="research-slide" data-research-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"{% unless forloop.first %} inert{% endunless %}>
         <a class="research-preview" href="{{ '/research/' | relative_url }}#{{ teaser_paper.id }}" title="{{ teaser_paper.title | escape }}">
           {% include research-art.html art=teaser_paper.art %}
-          <div><p class="eyebrow">Recent paper · {{ teaser_paper.teaser_label }}</p><h3>{{ teaser_paper.question }}</h3><p class="preview-note">{{ teaser_paper.short_venue }} {{ teaser_paper.year }} <span aria-hidden="true">↗</span></p></div>
+          <div><p class="eyebrow">Recent paper · {{ teaser_paper.teaser_label }}</p><h3>{{ teaser_paper.question }}</h3><p class="preview-note"><span><strong>Loveland et al.</strong> · {{ teaser_paper.short_venue }}&nbsp;{{ teaser_paper.year }}</span><span aria-hidden="true">↗</span></p></div>
         </a>
       </div>
       {% endfor %}
