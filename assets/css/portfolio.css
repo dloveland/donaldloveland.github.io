@@ -307,13 +307,6 @@ h2 {
   object-fit: cover;
   object-position: center 36%;
 }
-.hero-portrait figcaption {
-  font-size: 10px;
-  line-height: 1.6;
-  margin-top: 12px;
-  color: var(--muted);
-  text-align: center;
-}
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -1373,12 +1366,6 @@ summary::-webkit-details-marker {
     padding: 11px 13px;
     gap: 12px;
   }
-  .hero-portrait {
-    margin-top: 2px;
-  }
-  .hero-portrait figcaption {
-    font-size: 9px;
-  }
   .social-links {
     font-size: 11px;
     gap: 18px;
@@ -1515,11 +1502,6 @@ summary::-webkit-details-marker {
     width: 49.6%;
     max-width: 216px;
     align-self: center;
-  }
-  .hero-portrait figcaption {
-    font-size: 9px;
-    text-align: center;
-    max-width: 220px;
   }
   .section-heading {
     align-items: flex-start;
