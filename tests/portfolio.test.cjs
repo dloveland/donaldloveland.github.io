@@ -214,10 +214,58 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
       const experience = page.locator(".experience-item").nth(1);
       await experience.locator("summary").focus();
       await page.keyboard.press("Enter");
+      await page.waitForURL(/#university-of-michigan-doctoral-research$/);
       assert.equal(await experience.getAttribute("open"), "");
       await page.keyboard.press("Enter");
+      await page.waitForURL(/#timeline$/);
       assert.equal(await experience.getAttribute("open"), null);
     });
+    await t.test(
+      "experience milestones support direct links and browser history",
+      async () => {
+        const michigan = "university-of-michigan-doctoral-research";
+        const amazon = "amazon-summer-2025";
+        const selected = async (id) => {
+          assert.equal(await page.locator(".experience-item[open]").count(), 1);
+          assert.equal(
+            await page.locator(".experience-item[open]").getAttribute("id"),
+            id,
+          );
+          assert.equal(
+            await page.locator(`#${id} .experience-body`).isVisible(),
+            true,
+          );
+        };
+        await page.goto(`${base}/experience/#${michigan}`);
+        await selected(michigan);
+        await page.locator(`#${amazon} summary`).click();
+        await page.waitForURL(`${base}/experience/#${amazon}`);
+        await selected(amazon);
+        await page.goBack();
+        await page.waitForURL(`${base}/experience/#${michigan}`);
+        await selected(michigan);
+        await page.goForward();
+        await page.waitForURL(`${base}/experience/#${amazon}`);
+        await selected(amazon);
+        await page.reload();
+        await selected(amazon);
+        await page.locator(`#${amazon} summary`).focus();
+        await page.keyboard.press("Space");
+        await page.waitForURL(`${base}/experience/#timeline`);
+        assert.equal(await page.locator(".experience-item[open]").count(), 0);
+        await page.goBack();
+        await selected(amazon);
+        await page.setViewportSize({ width: 390, height: 844 });
+        const last = page.locator(".experience-item").last();
+        await last.locator("summary").click();
+        await page.waitForURL(
+          `${base}/experience/#${await last.getAttribute("id")}`,
+        );
+        await selected(await last.getAttribute("id"));
+        await screenshot("mobile-experience-expanded.png");
+        await page.setViewportSize({ width: 1440, height: 1000 });
+      },
+    );
     await t.test("all main pages are accessible", async () => {
       for (const route of ["/", "/research/", "/experience/"]) {
         await page.goto(base + route, { waitUntil: "networkidle" });
@@ -447,6 +495,13 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
         assert.equal(
           await staticPage.locator("#glance details").getAttribute("open"),
           "",
+        );
+        await staticPage.goto(`${base}/experience/`);
+        const milestone = staticPage.locator(".experience-item").nth(2);
+        await milestone.locator("summary").click();
+        assert.equal(
+          await milestone.locator(".experience-body").isVisible(),
+          true,
         );
         await noJs.close();
       },

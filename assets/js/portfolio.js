@@ -76,18 +76,40 @@
     }
   }
 
-  function revealExperience() {
-    let id;
-    try {
-      id = decodeURIComponent(window.location.hash.slice(1));
-    } catch {
-      return;
+  const experienceEntries = all(".experience-item");
+  if (experienceEntries.length) {
+    const selectExperience = (selected) => {
+      experienceEntries.forEach((entry) => {
+        entry.open = entry === selected;
+      });
+    };
+    function revealExperience() {
+      let id;
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return;
+      }
+      const entry = id ? document.getElementById(id) : experienceEntries[0];
+      if (experienceEntries.includes(entry)) selectExperience(entry);
+      else if (id === "timeline") selectExperience(null);
     }
-    const entry = document.getElementById(id);
-    if (entry?.matches(".experience-item")) entry.open = true;
+    experienceEntries.forEach((entry) => {
+      entry.querySelector("summary").addEventListener("click", () => {
+        // Let the native details interaction run before recording the selection.
+        requestAnimationFrame(() => {
+          selectExperience(entry.open ? entry : null);
+          const url = new URL(window.location.href);
+          url.hash = entry.open ? entry.id : "timeline";
+          if (url.href !== window.location.href)
+            window.history.pushState(null, "", url);
+        });
+      });
+    });
+    window.addEventListener("hashchange", revealExperience);
+    window.addEventListener("popstate", revealExperience);
+    revealExperience();
   }
-  window.addEventListener("hashchange", revealExperience);
-  revealExperience();
 
   const featureButtons = all("[data-feature-filter]");
   const featuredPapers = all("[data-featured-paper]");

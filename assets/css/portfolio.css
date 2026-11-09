@@ -450,7 +450,7 @@ h2 {
   line-height: 1.02;
 }
 .network-intro > p:not(.eyebrow) {
-  max-width: 320px;
+  max-width: 352px;
   margin-top: 20px;
   font-size: 14px;
   line-height: 1.7;
@@ -569,17 +569,24 @@ h2 {
   color: var(--teal);
 }
 .experience-list {
-  border-top: 1px solid var(--line);
+  padding-left: 4px;
 }
 .experience-item {
-  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  padding: 0 18px 0 32px;
+  display: flow-root;
+}
+.experience-item[open] {
+  background: #e6eade80;
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 summary {
   cursor: pointer;
 }
 .experience-item summary {
+  position: relative;
   display: grid;
-  grid-template-columns: 180px 1fr 25px;
+  grid-template-columns: 180px minmax(0, 1fr) 25px;
   align-items: center;
   gap: 20px;
   padding: 22px 0;
@@ -587,6 +594,24 @@ summary {
 }
 summary::-webkit-details-marker {
   display: none;
+}
+.experience-marker {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  left: -37px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid var(--teal);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.experience-item[open] .experience-marker {
+  background: var(--teal);
+  box-shadow: 0 0 0 5px var(--sage);
+}
+.experience-item[open] .experience-org {
+  color: var(--teal);
 }
 .experience-period {
   font-size: 12px;
@@ -622,7 +647,7 @@ summary::-webkit-details-marker {
 .experience-body {
   margin: 0 45px 23px 200px;
   font-size: 14px;
-  max-width: 670px;
+  max-width: 700px;
   color: #405248;
 }
 .experience-body .text-link {
@@ -632,7 +657,7 @@ summary::-webkit-details-marker {
 }
 .about-section {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
   gap: 48px;
   border-top: 1px solid var(--line);
   padding-top: 66px;
@@ -785,7 +810,7 @@ summary::-webkit-details-marker {
 .archive-intro {
   color: var(--muted);
   font-size: 14px;
-  max-width: 700px;
+  max-width: 820px;
   margin-bottom: 25px;
 }
 .publication-group + .publication-group {
@@ -1123,7 +1148,7 @@ summary::-webkit-details-marker {
 .detail-intro {
   font-size: 17px;
   line-height: 1.8;
-  max-width: 760px;
+  max-width: 780px;
   margin-top: 24px;
   color: var(--muted);
 }
@@ -1148,13 +1173,6 @@ summary::-webkit-details-marker {
 .experience-item {
   scroll-margin-top: 25px;
 }
-.experience-item:target {
-  background: #e6eade80;
-  border-radius: var(--radius);
-  box-shadow:
-    -14px 0 0 #e6eade80,
-    14px 0 0 #e6eade80;
-}
 .explore-next {
   display: flex;
   justify-content: space-between;
@@ -1168,6 +1186,11 @@ summary::-webkit-details-marker {
   font-family: var(--serif);
   font-size: 28px;
   letter-spacing: -0.02em;
+}
+@media (min-width: 1001px) {
+  .experience-teaser .teaser-copy > p:not(.eyebrow) {
+    width: calc(100% + 64px);
+  }
 }
 @media (max-width: 1000px) {
   .page-teaser {
@@ -1273,7 +1296,7 @@ summary::-webkit-details-marker {
     font-size: 11px;
   }
   .experience-item summary {
-    grid-template-columns: 140px 1fr 20px;
+    grid-template-columns: 140px minmax(0, 1fr) 20px;
   }
   .experience-body {
     margin-left: 160px;
@@ -1612,9 +1635,12 @@ summary::-webkit-details-marker {
     font-size: 12px;
   }
   .experience-item summary {
-    grid-template-columns: 1fr 20px;
+    grid-template-columns: minmax(0, 1fr) 20px;
     gap: 5px 10px;
     padding-block: 20px;
+  }
+  .experience-marker {
+    top: 29px;
   }
   .experience-period {
     grid-column: 1;
