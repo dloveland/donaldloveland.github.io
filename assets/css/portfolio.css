@@ -1111,6 +1111,9 @@ summary::-webkit-details-marker {
 .atlas-section .section-heading {
   margin-bottom: 22px;
 }
+.atlas-section .section-heading h2 {
+  margin-top: 0;
+}
 .atlas-count {
   font-size: 12px;
   color: var(--muted);

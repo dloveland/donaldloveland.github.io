@@ -12,8 +12,7 @@ permalink: /experience/
   <p class="detail-intro">My work spans industry, academia, and national laboratories—from machine learning for scientific discovery to graph learning and personalization.</p>
   <div class="section-nav"><a href="#timeline">Explore the timeline ↓</a><a href="{{ person.cv_url | relative_url }}">Read my full CV ↗</a></div>
 </header>
-<section id="timeline" class="experience-section wrap section" aria-labelledby="experience-title">
-  <div class="section-heading"><div><p class="eyebrow">02 / Along the way</p><h2 id="experience-title">Across research & industry.</h2></div><a class="text-link" href="{{ person.cv_url | relative_url }}">Full CV <span aria-hidden="true">↗</span></a></div>
+<section id="timeline" class="experience-section wrap section" aria-label="Career timeline">
   <div class="experience-list">
     {% for entry in person.experience %}
     <details id="{{ entry.organization | append: '-' | append: entry.period | slugify }}" class="experience-item" name="experience-timeline" {% if forloop.first %}open{% endif %}>
