@@ -220,7 +220,8 @@ h2 {
 }
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 600px) minmax(0, 288px);
+  justify-content: center;
   gap: 40px;
   align-items: center;
   padding-top: 72px;
@@ -864,11 +865,14 @@ summary::-webkit-details-marker {
 }
 @media (max-width: 1100px) {
   .hero {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    /* Preserve the smaller portrait and center the two occupied columns. */
+    grid-template-columns:
+      minmax(0, calc((100% - 32px) * 0.6))
+      minmax(0, min(288px, calc((100% - 32px) * 0.32)));
     gap: 32px;
   }
   .hero-portrait {
-    width: 80%;
+    width: 100%;
   }
   .hero h1 {
     font-size: 57px;
@@ -943,7 +947,9 @@ summary::-webkit-details-marker {
   .hero {
     gap: 24px;
     padding-block: 48px 55px;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, calc((100% - 24px) * 0.6))
+      minmax(0, calc((100% - 24px) * 0.32));
   }
   .hero h1 {
     font-size: clamp(33px, 6vw, 52px);
@@ -1086,7 +1092,8 @@ summary::-webkit-details-marker {
   .hero {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    text-align: center;
     padding-top: 35px;
     gap: 24px;
   }
@@ -1101,6 +1108,7 @@ summary::-webkit-details-marker {
   .hero-intro {
     font-size: 15px;
     max-width: 440px;
+    margin-inline: auto;
   }
   .hero-actions .button,
   .hero-actions .text-link {
@@ -1108,19 +1116,21 @@ summary::-webkit-details-marker {
   }
   .hero-actions {
     gap: 22px;
+    justify-content: center;
   }
   .social-links {
     font-size: 12px;
     gap: 22px;
+    justify-content: center;
   }
   .hero-portrait {
     width: 49.6%;
     max-width: 216px;
-    align-self: flex-end;
+    align-self: center;
   }
   .hero-portrait figcaption {
     font-size: 9px;
-    text-align: left;
+    text-align: center;
     max-width: 220px;
   }
   .section-heading {
