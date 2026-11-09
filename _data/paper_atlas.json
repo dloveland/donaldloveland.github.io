@@ -25,8 +25,8 @@
       "id": "semantic-initialization",
       "label": "Item semantics",
       "group": "recommendations",
-      "x": 193.39,
-      "y": 104.65,
+      "x": 204.31,
+      "y": 101.92,
       "summary": "Preserves the geometry of semantic item IDs when adding them to an LLM vocabulary. Initializing tokens from their semantic centroids improves learning efficiency and recommendation for less frequent items.",
       "source_url": "https://arxiv.org/abs/2608.07816",
       "community": "community-1"
@@ -35,7 +35,7 @@
       "id": "pauserec",
       "label": "PauseRec",
       "group": "recommendations",
-      "x": 81.0,
+      "x": 73.0,
       "y": 352.0,
       "summary": "Studies why explicit reasoning can struggle with semantic item IDs. PauseRec uses implicit reasoning to reduce the training and inference costs of LLM-based generative recommendation.",
       "source_url": "https://arxiv.org/abs/2606.14142",
@@ -45,7 +45,7 @@
       "id": "snaplgr",
       "label": "SnapLGR",
       "group": "recommendations",
-      "x": 105.0,
+      "x": 113.0,
       "y": 256.0,
       "summary": "Brings LLM-based generative retrieval to short-video recommendation. The system combines graph-informed semantic IDs, vocabulary grounding, and efficient serving.",
       "source_url": "https://arxiv.org/abs/2607.28895",
@@ -55,7 +55,7 @@
       "id": "llm-memorization",
       "label": "LLM memorization",
       "group": "recommendations",
-      "x": 65.0,
+      "x": 81.0,
       "y": 160.0,
       "summary": "Finds that much of the gain from LLM recommenders comes from memorizing one-step item transitions. IIRG trains richer collaborative and semantic item relationships to improve generalization.",
       "source_url": "https://arxiv.org/abs/2606.17276",
@@ -65,7 +65,7 @@
       "id": "id-text-complementarity",
       "label": "ID + text",
       "group": "recommendations",
-      "x": 65.0,
+      "x": 81.0,
       "y": 64.0,
       "summary": "Shows that item-ID and text-based recommenders capture complementary signals. Independently training and then combining the two models provides a simple way to preserve those strengths.",
       "source_url": "https://arxiv.org/abs/2512.17820",
@@ -75,7 +75,7 @@
       "id": "corre",
       "label": "CoRRe",
       "group": "recommendations",
-      "x": 321.0,
+      "x": 329.0,
       "y": 80.0,
       "summary": "Refines LLM-generated item representations with collaborative information after the LLM runs. Co-purchase structure shapes embedding directions, while popularity adjusts their magnitudes.",
       "source_url": "https://arxiv.org/abs/2608.19665",
@@ -85,8 +85,8 @@
       "id": "weight-decay",
       "label": "Weight decay",
       "group": "recommendations",
-      "x": 449.0,
-      "y": 64.0,
+      "x": 457.0,
+      "y": 72.0,
       "summary": "Explains how weight decay encodes item popularity in embedding magnitudes. PRISM initializes that information directly, simplifying collaborative-filtering training and offering control over popularity bias.",
       "source_url": "/assets/papers/25_KDD.pdf",
       "community": "community-1"
@@ -95,7 +95,7 @@
       "id": "paper-3",
       "label": "Matrix rank",
       "group": "recommendations",
-      "x": 209.0,
+      "x": 201.0,
       "y": 352.0,
       "summary": "Connects collaborative-filtering losses to the stable rank of embedding tables. Regularizing rank early in training improves optimization and can reduce reliance on expensive negative sampling.",
       "source_url": "https://arxiv.org/abs/2410.23300",
@@ -105,7 +105,7 @@
       "id": "paper-6",
       "label": "GraphHash",
       "group": "recommendations",
-      "x": 233.0,
+      "x": 241.0,
       "y": 200.0,
       "summary": "Uses communities in the user–item interaction graph to share embeddings. This graph-informed hashing reduces memory while preserving useful collaborative information.",
       "source_url": "https://arxiv.org/abs/2412.17245",
@@ -115,8 +115,8 @@
       "id": "gala",
       "label": "GaLA",
       "group": "graphs",
-      "x": 432.1,
-      "y": 218.61,
+      "x": 463.56,
+      "y": 209.91,
       "summary": "Explains how serializing a graph can suppress attention between its neighbors in an LLM. GaLA adjusts attention at inference time to better preserve graph relationships.",
       "source_url": "https://arxiv.org/abs/2606.15633",
       "community": "community-2"
@@ -125,8 +125,8 @@
       "id": "glance",
       "label": "GLANCE",
       "group": "graphs",
-      "x": 505.0,
-      "y": 312.0,
+      "x": 545.0,
+      "y": 304.0,
       "summary": "Learns when a graph model should request LLM assistance. A node-aware router uses local structural signals to target the nodes that benefit from the extra information.",
       "source_url": "https://arxiv.org/abs/2510.10849",
       "community": "community-2"
@@ -135,8 +135,8 @@
       "id": "pencil",
       "label": "PENCIL",
       "group": "graphs",
-      "x": 577.0,
-      "y": 96.0,
+      "x": 713.0,
+      "y": 112.0,
       "summary": "Uses a plain Transformer over sampled local subgraphs for link prediction. Attention captures structural signals without elaborate hand-built encodings or large node-ID tables.",
       "source_url": "https://arxiv.org/abs/2602.01553",
       "community": "community-2"
@@ -145,8 +145,8 @@
       "id": "edge-automorphism",
       "label": "Edge automorphism",
       "group": "graphs",
-      "x": 561.0,
-      "y": 192.0,
+      "x": 585.0,
+      "y": 112.0,
       "summary": "Quantifies when GNNs cannot distinguish structurally equivalent links. EO-GNN uses orbit-aware designs to improve link prediction while retaining equivariance.",
       "source_url": "https://arxiv.org/abs/2609.34729",
       "community": "community-2"
@@ -155,8 +155,8 @@
       "id": "paper-5",
       "label": "MAGNET",
       "group": "graphs",
-      "x": 337.0,
-      "y": 312.0,
+      "x": 329.0,
+      "y": 296.0,
       "summary": "Treats multi-agent task assignment as learning over edges of a bipartite graph. A line-graph transformation, pruning, and feasibility checks combine learned scoring with assignment constraints.",
       "source_url": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1399.pdf",
       "community": "community-3"
@@ -165,8 +165,8 @@
       "id": "paper-7",
       "label": "Local performance",
       "group": "graphs",
-      "x": 633.0,
-      "y": 312.0,
+      "x": 673.0,
+      "y": 320.0,
       "summary": "Shows that node performance depends on how local homophily differs from the overall graph. Aggregate accuracy can conceal systematic failures on underrepresented neighborhoods.",
       "source_url": "https://arxiv.org/abs/2306.05557",
       "community": "community-2"
@@ -175,8 +175,8 @@
       "id": "local-fairness",
       "label": "Local fairness",
       "group": "trustworthy",
-      "x": 521.0,
-      "y": 408.0,
+      "x": 593.0,
+      "y": 208.0,
       "summary": "Frames underrepresented local homophily as an out-of-distribution fairness problem. Theory and new benchmarks show how neighborhood structure can affect predictions across sensitive groups.",
       "source_url": "https://arxiv.org/abs/2410.04287",
       "community": "community-2"
@@ -185,7 +185,7 @@
       "id": "paper-9",
       "label": "Neighborhood fairness",
       "group": "trustworthy",
-      "x": 257.0,
+      "x": 249.0,
       "y": 448.0,
       "summary": "Connects local neighborhood assortativity to group fairness. GNN designs that handle heterophilous neighborhoods can improve treatment of otherwise disadvantaged groups.",
       "source_url": "https://arxiv.org/abs/2207.04376",
@@ -195,8 +195,8 @@
       "id": "fairedit",
       "label": "FairEdit",
       "group": "trustworthy",
-      "x": 385.0,
-      "y": 504.0,
+      "x": 377.0,
+      "y": 488.0,
       "summary": "Adds and removes graph edges to improve prediction fairness. Its gradient-guided editing approach works with different GNN models.",
       "source_url": "https://arxiv.org/abs/2201.03681",
       "community": "community-3"
@@ -205,8 +205,8 @@
       "id": "paper-8",
       "label": "Network design",
       "group": "graphs",
-      "x": 385.0,
-      "y": 408.0,
+      "x": 377.0,
+      "y": 392.0,
       "summary": "Shows that structural biases can mislead gradient-based graph editing. ORE repeatedly edits and re-embeds a graph to refresh the information guiding the next change.",
       "source_url": "https://arxiv.org/abs/2310.17100",
       "community": "community-3"
@@ -215,18 +215,18 @@
       "id": "paper-10",
       "label": "Heterophily + robustness",
       "group": "trustworthy",
-      "x": 649.0,
+      "x": 673.0,
       "y": 416.0,
       "summary": "Connects graph homophily to adversarial vulnerability. Separating ego-node and neighbor representations can improve robustness as well as learning on heterophilous graphs.",
       "source_url": "https://arxiv.org/abs/2106.07767",
-      "community": "community-4"
+      "community": "community-2"
     },
     {
       "id": "paper-11",
       "label": "Reliable explanations",
       "group": "trustworthy",
-      "x": 554.82,
-      "y": 508.88,
+      "x": 547.87,
+      "y": 466.82,
       "summary": "Studies how adversarial training changes the reliability of GNN explanations. It also evaluates whether explanations reflect learned representations and recover meaningful chemistry insights.",
       "source_url": "https://arxiv.org/abs/2106.13427",
       "community": "community-4"
@@ -235,8 +235,8 @@
       "id": "paper-16",
       "label": "Counterfactuals",
       "group": "trustworthy",
-      "x": 441.0,
-      "y": 704.0,
+      "x": 369.0,
+      "y": 680.0,
       "summary": "Uses a generative model to make meaningful changes to images and examine how a classifier responds. These interventions expose what can change a prediction.",
       "source_url": "https://arxiv.org/abs/1907.03077",
       "community": "community-4"
@@ -245,8 +245,8 @@
       "id": "paper-14",
       "label": "Actionable attribution",
       "group": "science",
-      "x": 497.0,
-      "y": 608.0,
+      "x": 513.0,
+      "y": 560.0,
       "summary": "Introduces domain-specific concepts as controllable inputs to model interpretation. Generative modeling helps turn explanations into actionable scientific questions.",
       "source_url": "https://arxiv.org/abs/2006.16533",
       "community": "community-4"
@@ -255,41 +255,41 @@
       "id": "paper-12",
       "label": "Molecular density",
       "group": "science",
-      "x": 625.0,
-      "y": 608.0,
+      "x": 642.77,
+      "y": 579.51,
       "summary": "Predicts crystalline density from molecular chemical structure. A comparison of learned graph representations and fixed features also investigates what the models learn.",
       "source_url": "https://pubmed.ncbi.nlm.nih.gov/33899482/",
-      "community": "community-4"
+      "community": "community-5"
     },
     {
       "id": "zeroth-order-sciml",
       "label": "Zeroth-order SciML",
       "group": "science",
-      "x": 569.0,
-      "y": 704.0,
+      "x": 369.0,
+      "y": 584.0,
       "summary": "Connects scientific software to neural-network training without requiring a differentiable simulator. Gradient-free optimization brings domain knowledge into data-limited materials tasks.",
       "source_url": "https://arxiv.org/abs/2206.02785",
-      "community": "community-4"
+      "community": "community-5"
     },
     {
       "id": "paper-15",
       "label": "Material strength",
       "group": "science",
-      "x": 681.0,
-      "y": 512.0,
+      "x": 625.0,
+      "y": 672.0,
       "summary": "Predicts the compressive strength of molecular solids from microscope images. It compares engineered visual features and learned features across different data regimes.",
       "source_url": "https://arxiv.org/abs/1906.02130",
-      "community": "community-4"
+      "community": "community-5"
     },
     {
       "id": "paper-13",
       "label": "Crystal packing",
       "group": "science",
-      "x": 697.0,
-      "y": 704.0,
+      "x": 497.0,
+      "y": 656.0,
       "summary": "Introduces Autopack to identify molecular-crystal packing motifs using representative neighboring molecules. Automated labels enable larger studies of composition and crystal organization.",
       "source_url": "https://pubmed.ncbi.nlm.nih.gov/33245232/",
-      "community": "community-4"
+      "community": "community-5"
     },
     {
       "id": "paper-17",
@@ -299,7 +299,7 @@
       "y": 705.0,
       "summary": "Tests whether an emission-line width can stand in for stellar velocity dispersion in active galaxies. This early astronomy study is shown separately from the connected machine-learning threads.",
       "source_url": "https://arxiv.org/abs/1808.04821",
-      "community": "community-5"
+      "community": "community-6"
     }
   ],
   "edges": [
@@ -672,6 +672,7 @@
         "gala",
         "glance",
         "local-fairness",
+        "paper-10",
         "paper-7",
         "pencil"
       ]
@@ -684,21 +685,18 @@
     },
     {
       "id": "community-4",
-      "label": "Explanations & scientific ML",
+      "label": "Interpretability",
       "color": "#766383",
-      "papers": [
-        "paper-10",
-        "paper-11",
-        "paper-12",
-        "paper-13",
-        "paper-14",
-        "paper-15",
-        "paper-16",
-        "zeroth-order-sciml"
-      ]
+      "papers": ["paper-11", "paper-14", "paper-16"]
     },
     {
       "id": "community-5",
+      "label": "Scientific ML",
+      "color": "#8a6b35",
+      "papers": ["paper-12", "paper-13", "paper-15", "zeroth-order-sciml"]
+    },
+    {
+      "id": "community-6",
       "label": "Early astronomy",
       "color": "#69705f",
       "papers": ["paper-17"]
@@ -710,7 +708,18 @@
     "weight": "0.5 + 2 × cosine similarity",
     "resolution": 1,
     "seed": 41,
-    "modularity": 0.5676,
+    "detected_modularity": 0.5676,
+    "modularity": 0.5296,
+    "refinements": {
+      "Interpretability": ["paper-11", "paper-14", "paper-16"],
+      "Scientific ML": [
+        "paper-12",
+        "paper-13",
+        "paper-15",
+        "zeroth-order-sciml"
+      ],
+      "Graph structure & prediction": ["paper-10"]
+    },
     "implementation": "NetworkX 3.7"
   }
 }

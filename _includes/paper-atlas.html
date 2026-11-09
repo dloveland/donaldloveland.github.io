@@ -7,7 +7,7 @@
       <div class="atlas-picker"><label for="atlas-paper">Jump to a paper</label><select id="atlas-paper">{% for node in atlas.nodes %}{% assign paper = site.data.publications | where: 'id', node.id | first %}<option value="{{ node.id }}" {% if node.id == atlas.default_paper %}selected{% endif %}>{{ node.label | escape }} · {{ paper.year }}</option>{% endfor %}</select></div>
       <div class="atlas-views" role="group" aria-label="Atlas view"><button type="button" data-atlas-view="all" aria-pressed="true">All papers</button><button type="button" data-atlas-view="connected" aria-pressed="false">Connected papers</button></div>
     </div>
-    <ul class="atlas-legend" aria-label="Detected paper communities">{% for community in atlas.communities %}<li style="--atlas-color: {{ community.color }}"><span aria-hidden="true"></span>{{ community.label }}</li>{% endfor %}</ul>
+    <ul class="atlas-legend" aria-label="Paper communities">{% for community in atlas.communities %}<li style="--atlas-color: {{ community.color }}"><span aria-hidden="true"></span>{{ community.label }}</li>{% endfor %}</ul>
     <div class="atlas-layout">
       <div class="atlas-map-column">
         <div class="atlas-map-scroll" role="region" aria-label="Paper connections map" tabindex="0">
@@ -18,7 +18,7 @@
         </div>
         <p class="atlas-map-caption" data-atlas-caption></p>
         <a class="atlas-details-link text-link" href="#atlas-detail">Read selected paper <span aria-hidden="true">↓</span></a>
-        <p class="atlas-method">Colors show communities found by Louvain clustering, using title-and-summary similarity to weight curated connections. A force-directed layout brings related papers together. Lines trace shared questions and methods, not citations.</p>
+        <p class="atlas-method">Colors show communities based on Louvain clustering and title-and-summary similarity, with Interpretability and Scientific ML separated for exploration. A force-directed layout brings related papers together. Lines trace shared questions and methods, not citations.</p>
       </div>
       <div id="atlas-detail" class="atlas-detail" role="region" aria-labelledby="atlas-paper-title">
         <p class="eyebrow" data-atlas-meta></p>

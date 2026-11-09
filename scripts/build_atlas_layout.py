@@ -2,7 +2,8 @@
 
 The visible edges remain the researched reading connections. TF-IDF cosine
 similarity of titles and curated summaries weights those edges for Louvain.
-Clustering does not infer citations. No remote model or service is required.
+Interpretability and Scientific ML are separated by an editorial refinement
+after clustering. Clustering does not infer citations or require a remote model.
 """
 
 from collections import Counter
@@ -24,14 +25,33 @@ STOP_WORDS = set(
     "shows show also more than between while their they them we our has have "
     "without across".split()
 )
-# Readable labels assigned AFTER clustering; these do not affect membership.
+# Readable labels assigned after clustering and the browsing refinements below.
 COMMUNITY_LABELS = [
     ("semantic-initialization", "Recommendation", "#245d53"),
     ("gala", "Graph structure & prediction", "#406779"),
-    ("paper-12", "Explanations & scientific ML", "#766383"),
+    ("paper-11", "Interpretability", "#766383"),
+    ("paper-12", "Scientific ML", "#8a6b35"),
     ("paper-8", "Graph editing & assignment", "#985a44"),
     ("paper-17", "Early astronomy", "#69705f"),
 ]
+COMMUNITY_SPLITS = {
+    "Interpretability": {"paper-11", "paper-14", "paper-16"},
+    "Scientific ML": {"paper-12", "paper-13", "paper-15", "zeroth-order-sciml"},
+}
+
+
+def refine_communities(communities):
+    """Keep the requested research areas distinct after automatic clustering.
+
+    Attribution and counterfactual work belongs in Interpretability even when
+    applied to science. Keep the general GNN robustness paper with graph work.
+    These refinements affect grouping and layout, never the curated connections.
+    """
+    separated = set().union(*COMMUNITY_SPLITS.values())
+    groups = [set(group) - separated - {"paper-10"} for group in communities]
+    next(group for group in groups if "gala" in group).add("paper-10")
+    groups.extend(set(group) for group in COMMUNITY_SPLITS.values())
+    return [group for group in groups if group]
 
 
 def text_vectors(nodes, papers):
@@ -118,6 +138,8 @@ def main():
     communities = nx.community.louvain_communities(
         graph, weight="weight", resolution=1, seed=SEED
     )
+    detected_modularity = nx.community.modularity(graph, communities)
+    communities = refine_communities(communities)
     communities.sort(key=lambda ids: (atlas["default_paper"] not in ids, min(ids)))
     membership = {}
     atlas["communities"] = []
@@ -143,7 +165,12 @@ def main():
         weight="0.5 + 2 × cosine similarity",
         resolution=1,
         seed=SEED,
+        detected_modularity=round(detected_modularity, 4),
         modularity=round(nx.community.modularity(graph, communities), 4),
+        refinements={
+            **{label: sorted(ids) for label, ids in COMMUNITY_SPLITS.items()},
+            "Graph structure & prediction": ["paper-10"],
+        },
         implementation=f"NetworkX {nx.__version__}",
     )
     TARGET.write_text(json.dumps(atlas, ensure_ascii=False, indent=2) + "\n")

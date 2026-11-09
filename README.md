@@ -67,12 +67,17 @@ can have one or no links when that is the honest reading. Prefer complementary
 approaches to a concrete question over linking every pair in a topic. Maintain the
 `reason` and descriptive `label` together when changing an edge.
 
-The global map renders circular nodes, colored by **Louvain communities**. TF-IDF
+The global map renders circular nodes, colored by **Louvain communities with
+editorial refinements**. TF-IDF
 cosine similarity of paper titles and curated summaries weights the existing
 connections (`0.5 + 2 × similarity`); it does not add speculative edges. Louvain
-optimizes weighted modularity with resolution 1 and seed 41. Community names are
-assigned after clustering and do not determine membership. Currently this yields
-five groups, including the isolated astronomy paper. The short-text similarity
+optimizes weighted modularity with resolution 1 and seed 41. After clustering,
+Interpretability (reliable explanations, actionable attribution, counterfactuals)
+and Scientific ML (density, crystal packing, strength, zeroth-order SciML) are
+separated for browsing, and general GNN robustness joins graph structure and
+prediction. These explicit refinements are recorded in the generation script and
+output metadata; they preserve every curated connection. Names are then assigned
+to the resulting six groups, including the isolated astronomy paper. The short-text similarity
 measure is lexical, not a full-text semantic embedding or citation analysis.
 
 A seeded Fruchterman–Reingold spring layout strengthens attraction within the

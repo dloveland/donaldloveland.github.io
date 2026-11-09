@@ -126,7 +126,7 @@
       related = neighbors(selected);
     picker.value = selected;
     root.querySelector("[data-atlas-meta]").textContent =
-      `${data.groups.find((group) => group.id === node.group).label} · ${entry.dataset.year}`;
+      `${data.communities.find((community) => community.id === node.community).label} · ${entry.dataset.year}`;
     root.querySelector("#atlas-paper-title").textContent = title(selected);
     root.querySelector("[data-atlas-venue]").textContent =
       entry.querySelector(".publication-venue").textContent;

@@ -3,6 +3,5 @@
 {% assign figure_source = figure.source %}{% unless figure.source contains '://' %}{% assign figure_source = figure.source | relative_url %}{% endunless %}
 <a class="paper-figure" href="{{ figure.image | relative_url }}" data-figure-open data-figure-caption="{{ figure.caption | escape }}" data-figure-source="{{ figure_source | escape }}" aria-label="Enlarge Figure {{ figure.figure }} from {{ include.paper.title | escape }}">
   <img src="{{ figure.thumbnail | relative_url }}" width="{{ figure.width }}" height="{{ figure.height }}" loading="lazy" decoding="async" alt="{{ figure.alt | escape }}">
-  <span class="paper-figure-label">Fig. {{ figure.figure }}{% if figure.thumb %} (detail){% endif %} <span aria-hidden="true">↗</span></span>
 </a>
 {% endif %}
