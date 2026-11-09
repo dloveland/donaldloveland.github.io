@@ -1,0 +1,56 @@
+name: Donald Loveland
+role: Research Scientist
+organization: Snap Research
+organization_url: https://research.snap.com
+headline: |-
+  Learning from
+  connections.
+intro: I study graph learning and recommendation systems, with a focus on understanding how models learn—and how to make them more useful.
+email: dlovelan@umich.edu
+scholar_url: https://scholar.google.com/citations?user=BvbMe3YAAAAJ&hl=en
+github_url: https://github.com/dloveland
+linkedin_url: https://www.linkedin.com/in/donald-loveland/
+cv_url: /assets/images/25_CV_Yr4.pdf
+topics:
+  - id: recommendations
+    label: Recommendations
+    description: Understanding the structure, optimization, and popularity biases of personalized recommendation systems.
+  - id: graphs
+    label: Graph learning
+    description: Learning from connections, and understanding how local structure shapes what a model can learn.
+  - id: trustworthy
+    label: Trustworthy ML
+    description: Investigating fairness, robustness, and explanations to better understand the behavior of machine learning models.
+  - id: science
+    label: Scientific applications
+    description: Applying machine learning to scientific questions, from molecular structure to materials properties.
+experience:
+  - period: Present
+    organization: Snap Research
+    role: Research Scientist
+    description: User modeling and personalization, with a focus on generative and graph-based recommendation systems.
+    url: https://research.snap.com
+  - period: Doctoral research
+    organization: University of Michigan
+    role: Computer Science & Engineering
+    description: Graph representation learning with Danai Koutra. Supported by an NSF Graduate Research Fellowship and a Rackham Merit Fellowship.
+    url: https://gemslab.github.io
+  - period: Summer 2025
+    organization: Amazon
+    role: Research internship
+    description: Investigating large language models for graph reasoning.
+  - period: Summer 2024
+    organization: Snap Research
+    role: Research internship
+    description: Efficient collaborative filtering and popularity bias in recommendation systems.
+    url: https://research.snap.com
+  - period: Summers 2022 & 2023
+    organization: MIT Lincoln Laboratory
+    role: Research internships
+    description: Combinatorial optimization over networks and applied machine learning for graph-structured data.
+    url: https://www.ll.mit.edu
+  - period: Before my Ph.D.
+    organization: Lawrence Livermore National Laboratory
+    role: Staff Scientist
+    description: Graph learning for molecular modeling, inverse design, and interpretable machine learning for scientific discovery.
+    url: https://www.llnl.gov

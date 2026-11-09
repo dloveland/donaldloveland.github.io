@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% assign person = site.data.portfolio %}
+    {% capture document_title %}{% if page.title %}{{ page.title }} · {% endif %}{{ person.name }}{% endcapture %}
+    <title>{{ document_title | strip | escape }}</title>
+    <meta name="description" content="{{ page.description | default: person.intro | escape }}">
+    <meta name="theme-color" content="#f7f6f2">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ document_title | strip | escape }}">
+    <meta property="og:description" content="{{ page.description | default: person.intro | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/images/loveland_headshot.jpg' | absolute_url }}">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="{{ '/assets/images/network-mark.svg' | relative_url }}" type="image/svg+xml">
+    <link rel="preload" href="{{ '/assets/fonts/newsreader-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/dm-sans-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+    <script src="{{ '/assets/js/portfolio.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  </head>
+  <body class="{% if page.home %}home-page{% else %}interior-page{% endif %}">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Donald Loveland, home">
+        <svg width="37" height="37" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 31 22 8 34 31" fill="none" stroke="currentColor" stroke-width="1.6"/><g fill="currentColor"><circle cx="7" cy="31" r="4.5"/><circle cx="22" cy="8" r="4.5"/><circle cx="34" cy="31" r="4.5"/></g></svg>
+        <span>Donald Loveland</span>
+      </a>
+      <button class="menu-toggle js-only" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">＋</span></button>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <a href="{{ '/' | relative_url }}#research" data-section="research">Research</a>
+        <a href="{{ '/' | relative_url }}#experience" data-section="experience">Experience</a>
+        <a href="{{ '/' | relative_url }}#about" data-section="about">About</a>
+        <a class="nav-cv" href="{{ person.cv_url | relative_url }}" aria-label="Read my CV (PDF)">CV <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">{{ content }}</main>
+    <footer class="site-footer wrap">
+      <a class="footer-name" href="{{ '/' | relative_url }}">Donald Loveland</a>
+      <p>Learning from connections.</p>
+      <div class="footer-links">
+        <a href="mailto:{{ person.email }}">Email <span aria-hidden="true">↗</span></a>
+        <a href="{{ person.scholar_url }}">Scholar <span aria-hidden="true">↗</span></a>
+        <a href="{{ person.github_url }}">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </body>
+</html>

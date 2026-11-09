@@ -6,8 +6,9 @@ title                    : "Donald Loveland"
 title_separator          : "-"
 subtitle                 : "Graph Learning, Recommender Systems, and Personalization"
 name                     : "Donald Loveland"
-description              : "Personal website for Donald Loveland. Donald is a Ph.D. student in Computer Science at University of Michigan, Ann Arbor and advised by Danai Koutra. Research interests include interpretable, robust, and fair deep learning on graphs, as well as recommender systems."
+description              : "Donald Loveland researches graph learning, recommendation systems, and trustworthy machine learning at Snap Research."
 url                      : "https://www.donaldloveland.com"
+baseurl                  : ""
 repository               : "dloveland/donaldloveland.github.io"
 
 masthead_title           : "Donald Loveland"
@@ -20,7 +21,7 @@ words_per_minute         : 200
 author:
   name             : "Donald Loveland"
   avatar           : "/assets/images/loveland_headshot.jpg"
-  bio              : "Computer Science Ph.D. student at University of Michigan, Ann Arbor."
+  bio              : "Research Scientist at Snap Research. Graph learning, recommendation systems, and trustworthy machine learning."
   location         : "Ann Arbor, Michigan"
   email            : "dlovelan@umich.edu"
   links:
@@ -87,6 +88,8 @@ exclude:
   - tmp
   - /docs
   - /test
+  - scripts
+  - tests
 
 keep_files:
   - .git
@@ -153,5 +156,3 @@ defaults:
       comments: true
       share: true
       related: true
-
-include: ["_pages"]

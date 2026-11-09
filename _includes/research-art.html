@@ -1,0 +1,10 @@
+<div class="research-art art-{{ include.art }}" aria-hidden="true">
+  {% case include.art %}
+  {% when 'popularity' %}
+  <svg viewBox="0 0 280 170" fill="none"><path d="M25 18v130h232M21 24l4-6 4 6m222 120 6 4-6 4" stroke="currentColor" stroke-width="1.5"/><g class="bars"><path fill="#245d53" d="M35 36h18v103H35z"/><path fill="#508275" d="M60 61h18v78H60z"/><path fill="#7d9b82" d="M85 83h18v56H85z"/><path fill="#a0b39a" d="M110 99h18v40h-18z"/><path fill="#bac6a4" d="M135 111h18v28h-18z"/><path fill="#ccca9f" d="M160 120h18v19h-18z"/><path fill="#cfb66f" d="M185 127h18v12h-18z"/><path fill="#c4a555" d="M210 132h18v7h-18z"/><path fill="#b79442" d="M235 135h12v4h-12z"/></g></svg>
+  {% when 'fusion' %}
+  <svg viewBox="0 0 280 170" fill="none"><g stroke="#729787" stroke-width="1.7"><path d="m35 62 71-26-10 56-61-30 20 68 41-38 28 49M55 130l69 11M35 62l-13 57 33 11"/><path d="M107 91h67m-7-5 7 5-7 5"/></g><g fill="#aac3aa" stroke="#245d53"><circle cx="35" cy="62" r="11" fill="#245d53"/><circle cx="106" cy="36" r="10"/><circle cx="96" cy="92" r="11"/><circle cx="55" cy="130" r="10"/><circle cx="124" cy="141" r="9"/><circle cx="22" cy="119" r="8"/></g><rect x="186" y="67" width="67" height="48" rx="4" stroke="#245d53" stroke-width="1.5"/><text x="219" y="97" fill="#24352e" font-size="20" text-anchor="middle" font-family="sans-serif">LLM</text></svg>
+  {% when 'fairness' %}
+  <svg viewBox="0 0 280 170" fill="none"><g stroke="#729787" stroke-width="1.5"><path d="m26 76 46-34 34 40-24 58-43-11-13-53 56 64-10-98-33 87 67-47"/><path d="m178 48 45 27 24 57-49 9-30-46 10-47 20 93 25-66-55 20 79 37"/></g><g fill="#b9c9a5" stroke="#628673"><circle cx="26" cy="76" r="9"/><circle cx="72" cy="42" r="9"/><circle cx="106" cy="82" r="9"/><circle cx="82" cy="140" r="9"/><circle cx="39" cy="129" r="9"/></g><g fill="#e8cf8b" stroke="#b19549"><circle cx="178" cy="48" r="9"/><circle cx="223" cy="75" r="9"/><circle cx="247" cy="132" r="9"/><circle cx="198" cy="141" r="9"/><circle cx="168" cy="95" r="9"/></g><path d="M122 87h29m-23-5-6 5 6 5m17-10 6 5-6 5" stroke="#245d53" stroke-width="1.5"/></svg>
+  {% endcase %}
+</div>

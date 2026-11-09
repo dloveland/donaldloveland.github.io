@@ -1,0 +1,10 @@
+{% assign paper = include.paper %}
+<div class="paper-links">
+  {% if paper.paper_url %}
+    {% assign start = paper.paper_url | slice: 0 %}
+    <a href="{% if start == '/' %}{{ paper.paper_url | relative_url }}{% else %}{{ paper.paper_url }}{% endif %}">Paper <span aria-hidden="true">↗</span><span class="sr-only">: {{ paper.title }}</span></a>
+  {% else %}
+    <a href="https://scholar.google.com/scholar?q={{ paper.title | url_encode }}">Find paper <span aria-hidden="true">↗</span><span class="sr-only">: {{ paper.title }}</span></a>
+  {% endif %}
+  {% if paper.code_url %}<a href="{{ paper.code_url }}">Code <span aria-hidden="true">↗</span><span class="sr-only">: {{ paper.title }}</span></a>{% endif %}
+</div>

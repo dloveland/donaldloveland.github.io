@@ -1,0 +1,217 @@
+(() => {
+  "use strict";
+  document.documentElement.classList.add("js");
+  const all = (selector, root = document) =>
+    Array.from(root.querySelectorAll(selector));
+  const normalize = (value) =>
+    value
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const menu = document.querySelector(".menu-toggle");
+  const navigation = document.getElementById("main-nav");
+  const closeMenu = () => {
+    if (!menu || !navigation) return;
+    menu.setAttribute("aria-expanded", "false");
+    navigation.classList.remove("is-open");
+  };
+  menu?.addEventListener("click", () => {
+    const open = menu.getAttribute("aria-expanded") !== "true";
+    menu.setAttribute("aria-expanded", String(open));
+    navigation.classList.toggle("is-open", open);
+  });
+  navigation?.addEventListener("click", (event) => {
+    if (event.target.closest("a")) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      menu?.getAttribute("aria-expanded") === "true"
+    ) {
+      closeMenu();
+      menu.focus();
+    }
+  });
+  window.matchMedia("(min-width: 901px)").addEventListener("change", closeMenu);
+
+  const featureButtons = all("[data-feature-filter]");
+  const featuredPapers = all("[data-featured-paper]");
+  featureButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      const topic = button.dataset.featureFilter;
+      featureButtons.forEach((item) =>
+        item.setAttribute("aria-pressed", String(item === button)),
+      );
+      let count = 0;
+      featuredPapers.forEach((paper) => {
+        paper.hidden =
+          topic !== "all" && !paper.dataset.topics.split(" ").includes(topic);
+        if (!paper.hidden) count++;
+      });
+      document.getElementById("featured-status").textContent =
+        `${count} featured ${count === 1 ? "paper" : "papers"} shown.`;
+    }),
+  );
+
+  const topicButtons = all("[data-map-topic]");
+  const topicPanels = all("[data-map-panel]");
+  topicButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      const topic = button.dataset.mapTopic;
+      topicButtons.forEach((item) =>
+        item.setAttribute("aria-pressed", String(item === button)),
+      );
+      topicPanels.forEach((panel) => {
+        panel.hidden = panel.dataset.mapPanel !== topic;
+      });
+      document.querySelector(".network-graph").dataset.activeTopic = topic;
+    }),
+  );
+
+  const browser = document.querySelector("[data-publication-browser]");
+  if (browser) {
+    const search = document.getElementById("publication-search");
+    const year = document.getElementById("publication-year");
+    const buttons = all("[data-publication-topic]", browser);
+    const papers = all("[data-publication]", browser).map((element) => ({
+      element,
+      year: element.dataset.year,
+      topics: element.dataset.topics.split(" "),
+      text: normalize(
+        [
+          element.querySelector("h2").textContent,
+          element.querySelector(".publication-authors").textContent,
+          element.querySelector(".publication-venue").textContent,
+          element.querySelector(".eyebrow").textContent,
+        ].join(" "),
+      ),
+    }));
+    const clear = browser.querySelector("[data-clear-filters]");
+    const empty = browser.querySelector(".empty-state");
+    let topic = "all";
+    function update(writeUrl = true) {
+      const terms = normalize(search.value).split(" ").filter(Boolean);
+      let count = 0;
+      papers.forEach((paper) => {
+        const visible =
+          (topic === "all" || paper.topics.includes(topic)) &&
+          (year.value === "all" || paper.year === year.value) &&
+          terms.every((term) => paper.text.includes(term));
+        paper.element.hidden = !visible;
+        if (visible) count++;
+      });
+      buttons.forEach((button) =>
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.publicationTopic === topic),
+        ),
+      );
+      document.getElementById("publication-status").textContent =
+        `${count} of ${papers.length} publications`;
+      empty.hidden = count > 0;
+      clear.hidden = !search.value && topic === "all" && year.value === "all";
+      if (writeUrl) {
+        const url = new URL(window.location.href);
+        [
+          ["q", search.value.trim()],
+          ["topic", topic === "all" ? "" : topic],
+          ["year", year.value === "all" ? "" : year.value],
+        ].forEach(([key, value]) => {
+          if (value) url.searchParams.set(key, value);
+          else url.searchParams.delete(key);
+        });
+        // A filtered view shouldn't retain a fragment pointing at a now-hidden paper.
+        url.hash = "";
+        window.history.replaceState(null, "", url);
+      }
+    }
+    function readUrl() {
+      const params = new URLSearchParams(window.location.search);
+      search.value = params.get("q") || "";
+      topic = buttons.some(
+        (button) => button.dataset.publicationTopic === params.get("topic"),
+      )
+        ? params.get("topic")
+        : "all";
+      year.value = all("option", year).some(
+        (option) => option.value === params.get("year"),
+      )
+        ? params.get("year")
+        : "all";
+      update(false);
+    }
+    function reset() {
+      search.value = "";
+      year.value = "all";
+      topic = "all";
+      update();
+      search.focus();
+    }
+    buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+        topic = button.dataset.publicationTopic;
+        update();
+      }),
+    );
+    search.addEventListener("input", () => update());
+    year.addEventListener("change", () => update());
+    clear.addEventListener("click", reset);
+    browser
+      .querySelector("[data-reset-search]")
+      .addEventListener("click", reset);
+    window.addEventListener("popstate", readUrl);
+    readUrl();
+
+    function revealLinkedPaper() {
+      if (!window.location.hash) return;
+      let id;
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return;
+      }
+      const linked = papers.find((paper) => paper.element.id === id);
+      if (!linked) return;
+      if (linked.element.hidden) {
+        search.value = "";
+        year.value = "all";
+        topic = "all";
+        const url = new URL(window.location.href);
+        ["q", "topic", "year"].forEach((key) => url.searchParams.delete(key));
+        window.history.replaceState(null, "", url);
+        update(false);
+      }
+      linked.element.querySelector("details").open = true;
+      requestAnimationFrame(() =>
+        linked.element.scrollIntoView({ block: "start", behavior: "instant" }),
+      );
+    }
+    window.addEventListener("hashchange", revealLinkedPaper);
+    revealLinkedPaper();
+  }
+
+  all("[data-copy-citation]").forEach((button) =>
+    button.addEventListener("click", async () => {
+      const citation = document.getElementById(button.dataset.copyCitation);
+      const status = button.nextElementSibling;
+      if (!citation || !status) return;
+      try {
+        if (!navigator.clipboard?.writeText)
+          throw new Error("Clipboard unavailable");
+        await navigator.clipboard.writeText(citation.textContent.trim());
+        status.textContent = "Citation copied.";
+      } catch {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(citation);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent =
+          "Citation selected. Use your device’s copy command.";
+      }
+    }),
+  );
+})();
