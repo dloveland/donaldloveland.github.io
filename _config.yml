@@ -20,7 +20,7 @@ words_per_minute         : 200
 
 author:
   name             : "Donald Loveland"
-  avatar           : "/assets/images/loveland_headshot.jpg"
+  avatar           : "/assets/images/donald-loveland-2026.jpg"
   bio              : "Research Scientist at Snap Research. Graph learning, recommendation systems, and trustworthy machine learning."
   location         : "Ann Arbor, Michigan"
   email            : "dlovelan@umich.edu"

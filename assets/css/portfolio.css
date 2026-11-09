@@ -220,9 +220,9 @@ h2 {
 }
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-  gap: 72px;
-  align-items: start;
+  grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
   padding-top: 72px;
   padding-bottom: 76px;
   border-bottom: 1px solid var(--line);
@@ -237,13 +237,7 @@ h2 {
   letter-spacing: -0.05em;
   white-space: nowrap;
 }
-.hero-headline {
-  font-family: var(--serif);
-  font-size: clamp(46px, 5vw, 65px);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-  margin-top: 17px;
-}
+
 .hero-intro {
   font-size: 16px;
   line-height: 1.7;
@@ -291,9 +285,9 @@ h2 {
 }
 .hero-portrait {
   margin-top: 0;
-  justify-self: end;
+  justify-self: start;
   width: 100%;
-  max-width: 360px;
+  max-width: 288px;
 }
 .hero-portrait img {
   width: 100%;
@@ -870,14 +864,16 @@ summary::-webkit-details-marker {
 }
 @media (max-width: 1100px) {
   .hero {
-    gap: 42px;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 32px;
+  }
+  .hero-portrait {
+    width: 80%;
   }
   .hero h1 {
     font-size: 57px;
   }
-  .hero-headline {
-    font-size: 56px;
-  }
+
   .main-nav {
     gap: 23px;
   }
@@ -945,16 +941,14 @@ summary::-webkit-details-marker {
     display: flex;
   }
   .hero {
-    gap: 30px;
+    gap: 24px;
     padding-block: 48px 55px;
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   }
   .hero h1 {
     font-size: clamp(33px, 6vw, 52px);
   }
-  .hero-headline {
-    font-size: clamp(38px, 5.8vw, 52px);
-  }
+
   .hero .eyebrow {
     font-size: 9px;
     letter-spacing: 0.13em;
@@ -1092,8 +1086,9 @@ summary::-webkit-details-marker {
   .hero {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     padding-top: 35px;
-    gap: 34px;
+    gap: 24px;
   }
   .hero .eyebrow {
     font-size: 9px;
@@ -1102,10 +1097,7 @@ summary::-webkit-details-marker {
   .hero h1 {
     font-size: clamp(39px, 9.6vw, 57px);
   }
-  .hero-headline {
-    font-size: clamp(45px, 11.5vw, 66px);
-    margin-top: 13px;
-  }
+
   .hero-intro {
     font-size: 15px;
     max-width: 440px;
@@ -1122,8 +1114,8 @@ summary::-webkit-details-marker {
     gap: 22px;
   }
   .hero-portrait {
-    width: 62%;
-    max-width: 270px;
+    width: 49.6%;
+    max-width: 216px;
     align-self: flex-end;
   }
   .hero-portrait figcaption {

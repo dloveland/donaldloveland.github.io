@@ -2,9 +2,6 @@ name: Donald Loveland
 role: Research Scientist
 organization: Snap Research
 organization_url: https://research.snap.com
-headline: |-
-  Learning from
-  connections.
 intro: I study graph learning and recommendation systems, with a focus on understanding how models learn—and how to make them more useful.
 email: dlovelan@umich.edu
 scholar_url: https://scholar.google.com/citations?user=BvbMe3YAAAAJ&hl=en
@@ -17,7 +14,7 @@ topics:
     description: Understanding the structure, optimization, and popularity biases of personalized recommendation systems.
   - id: graphs
     label: Graph learning
-    description: Learning from connections, and understanding how local structure shapes what a model can learn.
+    description: Understanding how local graph structure shapes what a model can learn.
   - id: trustworthy
     label: Trustworthy ML
     description: Investigating fairness, robustness, and explanations to better understand the behavior of machine learning models.
