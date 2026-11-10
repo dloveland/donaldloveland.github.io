@@ -7,14 +7,13 @@ permalink: /research/
 ---
 {% assign person = site.data.portfolio %}
 <header class="detail-heading wrap">
-  <a class="back-link" href="{{ '/' | relative_url }}">← Home</a>
   <h1 class="sr-only">Research</h1>
   <p class="detail-intro">I study how LLMs adapt to new tasks, with a focus on generative recommendation, personalization, and training efficiency. By understanding training dynamics and model behavior, I look for interventions that simplify training and improve performance. My work also spans graph learning, interpretability, and scientific machine learning.</p>
   <nav class="section-nav" aria-label="Research page sections"><a href="#atlas">Paper atlas ↓</a><a href="#publications">All publications ↓</a></nav>
 </header>
 {% include paper-atlas.html %}
 <section id="publications" class="research-archive wrap section" aria-labelledby="archive-title" data-publication-browser data-archive-anchor="publications">
-  <div class="section-heading"><div><p class="eyebrow">The full collection</p><h2 id="archive-title">All publications.</h2></div><a class="text-link" href="{{ person.scholar_url }}">Google Scholar <span aria-hidden="true">↗</span></a></div>
+  <div class="section-heading"><div><h2 id="archive-title">All publications.</h2></div><a class="text-link" href="{{ person.scholar_url }}">Google Scholar <span aria-hidden="true">↗</span></a></div>
   {% include publication-browser.html year_heading="h3" heading="h4" %}
 </section>
 <aside class="explore-next wrap" aria-label="Explore experience"><a class="text-link" href="{{ '/experience/' | relative_url }}">Explore experience <span aria-hidden="true">→</span></a></aside>
