@@ -1089,9 +1089,6 @@ summary::-webkit-details-marker {
   padding-block: 36px 30px;
   border-bottom: 1px solid var(--line);
 }
-.detail-heading .back-link {
-  margin-bottom: 0;
-}
 .detail-intro {
   font-size: 17px;
   line-height: 1.8;
