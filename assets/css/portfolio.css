@@ -194,10 +194,6 @@ h2 {
   letter-spacing: -0.04em;
   white-space: nowrap;
 }
-.wordmark svg {
-  color: var(--teal);
-  flex-shrink: 0;
-}
 .main-nav {
   display: flex;
   align-items: center;
@@ -1520,17 +1516,11 @@ summary::-webkit-details-marker {
 }
 .explore-next {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 24px;
   padding-block: 28px 45px;
   border-top: 1px solid var(--line);
-}
-.explore-next p {
-  margin-top: 0;
-  font-family: var(--serif);
-  font-size: 28px;
-  letter-spacing: -0.02em;
 }
 @media (min-width: 1001px) {
   .experience-teaser .teaser-copy > p:not(.eyebrow) {
@@ -1583,11 +1573,6 @@ summary::-webkit-details-marker {
   .section-nav {
     font-size: 12px;
     gap: 6px 20px;
-  }
-  .explore-next {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 17px;
   }
 }
 @media (max-width: 380px) {
@@ -1744,10 +1729,6 @@ summary::-webkit-details-marker {
   .wordmark {
     font-size: 25px;
     gap: 8px;
-  }
-  .wordmark svg {
-    width: 30px;
-    height: 30px;
   }
   .hero {
     --hero-bio-size: 18px;
