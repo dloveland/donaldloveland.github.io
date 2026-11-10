@@ -509,10 +509,7 @@ test("portfolio works on desktop, mobile, and without JavaScript", async (t) => 
           });
           assert.deepEqual(issues, [], `Graph at ${width}px`);
         }
-        const details = page.locator(".atlas-connections details").first();
-        assert.equal(await details.evaluate((d) => d.open), false);
-        await details.locator("summary").click();
-        assert.equal(await details.locator("p").isVisible(), true);
+        assert.equal(await page.locator(".atlas-connections details").count(), 0);
       },
     );
     await t.test(

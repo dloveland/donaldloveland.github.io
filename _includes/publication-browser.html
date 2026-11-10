@@ -1,7 +1,6 @@
 {% assign years = site.data.publications | map: 'year' | uniq | sort | reverse %}
 {% assign year_heading = include.year_heading | default: 'h2' %}
 {% assign paper_heading = include.heading | default: 'h3' %}
-<p class="archive-intro">Open a year to browse its papers, or search by topic, title, and publication type. Conference and journal versions are listed once; preprints are labeled separately.</p>
 <div class="publication-tools js-only">
   <div class="search-row">
     <div class="search-field"><label for="publication-search">Search publications</label><input id="publication-search" type="search" placeholder="Title, author, or venue…" autocomplete="off"></div>

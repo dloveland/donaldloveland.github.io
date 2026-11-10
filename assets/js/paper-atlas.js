@@ -162,13 +162,7 @@
         // Keep keyboard focus in the updated panel when a related-paper button is replaced.
         root.querySelector("#atlas-paper-title").focus({ preventScroll: true });
       });
-      const reason = document.createElement("p");
-      reason.textContent = edge.reason;
-      const explanation = document.createElement("details");
-      const summary = document.createElement("summary");
-      summary.textContent = "Why this connection?";
-      explanation.append(summary, reason);
-      item.append(button, explanation);
+      item.append(button);
       connections.append(item);
     });
     layout();
